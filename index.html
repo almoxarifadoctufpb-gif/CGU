@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Estudos · AFFC CGU 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+    </script>
+    <style>
+        :root {
+            --primary: #820AD1;
+            --primary-hover: #9333EA;
+            --primary-dark: #6811B8;
+            --primary-soft: #F3E8FF;
+            --primary-light: #A855F7;
+            --bg: #F8F7FC;
+            --surface: #FFFFFF;
+            --surface-alt: #FAFAFD;
+            --text-primary: #18181B;
+            --text-secondary: #71717A;
+            --muted: #A1A1AA;
+            --border: #ECEAF3;
+            --success: #22C55E;
+            --success-soft: #DCFCE7;
+            --warning: #F59E0B;
+            --warning-soft: #FEF3C7;
+            --danger: #EF4444;
+            --danger-soft: #FEE2E2;
+            --zebra-odd: #FAFAFD;
+            --zebra-even: #FFFFFF;
+            --sidebar-w: 260px;
+            --header-h: 64px;
+            --radius: 20px;
+            --radius-sm: 14px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 16px rgba(130, 10, 209, 0.06);
+            --shadow-lg: 0 10px 30px rgba(130, 10, 209, 0.08);
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sidebar {
+            width: var(--sidebar-w);
+            background: linear-gradient(180deg, #1a0a2e 0%, #1e1035 100%);
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition);
+            box-shadow: 0 20px 48px rgba(130, 10, 209, 0.12);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .sidebar-header {
+            padding: 18px 16px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+        .sidebar-header .logo-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 22px;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            box-shadow: 0 8px 28px rgba(130, 10, 209, 0.6), 0 0 40px rgba(130, 10, 209, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255,255,255,0.05);
+            display: block;
+        }
+        .sidebar-header .logo-img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 36px rgba(130, 10, 209, 0.75), 0 0 56px rgba(130, 10, 209, 0.4);
+        }
+        .sidebar-header h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-top: 4px;
+        }
+        .sidebar-header .subtitle {
+            font-size: 0.66rem;
+            opacity: 0.45;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .sidebar-nav {
+            flex: 1;
+            padding: 8px 12px;
+            overflow-y: auto;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 16px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.87rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(130, 10, 209, 0.2);
+            color: #fff;
+            transform: translateX(2px);
+        }
+        .sidebar-nav a.active {
+            background: rgba(130, 10, 209, 0.3);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 0 16px rgba(130, 10, 209, 0.4);
+        }
+        .sidebar-footer {
+            padding: 14px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.66rem;
+            opacity: 0.35;
+            text-align: center;
+        }
+        .main {
+            flex: 1;
+            margin-left: var(--sidebar-w);
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-w));
+        }
+        .topbar {
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(14px);
+            height: var(--header-h);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .topbar h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .content {
+            padding: 28px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(130, 10, 209, 0.06);
+            transition: all var(--transition);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .card-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            border-radius: 24px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-basicas { background: #F3E8FF; color: #6811B8; }
+        .badge-especificas { background: #FEF3C7; color: #92400E; }
+        .badge-especializadas { background: #DCFCE7; color: #065F46; }
+        .badge-peso { background: #F4F4F5; color: #52525B; }
+
+        .progress-bar {
+            height: 10px;
+            background: #F4F4F5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #820AD1 0%, #A855F7 100%);
+            box-shadow: 0 0 16px rgba(130, 10, 209, 0.35);
+        }
+        .progress-fill.low { background: linear-gradient(90deg, #EF4444, #F87171); box-shadow: 0 0 14px rgba(239, 68, 68, 0.3); }
+        .progress-fill.mid { background: linear-gradient(90deg, #F59E0B, #FBBF24); box-shadow: 0 0 14px rgba(245, 158, 11, 0.3); }
+        .progress-fill.high { background: linear-gradient(90deg, #22C55E, #4ADE80); box-shadow: 0 0 14px rgba(34, 197, 94, 0.3); }
+        .btn {
+            padding: 9px 18px;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font);
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(130, 10, 209, 0.3); }
+        .btn-outline { background: transparent; border: 2px solid #E4E4E7; color: var(--text-primary); }
+        .btn-sm { padding: 6px 14px; font-size: 0.72rem; }
+        .btn-accent { background: #22C55E; color: #fff; }
+        .btn-warning { background: #F59E0B; color: #fff; }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            border: 1px solid rgba(130, 10, 209, 0.06);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .kpi-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .kpi-icon.purple { background: #F3E8FF; color: #820AD1; }
+        .kpi-icon.green { background: #DCFCE7; color: #059669; }
+        .kpi-info .kpi-value {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            line-height: 1.1;
+        }
+        .kpi-info .kpi-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--surface-alt); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        tbody tr:nth-child(odd) { background: var(--zebra-odd); }
+        tbody tr:nth-child(even) { background: var(--zebra-even); }
+        tbody tr:hover td { background: #F3E8FF !important; }
+
+        .disciplina-row:nth-child(odd) { background: var(--zebra-odd); }
+        .disciplina-row:nth-child(even) { background: var(--zebra-even); }
+        .disciplina-row:hover { background: #F3E8FF !important; }
+
+        .chart-container { position: relative; width: 100%; max-height: 300px; }
+        .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .foguete-container { position: relative; margin: 20px 0 30px; padding: 10px 0; }
+        .foguete-track {
+            height: 16px;
+            background: linear-gradient(90deg, #F4F4F5 0%, #E9D5FF 50%, #C084FC 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: visible;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .foguete-progress {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #820AD1, #A855F7, #C084FC);
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(130, 10, 209, 0.5);
+        }
+        .foguete-icone {
+            position: absolute;
+            top: -28px;
+            font-size: 2.2rem;
+            color: #820AD1;
+            transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 8px rgba(130, 10, 209, 0.5));
+            transform: translateX(-50%);
+            z-index: 5;
+            animation: fogueteFlutuar 2s ease-in-out infinite;
+        }
+        @keyframes fogueteFlutuar {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+        .foguete-meta { position: absolute; right: 0; top: -36px; font-size: 0.8rem; font-weight: 700; color: #22C55E; white-space: nowrap; }
+        .foguete-label { position: absolute; left: 50%; transform: translateX(-50%); bottom: -28px; font-weight: 700; font-size: 0.9rem; color: var(--primary); transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; }
+
+        .motivational-card {
+            background: linear-gradient(135deg, #F8F7FC 0%, #F3E8FF 100%);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            border: 1px solid var(--primary-soft);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+        }
+        .motivational-card::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            font-size: 8rem;
+            color: rgba(130, 10, 209, 0.06);
+            font-family: Georgia, serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .motivational-card .frase-texto {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.1px;
+        }
+        .motivational-card .frase-categoria {
+            font-size: 0.72rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+        .motivational-card .frase-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .motivational-card .frase-nav button {
+            background: rgba(130, 10, 209, 0.08);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .motivational-card .frase-nav button:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .search-input {
+            padding: 10px 16px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-family: var(--font);
+            width: 240px;
+            max-width: 100%;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: var(--primary); }
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(24, 24, 27, 0.6); backdrop-filter: blur(4px);
+            z-index: 200; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal {
+            background: #fff; border-radius: var(--radius); padding: 28px 32px; max-width: 750px; width: 95%;
+            max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 48px rgba(130,10,209,0.15);
+            position: relative; animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .toast {
+            position: fixed; bottom: 28px; right: 28px; background: #18181B; color: #fff; padding: 12px 22px;
+            border-radius: 28px; font-size: 0.82rem; z-index: 999; animation: toastIn 0.35s ease;
+            box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px;
+        }
+        @keyframes toastIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none !important; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; }
+        .overlay-bg { position: fixed; inset: 0; background: rgba(24, 24, 27, 0.5); z-index: 99; }
+        .insight-box { background: #F8F7FC; border-radius: 16px; padding: 18px 20px; border-left: 4px solid #820AD1; margin-bottom: 16px; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+        .tag-high { background: #FEE2E2; color: #DC2626; }
+        .tag-medium { background: #FEF3C7; color: #D97706; }
+        .tag-low { background: #DCFCE7; color: #059669; }
+
+        .topico-item:nth-child(odd) { background: #FAFAFD; }
+        .topico-item:nth-child(even) { background: #FFFFFF; }
+
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; width: 100%; }
+            .hamburger { display: block; }
+            .charts-row { grid-template-columns: 1fr; }
+            .foguete-icone { top: -20px; font-size: 1.8rem; }
+            .foguete-meta { top: -30px; font-size: 0.7rem; }
+            .foguete-label { bottom: -22px; font-size: 0.75rem; }
+            .motivational-card .frase-texto { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="https://res.cloudinary.com/dew6hgzpv/image/upload/v1780013499/ChatGPT_Image_28_de_mai._de_2026_21_10_39_luiyov.png" 
+                 alt="Logo CGU AFFC" 
+                 class="logo-img"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <i class="fa-solid fa-graduation-cap" style="font-size:42px;color:#C084FC;display:none;margin-bottom:10px;"></i>
+            <h2>AFFC CGU</h2>
+            <span class="subtitle">Gestor de Estudos</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a data-tab="dashboard" class="active" onclick="navegar('dashboard')"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span> Dashboard</a>
+            <a data-tab="disciplinas" onclick="navegar('disciplinas')"><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span> Disciplinas</a>
+            <a data-tab="questoes" onclick="navegar('questoes')"><span class="nav-icon"><i class="fa-solid fa-file-pen"></i></span> Questões</a>
+            <a data-tab="metas" onclick="navegar('metas')"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Metas</a>
+            <a data-tab="estatisticas" onclick="navegar('estatisticas')"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span> Estatísticas</a>
+        </nav>
+        <div class="sidebar-footer">v9.0 · Edital Completo</div>
+    </aside>
+
+    <div id="overlay" class="overlay-bg hidden" onclick="fecharSidebar()"></div>
+
+    <div class="main" id="mainContent">
+        <header class="topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+                <h1 id="pageTitle"><i class="fa-solid fa-chart-pie"></i> Dashboard</h1>
+            </div>
+            <span style="color:var(--text-secondary);font-size:0.82rem;"><i class="fa-regular fa-calendar"></i> <span id="dateText"></span></span>
+        </header>
+        <div class="content" id="contentArea"></div>
+    </div>
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        // ==================== FRASES MOTIVACIONAIS ====================
+        const frasesMotivacionais = [
+            { texto: "O crachá da CGU vale cada hora de sono sacrificada.", categoria: "Foco no Objetivo" },
+            { texto: "Estudar para o topo exige o esforço que a maioria não aguenta.", categoria: "Foco no Objetivo" },
+            { texto: "O salário de Auditor Federal começa muito antes da posse.", categoria: "Foco no Objetivo" },
+            { texto: "Pensar em desistir é normal, mas continuar é o que aprova.", categoria: "Foco no Objetivo" },
+            { texto: "A estabilidade financeira que você busca está no próximo capítulo.", categoria: "Foco no Objetivo" },
+            { texto: "Concurso de alto nível não premia inteligência, premia constância.", categoria: "Disciplina e Constância" },
+            { texto: "O edital da CGU é grande, mas a sua determinação é maior.", categoria: "Disciplina e Constância" },
+            { texto: "Melhore 1% todos os dias e o topo será seu.", categoria: "Disciplina e Constância" },
+            { texto: "Disciplina é fazer o que precisa ser feito, mesmo sem vontade.", categoria: "Disciplina e Constância" },
+            { texto: "Cada questão resolvida hoje afasta você da iniciativa privada.", categoria: "Disciplina e Constância" },
+            { texto: "Dias ruins também servem para acumular horas de estudo.", categoria: "Superação de Obstáculos" },
+            { texto: "A dor do aprendizado é temporária, mas a posse é vitalícia.", categoria: "Superação de Obstáculos" },
+            { texto: "Nenhum concorrente pode vencer quem decidiu não parar.", categoria: "Superação de Obstáculos" },
+            { texto: "O cansaço passa, mas o cargo de Auditor fica para sempre.", categoria: "Superação de Obstáculos" },
+            { texto: "Errar questões no treino é o segredo para acertar na prova.", categoria: "Superação de Obstáculos" },
+            { texto: "Comece a agir hoje com a seriedade de um Auditor Federal.", categoria: "Mentalidade de Auditor" },
+            { texto: "A fiscalização do seu próprio tempo é o seu primeiro teste.", categoria: "Mentalidade de Auditor" },
+            { texto: "Estude com a certeza de quem vai assinar relatórios importantes.", categoria: "Mentalidade de Auditor" },
+            { texto: "Grandes responsabilidades exigem uma preparação impecável.", categoria: "Mentalidade de Auditor" },
+            { texto: "O seu nome no Diário Oficial compensará cada renúncia.", categoria: "Mentalidade de Auditor" }
+        ];
+        let indiceFraseAtual = Math.floor(Math.random() * frasesMotivacionais.length);
+
+        function renderizarFraseMotivacional() {
+            const frase = frasesMotivacionais[indiceFraseAtual];
+            return `
+            <div class="motivational-card" id="motivationalCard">
+                <div class="frase-texto">${frase.texto}</div>
+                <div class="frase-categoria">${frase.categoria}</div>
+                <div class="frase-nav">
+                    <button onclick="fraseAnterior();event.stopPropagation();" title="Frase anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="proximaFrase();event.stopPropagation();" title="Próxima frase"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>`;
+        }
+        function proximaFrase() { indiceFraseAtual = (indiceFraseAtual + 1) % frasesMotivacionais.length; atualizarFraseNoDOM(); }
+        function fraseAnterior() { indiceFraseAtual = (indiceFraseAtual - 1 + frasesMotivacionais.length) % frasesMotivacionais.length; atualizarFraseNoDOM(); }
+        function atualizarFraseNoDOM() {
+            const card = document.getElementById('motivationalCard');
+            if (card) {
+                const frase = frasesMotivacionais[indiceFraseAtual];
+                card.querySelector('.frase-texto').textContent = frase.texto;
+                card.querySelector('.frase-categoria').textContent = frase.categoria;
+                card.style.opacity = '0.6'; card.style.transform = 'scale(0.99)';
+                setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 150);
+            }
+        }
+
+        // ==================== DADOS DO EDITAL COMPLETO (REVISADO) ====================
+        const editalData = {
+            grupos: {
+                'basicas': { nome: 'Conhecimentos Básicos', badgeClass: 'badge-basicas', pesoGrupo: 1 },
+                'especificas': { nome: 'Conhecimentos Específicos', badgeClass: 'badge-especificas', pesoGrupo: 2 },
+                'especializadas': { nome: 'Conhecimentos Especializados', badgeClass: 'badge-especializadas', pesoGrupo: 3 }
+            },
+            disciplinas: [
+                {
+                    id: 'portugues', nome: 'Língua Portuguesa', grupo: 'basicas', peso: 1, topicos: [
+                        'Interpretação de texto: decodificação dos diversos tipos de mensagem',
+                        'Compreensão de texto: processos que constroem os significados textuais',
+                        'Características básicas da textualidade',
+                        'Estruturas linguísticas no processo de construção de mensagens adequadas',
+                        'Classes de palavras',
+                        'Pragmática na linguagem: o significado contextual',
+                        'Semântica vocabular: antônimos, sinônimos, homônimos, parônimos e heterônimos',
+                        'Modos de organização discursiva: descrição, narração, exposição informativa e argumentativa',
+                        'Organização das frases nas situações comunicativas',
+                        'Linguagem lógica e figurada',
+                        'Diversos níveis de linguagem',
+                        'Tipos de discurso: direto, indireto e indireto livre',
+                        'Funções da linguagem'
+                    ]
+                },
+                {
+                    id: 'ingles', nome: 'Língua Inglesa', grupo: 'basicas', peso: 1, topicos: [
+                        'Estratégias de leitura: compreensão geral de texto e informações específicas',
+                        'Capacidade de análise e síntese; inferência e predição',
+                        'Reconhecimento de organização semântica e discursiva',
+                        'Uso de palavras mais frequentes, sinonímia e antonímia',
+                        'Funções retóricas; percepção de metáfora e metonímia',
+                        'Artigos definidos e indefinidos; tempos e modos verbais',
+                        'Uso de preposições, conjunções, pronomes e modais',
+                        'Concordância nominal e verbal',
+                        'Formação e classe de palavras; expressões idiomáticas',
+                        'Relações de subordinação e coordenação',
+                        'Voz passiva, discurso direto e indireto'
+                    ]
+                },
+                {
+                    id: 'adm-publica', nome: 'Administração Pública e Políticas Públicas', grupo: 'basicas', peso: 1, topicos: [
+                        'Políticas públicas: ciclo (construção de agenda, formulação, processo decisório, implementação, avaliação)',
+                        'Processos participativos de gestão pública: conselhos de gestão, orçamento participativo, parceria governo-sociedade',
+                        'Governo Aberto: Decreto nº 10.160/2019 e Comitê Interministerial',
+                        'Governo Digital: Decreto nº 10.332/2020 (Estratégia de Governo Digital 2020-2022)',
+                        'Planejamento nas organizações públicas: análise do ambiente, objetivos estratégicos, missão, visão, valores',
+                        'Ciclo do planejamento em organizações: PDCA',
+                        'Gestão por resultados na produção de serviços públicos',
+                        'Princípios de governabilidade e governança',
+                        'Intermediação de interesses: clientelismo, corporativismo e neocorporativismo',
+                        'Decreto nº 9.203/2017: política de governança da administração pública federal',
+                        'Corrupção e políticas públicas: fatores que influenciam a incidência e qualidade',
+                        'Papel das instituições nas políticas públicas',
+                        'Indicadores de políticas públicas'
+                    ]
+                },
+                {
+                    id: 'dir-constitucional', nome: 'Direito Constitucional', grupo: 'especificas', peso: 2, topicos: [
+                        'Constituição da República Federativa do Brasil de 1988: princípios fundamentais',
+                        'Aplicabilidade das normas constitucionais: eficácia plena, contida e limitada; normas programáticas',
+                        'Direitos e garantias fundamentais: direitos e deveres individuais e coletivos',
+                        'Direitos sociais, direitos de nacionalidade, direitos políticos',
+                        'Partidos políticos',
+                        'Organização político-administrativa do Estado: União, Estados, DF, Municípios e Territórios',
+                        'Administração Pública: disposições gerais e servidores públicos',
+                        'Poder Executivo: atribuições e responsabilidades do Presidente da República',
+                        'Poder Legislativo: estrutura, funcionamento, atribuições e processo legislativo',
+                        'Fiscalização contábil, financeira e orçamentária; Comissões Parlamentares de Inquérito',
+                        'Poder Judiciário: disposições gerais, órgãos, organização e competências',
+                        'Conselho Nacional de Justiça: composição e competências',
+                        'Funções essenciais à justiça: Ministério Público e Advocacia Pública',
+                        'Ordem Econômica e Financeira: princípios gerais da atividade econômica'
+                    ]
+                },
+                {
+                    id: 'dir-administrativo', nome: 'Direito Administrativo', grupo: 'especificas', peso: 2, topicos: [
+                        'Estado, governo e Administração Pública: conceitos e elementos',
+                        'Direito administrativo: conceito, objeto e fontes',
+                        'Ato administrativo: conceito, requisitos, atributos, classificação e espécies',
+                        'Extinção do ato administrativo: cassação, anulação, revogação e convalidação; decadência administrativa',
+                        'Agentes públicos: conceito, espécies, cargo, emprego e função pública',
+                        'Provimento, vacância, efetividade, estabilidade e vitaliciedade; remuneração',
+                        'Direitos, deveres, responsabilidade e processo administrativo disciplinar; Lei nº 8.112/1990',
+                        'Poderes da Administração Pública: hierárquico, disciplinar, regulamentar e de polícia; uso e abuso do poder',
+                        'Princípios expressos e implícitos da Administração Pública',
+                        'Responsabilidade civil do Estado: ato comissivo, omissão, requisitos, excludentes e atenuantes',
+                        'Reparação do dano e direito de regresso',
+                        'Serviços públicos: conceito, elementos, formas de prestação e meios de execução',
+                        'Delegação: concessão, permissão e autorização; classificação e princípios; Lei nº 13.460/2018',
+                        'Organização administrativa: centralização, descentralização, concentração e desconcentração',
+                        'Administração direta e indireta: autarquias, fundações; empresas estatais (Lei nº 13.303/2016 e Decreto nº 8.945/2016)',
+                        'Controle da Administração Pública: administrativo, judicial e legislativo',
+                        'Improbidade administrativa: Lei nº 8.429/1992',
+                        'Processo administrativo: Lei nº 9.784/1999',
+                        'Licitações e contratos administrativos: conceito, finalidades, princípios, objeto; Leis nº 8.666/1993 e nº 14.133/2021',
+                        'Ética Pública: Decreto nº 1.171/1994 e Sistema de Gestão da Ética (Decreto nº 6.029/2007)',
+                        'Lei nº 12.813/2013: conflito de interesses e impedimentos; Código de Ética da Alta Administração',
+                        'LINDB: Decreto-Lei nº 4.657/1942 e Decreto nº 9.830/2019',
+                        'Direito de acesso à informação: Lei nº 12.527/2011, Decretos nº 7.724/2012 e nº 8.777/2016',
+                        'Tratamento de dados pessoais pelo Poder Público: Capítulos II e IV da Lei nº 13.709/2018 (LGPD)'
+                    ]
+                },
+                {
+                    id: 'afo', nome: 'Administração Financeira e Orçamentária', grupo: 'especificas', peso: 2, topicos: [
+                        'Orçamento Público: conceitos e princípios orçamentários',
+                        'Orçamento na Constituição de 1988: PPA, LDO e LOA',
+                        'Lei de Responsabilidade Fiscal - LRF',
+                        'Classificação econômica da Receita e da Despesa pública',
+                        'Conceito e estágios da Receita e da Despesa pública',
+                        'Gestão organizacional das finanças públicas: sistema de planejamento e orçamento (Lei nº 10.180/2001)'
+                    ]
+                },
+                {
+                    id: 'fundamentos-auditoria', nome: 'Fundamentos de Auditoria Governamental', grupo: 'especificas', peso: 2, topicos: [
+                        'Sistema de Controle Interno do Poder Executivo Federal: finalidades, atividades, organização e competências',
+                        'Lei nº 10.180/2001 e Decreto nº 3.591/2000',
+                        'Manual de Orientações Técnicas da Atividade de Auditoria Interna Governamental - MOT 2017',
+                        'Instrução Normativa SFC nº 3, de 9 de julho de 2017'
+                    ]
+                },
+                {
+                    id: 'cgu', nome: 'CGU: Organização, Competências e Sistemas Estruturantes', grupo: 'especificas', peso: 1.5, topicos: [
+                        'Estrutura e competência: Lei nº 13.844/2019 (áreas de competência da CGU, competências do Ministro, estrutura básica)',
+                        'Decreto nº 9.681/2019: natureza, competência, estrutura organizacional e unidades descentralizadas',
+                        'Sistema de Controle Interno do Poder Executivo Federal (Lei nº 10.180/2001 e Decreto nº 3.591/2000)',
+                        'Sistema de Correição do Poder Executivo Federal (Decreto nº 5.480/2005)',
+                        'Sistema de Ouvidorias Públicas do Poder Executivo Federal (Decreto nº 9.492/2018)',
+                        'Sistema de Integridade Pública do Poder Executivo Federal (Decreto nº 10.756/2021)'
+                    ]
+                },
+                {
+                    id: 'auditoria-governamental', nome: 'Auditoria Governamental e Controle Interno', grupo: 'especializadas', peso: 3, topicos: [
+                        'Sistema de Controle Interno do Poder Executivo Federal: Lei nº 10.180/2001 e Decreto nº 3.591/2000',
+                        'MOT 2017 e Instrução Normativa SFC nº 3/2017',
+                        'Orientação Prática: Relatório de Auditoria (Portaria nº 1.037/2019)',
+                        'Orientação Prática: Auditoria Anual de Contas (Portaria nº 2.035/2019)',
+                        'NBC TA Estrutura Conceitual para Trabalhos de Asseguração',
+                        'Estrutura Internacional de Práticas Profissionais - IPPF/IIA',
+                        'O papel da auditoria interna na gestão de riscos',
+                        'O modelo de três linhas',
+                        'Instrução Normativa Conjunta MPOG/CGU nº 1, de 10 de maio de 2016'
+                    ]
+                },
+                {
+                    id: 'contabilidade-publica', nome: 'Contabilidade Aplicada ao Setor Público', grupo: 'especializadas', peso: 3, topicos: [
+                        'NBC TSP Estrutura Conceitual: objetivos e usuários da informação contábil de propósito geral',
+                        'Características qualitativas da informação contábil',
+                        'Entidade que reporta a informação contábil',
+                        'Elementos das Demonstrações Contábeis',
+                        'Reconhecimento nas Demonstrações Contábeis',
+                        'Mensuração de Ativos e Passivos nas Demonstrações Contábeis',
+                        'Estrutura e conteúdo das demonstrações contábeis: Lei nº 4.320/1964, NBC TSP 11 e MCASP 9ª Edição',
+                        'Plano de Contas Aplicado ao Setor Público – PCASP: aspectos gerais, conceito, objetivos, conta contábil e alcance',
+                        'Estrutura do PCASP: natureza da informação, código e atributos da conta contábil',
+                        'Tópicos da LRF: renúncia de receita, geração de despesas, despesas obrigatórias de caráter continuado',
+                        'Dívida e endividamento: definições básicas; escrituração e consolidação das contas',
+                        'Relatório de Gestão Fiscal: estrutura, composição e limites',
+                        'Procedimentos Contábeis Orçamentários e Patrimoniais conforme MCASP 9ª edição',
+                        'Sistema de Informações de Custos: NBC T 16.11',
+                        'Manual de Informações de Custos do Governo Federal (Portaria STN nº 518/2018)'
+                    ]
+                },
+                {
+                    id: 'avaliacao-politicas', nome: 'Avaliação de Políticas Públicas', grupo: 'especializadas', peso: 2, topicos: [
+                        'Análise Ex Ante: "Avaliação de políticas públicas: guia prático de análise ex ante", volume 1 (Casa Civil/IPEA 2018)',
+                        'Análise Ex Post: "Avaliação de políticas públicas: guia prático de análise ex post", volume 2 (Casa Civil et al. 2018)',
+                        'Conselho de Monitoramento e Avaliação de Políticas Públicas - CMAP (Decreto nº 9.834/2019)'
+                    ]
+                },
+                {
+                    id: 'financas-publicas', nome: 'Finanças Públicas', grupo: 'especializadas', peso: 3, topicos: [
+                        'Objetivos, metas, abrangência e definição de Finanças Públicas',
+                        'Funções do Estado e financiamento dos gastos públicos: tributação e equidade',
+                        'A função do bem-estar; políticas alocativas, distributivas e de estabilização',
+                        'Instrumentos e recursos da economia pública: política fiscal, regulatória e monetária',
+                        'Tributação: tipos de tributos; progressividade, regressividade e neutralidade',
+                        'Federalismo fiscal',
+                        'Orçamento público no Brasil: PPA, LDO e LOA na Constituição de 1988',
+                        'Títulos I, IV, V e VI da Lei nº 4.320/1964; Leis de Créditos Adicionais',
+                        'PPA: estrutura, base legal, objetivos, conteúdo, tipos de programas',
+                        'LDO: objetivos, Anexos de Metas Fiscais, Anexos de Riscos Fiscais, critérios para limitação de empenho',
+                        'Classificações orçamentárias: despesa (institucional, funcional, programática, pela natureza) e receita (institucional, por categorias econômicas, por fontes)',
+                        'Ciclo orçamentário: elaboração, discussão, votação e aprovação da lei de orçamento',
+                        'Execução orçamentária e financeira: estágios da despesa e da receita pública',
+                        'Programação de desembolso e mecanismos retificadores do orçamento',
+                        'Conta Única do Tesouro Nacional: conceito e previsão legal',
+                        'Gestão organizacional das finanças públicas: sistema de planejamento e orçamento (Lei nº 10.180/2001)',
+                        'Conceito de déficit público; financiamento do déficit; sustentabilidade da política fiscal',
+                        'Resultado Fiscal do Governo (NFSP): Resultado Primário e Resultado Nominal',
+                        'Tópicos selecionados da LRF: princípios, objetivos, conceitos, planejamento, transparência da gestão fiscal, prestação de contas e fiscalização'
+                    ]
+                }
+            ]
+        };
+
+        const dadosProvaCGU = {
+            totalQuestoes: 140, ano: 2023,
+            distribuição: { 'portugues':18,'ingles':8,'adm-publica':10,'dir-constitucional':12,'dir-administrativo':16,'afo':8,'fundamentos-auditoria':10,'cgu':6,'auditoria-governamental':14,'contabilidade-publica':12,'avaliacao-politicas':6,'financas-publicas':20 },
+            pesoMedioPorDisciplina: { 'portugues':1,'ingles':1,'adm-publica':1,'dir-constitucional':2,'dir-administrativo':2,'afo':2,'fundamentos-auditoria':2,'cgu':1.5,'auditoria-governamental':3,'contabilidade-publica':3,'avaliacao-politicas':2,'financas-publicas':3 },
+            notaCorteEstimada: 84, percentualAcertoMedio: 68
+        };
+
+        const disciplinaIconMap = {
+            'portugues':'fa-solid fa-book','ingles':'fa-solid fa-globe','adm-publica':'fa-solid fa-building-columns',
+            'dir-constitucional':'fa-solid fa-scale-balanced','dir-administrativo':'fa-solid fa-file-contract',
+            'afo':'fa-solid fa-coins','fundamentos-auditoria':'fa-solid fa-magnifying-glass-chart',
+            'cgu':'fa-solid fa-shield-haltered','auditoria-governamental':'fa-solid fa-check-double',
+            'contabilidade-publica':'fa-solid fa-calculator','avaliacao-politicas':'fa-solid fa-clipboard-check',
+            'financas-publicas':'fa-solid fa-chart-column'
+        };
+        function getIcon(id) { return `<i class="${disciplinaIconMap[id] || 'fa-solid fa-circle-question'}"></i>`; }
+
+        const STORAGE_KEY = 'affc_cgu_study_v9_edital_completo';
+        let appState = {
+            metaQuestoesDiaria:50, metaHorasDiaria:5, metaRevisoesSemana:4,
+            dataInicio: new Date().toISOString().split('T')[0],
+            topicosConcluidos:{}, questoes:{}, anotacoes:{}, metasPorDisciplina:{}, cicloAtual:1,
+            historicoDiario:{}, ultimaAtividade: new Date().toISOString()
+        };
+
+        const progressoCache = {};
+        function getProgressoDisciplinaCache(discId) {
+            if (progressoCache[discId]) return progressoCache[discId];
+            const disc = editalData.disciplinas.find(d=>d.id===discId);
+            if(!disc||!disc.topicos||disc.topicos.length===0) return {pct:0,concluidos:0,total:0};
+            const total = disc.topicos.length; let concluidos=0;
+            disc.topicos.forEach((_,i)=>{ if(appState.topicosConcluidos[`${discId}-${i}`]) concluidos++; });
+            const res = {pct:Math.round((concluidos/total)*100),concluidos,total};
+            progressoCache[discId] = res;
+            return res;
+        }
+        function invalidateProgressoCache(discId) { delete progressoCache[discId]; }
+        function invalidateAllCache() { for(let k in progressoCache) delete progressoCache[k]; }
+
+        function carregarState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) { appState = { ...appState, ...JSON.parse(saved) }; }
+                if(!appState.topicosConcluidos) appState.topicosConcluidos={};
+                if(!appState.questoes) appState.questoes={};
+                if(!appState.anotacoes) appState.anotacoes={};
+                if(!appState.metasPorDisciplina) appState.metasPorDisciplina={};
+                if(!appState.historicoDiario) appState.historicoDiario={};
+                invalidateAllCache();
+            } catch(e){}
+        }
+        function salvarState() { appState.ultimaAtividade = new Date().toISOString(); localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); invalidateAllCache(); }
+        function toast(msg) { const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.remove('hidden'); clearTimeout(t._timeout); t._timeout=setTimeout(()=>t.classList.add('hidden'),2800); }
+        function getProgressoDisciplina(discId) { return getProgressoDisciplinaCache(discId); }
+        function getProgressoGeral() {
+            let total=0,concluidos=0;
+            editalData.disciplinas.forEach(d=>{ if(!d.topicos) return; d.topicos.forEach((_,i)=>{ total++; if(appState.topicosConcluidos[`${d.id}-${i}`]) concluidos++; }); });
+            return {pct:total>0?Math.round((concluidos/total)*100):0,concluidos,total};
+        }
+        function getTotalQuestoes() { let total=0,corretas=0; Object.values(appState.questoes).forEach(q=>{total+=(q.resolvidas||0);corretas+=(q.corretas||0);}); return {total,corretas,pct:total>0?Math.round((corretas/total)*100):0}; }
+        function getQuestoesDisciplina(id) { return appState.questoes[id]||{resolvidas:0,corretas:0}; }
+        function getStreak() { const hoje=new Date(); hoje.setHours(0,0,0,0); let streak=0; const check=new Date(hoje); while(true){ const key=check.toISOString().split('T')[0]; if(appState.historicoDiario[key]){streak++;check.setDate(check.getDate()-1);}else break; } return streak; }
+        function registrarAtividadeHoje() { const hoje=new Date().toISOString().split('T')[0]; appState.historicoDiario[hoje]=true; salvarState(); }
+
+        function exportarBackup() {
+            const dados = JSON.stringify(appState,null,2); const blob = new Blob([dados],{type:'application/json'});
+            const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url;
+            a.download=`backup_affc_cgu_${new Date().toISOString().split('T')[0]}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            toast('<i class="fa-solid fa-download"></i> Backup exportado!');
+        }
+        function importarBackup() {
+            const input = document.createElement('input'); input.type='file'; input.accept='.json';
+            input.onchange=(e)=>{ const file=e.target.files[0]; if(!file) return; const reader=new FileReader();
+                reader.onload=(event)=>{ try{ const dados=JSON.parse(event.target.result); if(dados.topicosConcluidos===undefined||dados.questoes===undefined) throw new Error('Inválido');
+                    if(confirm('⚠️ Substituir todos os dados pelo backup?')){ appState={...appState,...dados}; salvarState(); toast('<i class="fa-solid fa-upload"></i> Restaurado!'); setTimeout(()=>location.reload(),1500); }
+                }catch(err){ toast('<i class="fa-solid fa-circle-exclamation"></i> Arquivo inválido.'); } }; reader.readAsText(file); }; input.click();
+        }
+
+        let currentTab='dashboard'; let chartInstances={};
+        function destruirGraficos() { Object.values(chartInstances).forEach(c=>{try{c.destroy();}catch(e){}}); chartInstances={}; }
+        function navegar(tab) {
+            destruirGraficos(); currentTab=tab;
+            document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.remove('active'));
+            const link=document.querySelector(`.sidebar-nav a[data-tab="${tab}"]`); if(link) link.classList.add('active');
+            const icons={'dashboard':'fa-chart-pie','disciplinas':'fa-book-open','questoes':'fa-file-pen','metas':'fa-bullseye','estatisticas':'fa-chart-line'};
+            const titles={'dashboard':'Dashboard','disciplinas':'Disciplinas','questoes':'Questões','metas':'Metas','estatisticas':'Estatísticas'};
+            document.getElementById('pageTitle').innerHTML=`<i class="fa-solid ${icons[tab]}"></i> ${titles[tab]}`;
+            renderizarTab(tab);
+            if(tab==='dashboard') setTimeout(initGraficosDashboard,400);
+            if(tab==='estatisticas') setTimeout(initGraficosEstatisticas,500);
+            fecharSidebar();
+        }
+        function renderizarTab(tab) { const area=document.getElementById('contentArea'); const renders={'dashboard':renderDashboard,'disciplinas':renderDisciplinas,'questoes':renderQuestoes,'metas':renderMetas,'estatisticas':renderEstatisticas}; area.innerHTML=(renders[tab]||renderDashboard)(); }
+
+        function initGraficosDashboard() {
+            const ctxBar = document.getElementById('chartDisciplinas')?.getContext('2d');
+            if(ctxBar) {
+                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,25)+'...');
+                const data = editalData.disciplinas.map(d=>getProgressoDisciplina(d.id).pct);
+                const colors = data.map(v=>v<30?'#EF4444':v<70?'#F59E0B':'#22C55E');
+                chartInstances['bar'] = new Chart(ctxBar,{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:8,barThickness:14}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{max:100,grid:{color:'#F4F4F5'}}}}});
+            }
+            const ctxDonut = document.getElementById('chartGrupos')?.getContext('2d');
+            if(ctxDonut) {
+                const gruposData = {};
+                editalData.disciplinas.forEach(d=>{ const g=d.grupo; if(!gruposData[g]) gruposData[g]={total:0,concluidos:0}; const p=getProgressoDisciplina(d.id); gruposData[g].total+=p.total; gruposData[g].concluidos+=p.concluidos; });
+                const labels = Object.keys(gruposData).map(k=>editalData.grupos[k].nome);
+                const data = Object.values(gruposData).map(v=>v.total>0?Math.round((v.concluidos/v.total)*100):0);
+                chartInstances['donut'] = new Chart(ctxDonut,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:['#820AD1','#F59E0B','#22C55E'],borderWidth:3,borderColor:'#fff',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}},cutout:'65%'}});
+            }
+        }
+
+        function initGraficosEstatisticas() {
+            const ctxDist = document.getElementById('chartDistribuicaoProva')?.getContext('2d');
+            if(ctxDist) {
+                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,20)+'...');
+                const data = editalData.disciplinas.map(d=>dadosProvaCGU.distribuição[d.id]||0);
+                chartInstances['distProva'] = new Chart(ctxDist,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#820AD1',borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+            }
+            const ctxBubble = document.getElementById('chartImportanciaProgresso')?.getContext('2d');
+            if(ctxBubble) {
+                const pontos = editalData.disciplinas.map(d=>({
+                    x: getProgressoDisciplina(d.id).pct,
+                    y: (dadosProvaCGU.distribuição[d.id] || 0),
+                    r: (dadosProvaCGU.pesoMedioPorDisciplina[d.id] || 1) * 8,
+                    label: d.nome
+                }));
+                chartInstances['bubble'] = new Chart(ctxBubble,{
+                    type: 'bubble',
+                    data: { datasets: [{ data: pontos, backgroundColor: 'rgba(130,10,209,0.6)', borderColor: '#820AD1', borderWidth: 1 }] },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { tooltip: { callbacks: { label: (ctx) => `${ctx.raw.label}: Progresso ${ctx.raw.x}%, Questões ${ctx.raw.y}` } }, legend: { display: false } },
+                        scales: { x: { title: { display: true, text: 'Seu Progresso (%)' }, max: 100, grid: { color: '#F4F4F5' } }, y: { title: { display: true, text: 'Questões na Prova' }, grid: { color: '#F4F4F5' } } }
+                    }
+                });
+            }
+            const ctxRadar = document.getElementById('chartRadarDesempenho')?.getContext('2d');
+            if(ctxRadar) {
+                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,16)+'...');
+                const progressoAtual = editalData.disciplinas.map(d=>getProgressoDisciplina(d.id).pct);
+                chartInstances['radar'] = new Chart(ctxRadar,{
+                    type: 'radar',
+                    data: { labels, datasets: [
+                        { label: 'Seu Progresso', data: progressoAtual, backgroundColor: 'rgba(130,10,209,0.2)', borderColor: '#820AD1', borderWidth: 2, pointBackgroundColor: '#820AD1' },
+                        { label: 'Meta Ideal (75%)', data: labels.map(()=>75), backgroundColor: 'rgba(34,197,94,0.1)', borderColor: '#22C55E', borderWidth: 2, borderDash: [6,4], pointBackgroundColor: '#22C55E' }
+                    ] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } } }, scales: { r: { max: 100, ticks: { stepSize: 20 }, grid: { color: '#E4E4E7' }, pointLabels: { font: { size: 10 } } } } }
+                });
+            }
+        }
+
+        function renderDashboard() {
+            const geral=getProgressoGeral(); const questoes=getTotalQuestoes(); const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24))); const streak=getStreak(); const horasEst=Math.round(appState.metaHorasDiaria*dias); const saudacao=new Date().getHours()<12?'Bom dia':new Date().getHours()<18?'Boa tarde':'Boa noite'; registrarAtividadeHoje();
+            return `
+            <div style="background:linear-gradient(135deg,#820AD1,#9333EA,#A855F7);border-radius:20px;padding:36px 40px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(130,10,209,.25);">
+                <h2 style="font-size:1.9rem;font-weight:800;">${saudacao} 👋</h2>
+                <p style="opacity:.85;margin-bottom:24px;">Sua preparação para AFFC CGU está avançando.</p>
+                <div style="display:flex;gap:20px;flex-wrap:wrap;">
+                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-chart-line" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">${geral.pct}%</div><div style="font-size:.7rem;opacity:.8;">Edital</div></div></div>
+                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-clock" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">+${horasEst}h</div><div style="font-size:.7rem;opacity:.8;">Horas</div></div></div>
+                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-fire" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">${streak} dias</div><div style="font-size:.7rem;opacity:.8;">Sequência</div></div></div>
+                </div>
+            </div>
+            ${renderizarFraseMotivacional()}
+            <div class="card"><div class="card-header"><h3><i class="fa-solid fa-rocket" style="color:#820AD1;"></i> Missão AFFC CGU</h3><span>${geral.concluidos}/${geral.total} tópicos</span></div>
+                <div class="foguete-container">
+                    <div class="foguete-meta"><i class="fa-solid fa-flag-checkered"></i> Aprovação</div>
+                    <div class="foguete-icone" style="left:${Math.min(geral.pct,97)}%;"><i class="fa-solid fa-rocket"></i></div>
+                    <div class="foguete-track"><div class="foguete-progress" style="width:${geral.pct}%;"></div></div>
+                    <div class="foguete-label" style="left:${Math.min(geral.pct,90)}%;">${geral.pct}%</div>
+                </div>
+            </div>
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-icon purple"><i class="fa-solid fa-bullseye"></i></div><div class="kpi-info"><div class="kpi-value">${geral.concluidos}/${geral.total}</div><div class="kpi-label">Tópicos</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon green"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-calendar-check"></i></div><div class="kpi-info"><div class="kpi-value">${dias}</div><div class="kpi-label">Dias</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon" style="background:#DBEAFE;color:#2563EB;"><i class="fa-solid fa-trophy"></i></div><div class="kpi-info"><div class="kpi-value">${Math.round(questoes.total/dias)}</div><div class="kpi-label">Média/dia</div></div></div>
+            </div>
+            <div class="charts-row">
+                <div class="card"><div class="card-header"><h3>Progresso por Disciplina</h3></div><div class="chart-container"><canvas id="chartDisciplinas"></canvas></div></div>
+                <div class="card"><div class="card-header"><h3>Por Grupo</h3></div><div class="chart-container"><canvas id="chartGrupos"></canvas></div></div>
+            </div>`;
+        }
+
+        function renderDisciplinas() {
+            let html = `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-book-open"></i> Disciplinas</h3><div style="display:flex;gap:8px;align-items:center;"><input type="text" class="search-input" placeholder="🔍 Pesquisar disciplina..." id="searchDisciplina" oninput="filtrarDisciplinas()"><button class="btn btn-outline btn-sm" onclick="filtrarGrupo('todas')">Todas</button>`;
+            Object.entries(editalData.grupos).forEach(([k,v])=>html+=`<button class="btn btn-outline btn-sm" style="margin-left:4px;" onclick="filtrarGrupo('${k}')">${v.nome}</button>`);
+            html+=`</div></div><div id="disciplinasList">`;
+            editalData.disciplinas.forEach(d=>{
+                const p=getProgressoDisciplina(d.id); const q=getQuestoesDisciplina(d.id);
+                html+=`<div class="disciplina-row" data-grupo="${d.grupo}" data-nome="${d.nome.toLowerCase()}" onclick="abrirDisciplina('${d.id}')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:1px solid var(--border);border-radius:12px;margin-bottom:6px;cursor:pointer;transition:all .25s;">
+                    <div><div style="font-weight:600;">${getIcon(d.id)} ${d.nome}</div><div style="font-size:.7rem;color:var(--text-secondary);"><span class="badge ${editalData.grupos[d.grupo].badgeClass}">${editalData.grupos[d.grupo].nome}</span> · Peso ${d.peso} · ${p.total} tópicos</div></div>
+                    <div style="display:flex;gap:20px;align-items:center;"><div style="text-align:center;"><div style="font-weight:700;">${p.pct}%</div><div style="font-size:.62rem;color:var(--text-secondary);">Progresso</div></div><div style="text-align:center;"><div style="font-weight:700;">${p.concluidos}/${p.total}</div><div style="font-size:.62rem;color:var(--text-secondary);">Tópicos</div></div><div style="text-align:center;"><div style="font-weight:700;">${q.resolvidas||0}</div><div style="font-size:.62rem;color:var(--text-secondary);">Questões</div></div></div></div>`;
+            });
+            return html+`</div></div>`;
+        }
+        let filtroGrupoAtual = 'todas';
+        function filtrarGrupo(g) { filtroGrupoAtual = g; filtrarDisciplinas(); }
+        function filtrarDisciplinas() {
+            const termo = document.getElementById('searchDisciplina')?.value.toLowerCase() || '';
+            document.querySelectorAll('#disciplinasList .disciplina-row').forEach(r=>{
+                const grupoOk = filtroGrupoAtual === 'todas' || r.dataset.grupo === filtroGrupoAtual;
+                const nomeOk = !termo || r.dataset.nome.includes(termo);
+                r.style.display = (grupoOk && nomeOk) ? '' : 'none';
+            });
+        }
+
+        function abrirDisciplina(discId) {
+            const disc=editalData.disciplinas.find(d=>d.id===discId); if(!disc) return;
+            const p=getProgressoDisciplina(discId); const q=getQuestoesDisciplina(discId);
+            let topicosHtml='';
+            disc.topicos.forEach((t,i)=>{ const ok=!!appState.topicosConcluidos[`${discId}-${i}`]; topicosHtml+=`<div class="topico-item ${ok?'concluido':''}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;"><input type="checkbox" ${ok?'checked':''} onchange="toggleTopico('${discId}',${i},this.checked)"><span class="topico-nome">${t}</span><span class="badge" style="font-size:.68rem;">${ok?'<i class="fa-solid fa-check"></i> Concluído':'<i class="fa-regular fa-circle"></i> Pendente'}</span></div>`; });
+            const anotacao = (appState.anotacoes[discId] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            const modal=document.createElement('div'); modal.className='modal-overlay'; modal.id='modalDisciplina'; modal.onclick=e=>{if(e.target===modal)fecharModal();};
+            modal.innerHTML=`<div class="modal"><button style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#A1A1AA;" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button><h2>${getIcon(discId)} ${disc.nome}</h2><p><span class="badge ${editalData.grupos[disc.grupo].badgeClass}">${editalData.grupos[disc.grupo].nome}</span> <span class="badge badge-peso">Peso ${disc.peso}</span> Progresso: <strong>${p.pct}%</strong></p><div style="display:flex;gap:12px;margin:16px 0;"><div><label>Resolvidas</label><input type="number" id="qtdResolvidas" value="${q.resolvidas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><label>Corretas</label><input type="number" id="qtdCorretas" value="${q.corretas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><strong>${q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0}%</strong></div></div><div style="margin-bottom:12px;"><label>Anotações</label><textarea id="anotacaoDisc" style="width:100%;min-height:60px;">${anotacao}</textarea><button class="btn btn-sm btn-outline" onclick="salvarAnotacao('${discId}')">Salvar</button></div><h4>Tópicos do Edital (${p.concluidos}/${p.total})</h4><div style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:12px;">${topicosHtml}</div><div style="margin-top:12px;display:flex;gap:8px;"><button class="btn btn-sm btn-accent" onclick="marcarTodos('${discId}',true)">Marcar Todos</button><button class="btn btn-outline btn-sm" onclick="marcarTodos('${discId}',false)">Desmarcar</button></div></div>`;
+            document.getElementById('modalDisciplina')?.remove(); document.body.appendChild(modal);
+        }
+        function fecharModal() { document.getElementById('modalDisciplina')?.remove(); renderizarTab(currentTab); salvarState(); }
+        function toggleTopico(discId,i,checked) { const key=`${discId}-${i}`; if(checked) appState.topicosConcluidos[key]=true; else delete appState.topicosConcluidos[key]; invalidateProgressoCache(discId); registrarAtividadeHoje(); salvarState(); }
+        function marcarTodos(discId,v) {
+            if(!v && !confirm('Tem certeza que deseja desmarcar todos os tópicos? Isso zerará o progresso desta disciplina.')) return;
+            const disc=editalData.disciplinas.find(d=>d.id===discId); if(!disc) return;
+            disc.topicos.forEach((_,i)=>{ const key=`${discId}-${i}`; if(v) appState.topicosConcluidos[key]=true; else delete appState.topicosConcluidos[key]; });
+            invalidateProgressoCache(discId); registrarAtividadeHoje(); salvarState(); fecharModal();
+            toast(v?'Todos marcados!':'Todos desmarcados.');
+        }
+        function atualizarQuestoes(discId) { const r=parseInt(document.getElementById('qtdResolvidas')?.value)||0; const c=Math.min(r,parseInt(document.getElementById('qtdCorretas')?.value)||0); appState.questoes[discId]={resolvidas:r,corretas:c}; registrarAtividadeHoje(); salvarState(); }
+        function salvarAnotacao(discId) { appState.anotacoes[discId]=document.getElementById('anotacaoDisc')?.value||''; salvarState(); toast('Anotação salva!'); }
+
+        function renderQuestoes() {
+            const t=getTotalQuestoes();
+            let html=`<div class="card"><div class="card-header"><h3><i class="fa-solid fa-file-pen"></i> Controle de Questões</h3></div><p>Total: <strong>${t.total}</strong> · Corretas: <strong>${t.corretas}</strong> · <strong>${t.pct}%</strong> acerto</p><div class="progress-bar"><div class="progress-fill${t.pct<50?' low':t.pct<75?' mid':' high'}" style="width:${t.pct}%;"></div></div></div><div class="card"><div class="card-header"><h3>Por Disciplina</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Resolvidas</th><th>Corretas</th><th>%</th><th>Ações</th></tr></thead><tbody>`;
+            editalData.disciplinas.forEach(d=>{ const q=getQuestoesDisciplina(d.id); const p=q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0; html+=`<tr><td>${getIcon(d.id)} ${d.nome}</td><td>${q.resolvidas||0}</td><td>${q.corretas||0}</td><td><strong>${p}%</strong></td><td><button class="btn btn-sm btn-primary" onclick="abrirDisciplina('${d.id}')"><i class="fa-solid fa-gear"></i></button> <button class="btn btn-sm btn-outline" onclick="addQuestoes('${d.id}')">+10</button></td></tr>`; });
+            return html+`</tbody></table></div></div>`;
+        }
+        function addQuestoes(discId) { if(!appState.questoes[discId]) appState.questoes[discId]={resolvidas:0,corretas:0}; appState.questoes[discId].resolvidas+=10; appState.questoes[discId].corretas+=7; registrarAtividadeHoje(); salvarState(); renderizarTab('questoes'); toast('+10 questões!'); }
+
+        function renderMetas() {
+            const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24))); const totalQ=getTotalQuestoes(); const metaAc=appState.metaQuestoesDiaria*dias; const pctMeta=Math.min(100,Math.round((totalQ.total/metaAc)*100));
+            return `
+            <div class="card"><div class="card-header"><h3><i class="fa-solid fa-bullseye"></i> Metas Gerais</h3></div>
+                <div style="display:flex;gap:12px;margin:8px 0;"><label style="font-weight:600;">Questões/dia:</label><input type="number" id="metaQDiaria" value="${appState.metaQuestoesDiaria}" style="width:80px;padding:8px;border:2px solid var(--border);border-radius:8px;"></div>
+                <div style="display:flex;gap:12px;margin:8px 0;"><label style="font-weight:600;">Horas/dia:</label><input type="number" id="metaHDiaria" value="${appState.metaHorasDiaria}" step="0.5" style="width:80px;padding:8px;border:2px solid var(--border);border-radius:8px;"></div>
+                <div style="display:flex;gap:12px;margin:8px 0;"><label style="font-weight:600;">Revisões/semana:</label><input type="number" id="metaRevSemana" value="${appState.metaRevisoesSemana}" style="width:80px;padding:8px;border:2px solid var(--border);border-radius:8px;"></div>
+                <div style="display:flex;gap:12px;margin:8px 0;"><label style="font-weight:600;">Data início:</label><input type="date" id="dataInicio" value="${appState.dataInicio}" style="padding:8px;border:2px solid var(--border);border-radius:8px;"></div>
+                <button class="btn btn-accent" onclick="salvarMetasGerais()">Salvar</button>
+            </div>
+            <div class="card"><div class="card-header"><h3>Acompanhamento</h3></div><p>${dias} dias · Meta: <strong>${metaAc}</strong> · Realizado: <strong>${totalQ.total}</strong> (${pctMeta}%)</p><div class="progress-bar"><div class="progress-fill${pctMeta<50?' low':pctMeta<80?' mid':' high'}" style="width:${pctMeta}%;"></div></div></div>
+            <div class="card"><div class="card-header"><h3>Metas por Disciplina</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Meta</th><th>Realizado</th></tr></thead><tbody>${editalData.disciplinas.map(d=>{const m=appState.metasPorDisciplina[d.id]?.questoes||0;const r=(appState.questoes[d.id]?.resolvidas)||0;return`<tr><td>${getIcon(d.id)} ${d.nome}</td><td><input type="number" value="${m}" style="width:80px;" onchange="atualizarMetaDisciplina('${d.id}','questoes',this.value)"></td><td>${r}</td></tr>`;}).join('')}</tbody></table></div></div>
+            <div class="card" style="border:2px solid #820AD1;"><div class="card-header"><h3><i class="fa-solid fa-database" style="color:#820AD1;"></i> Backup</h3></div><p style="font-size:0.85rem;margin-bottom:16px;">Exporte seus dados para segurança.</p><div style="display:flex;gap:12px;"><button class="btn btn-primary" onclick="exportarBackup()"><i class="fa-solid fa-download"></i> Exportar</button><button class="btn btn-warning" onclick="importarBackup()"><i class="fa-solid fa-upload"></i> Restaurar</button></div></div>`;
+        }
+        function salvarMetasGerais() { appState.metaQuestoesDiaria=parseInt(document.getElementById('metaQDiaria')?.value)||50; appState.metaHorasDiaria=parseFloat(document.getElementById('metaHDiaria')?.value)||5; appState.metaRevisoesSemana=parseInt(document.getElementById('metaRevSemana')?.value)||4; appState.dataInicio=document.getElementById('dataInicio')?.value||appState.dataInicio; salvarState(); toast('Metas salvas!'); renderizarTab('metas'); }
+        function atualizarMetaDisciplina(discId,tipo,val) { if(!appState.metasPorDisciplina[discId]) appState.metasPorDisciplina[discId]={questoes:0,horas:0}; appState.metasPorDisciplina[discId][tipo]=parseInt(val)||0; salvarState(); }
+
+        function renderEstatisticas() {
+            const geral=getProgressoGeral(); const questoes=getTotalQuestoes(); const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24)));
+            let notaEstimada=0,notaMaxima=0; editalData.disciplinas.forEach(d=>{const qtd=dadosProvaCGU.distribuição[d.id]||0;const prog=getProgressoDisciplina(d.id).pct/100;const peso=dadosProvaCGU.pesoMedioPorDisciplina[d.id]||1;notaEstimada+=qtd*prog*(peso/2);notaMaxima+=qtd*(peso/2);});
+            const notaProjetada=Math.round((notaMaxima>0?Math.round((notaEstimada/notaMaxima)*100):0)/100*dadosProvaCGU.totalQuestoes);
+            const criticas=editalData.disciplinas.map(d=>({id:d.id,nome:d.nome,questoesProva:dadosProvaCGU.distribuição[d.id]||0,progresso:getProgressoDisciplina(d.id).pct,gap:((dadosProvaCGU.distribuição[d.id]||0)*(100-getProgressoDisciplina(d.id).pct)/100)})).sort((a,b)=>b.gap-a.gap);
+            const topCriticas=criticas.slice(0,5);
+            return `
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-icon purple"><i class="fa-solid fa-chart-pie"></i></div><div class="kpi-info"><div class="kpi-value">${geral.pct}%</div><div class="kpi-label">Progresso</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon green"><i class="fa-solid fa-calendar"></i></div><div class="kpi-info"><div class="kpi-value">${dias}</div><div class="kpi-label">Dias</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon" style="background:#DBEAFE;color:#2563EB;"><i class="fa-solid fa-gauge-high"></i></div><div class="kpi-info"><div class="kpi-value">${(questoes.total/dias).toFixed(1)}</div><div class="kpi-label">Média/dia</div></div></div>
+            </div>
+            <div class="card" style="border:2px solid #820AD1;"><div class="card-header"><h3>Coaching Estratégico</h3></div><div class="insight-box"><strong>Nota Projetada:</strong> <span style="font-size:1.4rem;font-weight:800;color:#820AD1;">~${notaProjetada} pts</span> de ${dadosProvaCGU.totalQuestoes} | Corte: ${dadosProvaCGU.notaCorteEstimada} pts</div></div>
+            <div class="charts-row">
+                <div class="card"><div class="card-header"><h3>Distribuição na Prova</h3></div><div class="chart-container"><canvas id="chartDistribuicaoProva"></canvas></div></div>
+                <div class="card"><div class="card-header"><h3>Progresso vs Importância</h3></div><div class="chart-container"><canvas id="chartImportanciaProgresso"></canvas></div></div>
+            </div>
+            <div class="card"><div class="card-header"><h3>Radar de Desempenho</h3></div><div class="chart-container" style="max-height:400px;"><canvas id="chartRadarDesempenho"></canvas></div></div>
+            <div class="card"><div class="card-header"><h3>Top 5 Críticas</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Qtd</th><th>Prog</th><th>Gap</th></tr></thead><tbody>${topCriticas.map(d=>`<tr><td>${getIcon(d.id)} ${d.nome}</td><td>${d.questoesProva}</td><td>${d.progresso}%</td><td>${Math.round(d.gap)} pts</td></tr>`).join('')}</tbody></table></div></div>`;
+        }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('hidden'); }
+        function fecharSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.add('hidden'); }
+        function init() {
+            carregarState();
+            document.getElementById('dateText').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+            editalData.disciplinas.forEach(d=>{if(!appState.questoes[d.id]) appState.questoes[d.id]={resolvidas:0,corretas:0}; if(!appState.metasPorDisciplina[d.id]) appState.metasPorDisciplina[d.id]={questoes:0,horas:0};});
+            salvarState(); navegar('dashboard');
+        }
+        document.addEventListener('DOMContentLoaded',init);
+        document.addEventListener('keydown',e=>{if(e.key==='Escape'){fecharModal();fecharSidebar();}});
+        window.addEventListener('beforeunload',()=>salvarState());
+    </script>
+</body>
+</html>
