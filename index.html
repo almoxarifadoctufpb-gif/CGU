@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gestor de Estudos · AFFC CGU 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,6 +55,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
+        /* SIDEBAR */
         .sidebar {
             width: var(--sidebar-w);
             background: linear-gradient(180deg, #1a0a2e 0%, #1e1035 100%);
@@ -140,6 +141,7 @@
             opacity: 0.35;
             text-align: center;
         }
+        /* MAIN */
         .main {
             flex: 1;
             margin-left: var(--sidebar-w);
@@ -304,6 +306,7 @@
 
         .chart-container { position: relative; width: 100%; max-height: 300px; }
         .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        /* FOGUETE */
         .foguete-container { position: relative; margin: 20px 0 30px; padding: 10px 0; }
         .foguete-track {
             height: 16px;
@@ -335,7 +338,6 @@
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-6px); }
         }
-        .foguete-meta { position: absolute; right: 0; top: -36px; font-size: 0.8rem; font-weight: 700; color: #22C55E; white-space: nowrap; }
         .foguete-label { position: absolute; left: 50%; transform: translateX(-50%); bottom: -28px; font-weight: 700; font-size: 0.9rem; color: var(--primary); transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; }
 
         .motivational-card {
@@ -446,16 +448,111 @@
         .topico-item:nth-child(odd) { background: #FAFAFD; }
         .topico-item:nth-child(even) { background: #FFFFFF; }
 
+        /* RESPONSIVIDADE */
         @media (max-width: 1024px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; width: 100%; }
-            .hamburger { display: block; }
-            .charts-row { grid-template-columns: 1fr; }
-            .foguete-icone { top: -20px; font-size: 1.8rem; }
-            .foguete-meta { top: -30px; font-size: 0.7rem; }
-            .foguete-label { bottom: -22px; font-size: 0.75rem; }
-            .motivational-card .frase-texto { font-size: 0.95rem; }
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+            .hamburger {
+                display: block;
+            }
+            .topbar {
+                padding: 0 16px;
+            }
+            .content {
+                padding: 20px 16px;
+            }
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding: 24px 20px !important;
+            }
+            .hero h2 {
+                font-size: 1.5rem !important;
+            }
+            .hero-stats {
+                gap: 12px;
+            }
+            .hero-stat {
+                padding: 10px 14px;
+            }
+            .hero-stat .hero-stat-value {
+                font-size: 1.3rem;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            .foguete-icone {
+                top: -20px;
+                font-size: 1.8rem;
+            }
+            .foguete-label {
+                bottom: -22px;
+                font-size: 0.75rem;
+            }
+            .disciplina-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .disc-stats {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 18px 16px !important;
+            }
+            .hero h2 {
+                font-size: 1.3rem !important;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .hero-stat {
+                padding: 8px 12px;
+            }
+            .hero-stat .hero-stat-value {
+                font-size: 1.1rem;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 16px;
+            }
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.72rem;
+            }
+            .foguete-icone {
+                top: -16px;
+                font-size: 1.5rem;
+            }
+            .foguete-label {
+                bottom: -20px;
+                font-size: 0.7rem;
+            }
+            .disciplina-row .disc-stats {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            .search-input {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -478,7 +575,7 @@
             <a data-tab="metas" onclick="navegar('metas')"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Metas</a>
             <a data-tab="estatisticas" onclick="navegar('estatisticas')"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span> Estatísticas</a>
         </nav>
-        <div class="sidebar-footer">v9.0 · Edital Completo</div>
+        <div class="sidebar-footer">v10.0 · Responsivo</div>
     </aside>
 
     <div id="overlay" class="overlay-bg hidden" onclick="fecharSidebar()"></div>
@@ -546,7 +643,7 @@
             }
         }
 
-        // ==================== DADOS DO EDITAL COMPLETO (REVISADO) ====================
+        // ==================== DADOS DO EDITAL COMPLETO ====================
         const editalData = {
             grupos: {
                 'basicas': { nome: 'Conhecimentos Básicos', badgeClass: 'badge-basicas', pesoGrupo: 1 },
@@ -554,8 +651,7 @@
                 'especializadas': { nome: 'Conhecimentos Especializados', badgeClass: 'badge-especializadas', pesoGrupo: 3 }
             },
             disciplinas: [
-                {
-                    id: 'portugues', nome: 'Língua Portuguesa', grupo: 'basicas', peso: 1, topicos: [
+                { id: 'portugues', nome: 'Língua Portuguesa', grupo: 'basicas', peso: 1, topicos: [
                         'Interpretação de texto: decodificação dos diversos tipos de mensagem',
                         'Compreensão de texto: processos que constroem os significados textuais',
                         'Características básicas da textualidade',
@@ -569,10 +665,8 @@
                         'Diversos níveis de linguagem',
                         'Tipos de discurso: direto, indireto e indireto livre',
                         'Funções da linguagem'
-                    ]
-                },
-                {
-                    id: 'ingles', nome: 'Língua Inglesa', grupo: 'basicas', peso: 1, topicos: [
+                    ] },
+                { id: 'ingles', nome: 'Língua Inglesa', grupo: 'basicas', peso: 1, topicos: [
                         'Estratégias de leitura: compreensão geral de texto e informações específicas',
                         'Capacidade de análise e síntese; inferência e predição',
                         'Reconhecimento de organização semântica e discursiva',
@@ -584,10 +678,8 @@
                         'Formação e classe de palavras; expressões idiomáticas',
                         'Relações de subordinação e coordenação',
                         'Voz passiva, discurso direto e indireto'
-                    ]
-                },
-                {
-                    id: 'adm-publica', nome: 'Administração Pública e Políticas Públicas', grupo: 'basicas', peso: 1, topicos: [
+                    ] },
+                { id: 'adm-publica', nome: 'Administração Pública e Políticas Públicas', grupo: 'basicas', peso: 1, topicos: [
                         'Políticas públicas: ciclo (construção de agenda, formulação, processo decisório, implementação, avaliação)',
                         'Processos participativos de gestão pública: conselhos de gestão, orçamento participativo, parceria governo-sociedade',
                         'Governo Aberto: Decreto nº 10.160/2019 e Comitê Interministerial',
@@ -601,10 +693,8 @@
                         'Corrupção e políticas públicas: fatores que influenciam a incidência e qualidade',
                         'Papel das instituições nas políticas públicas',
                         'Indicadores de políticas públicas'
-                    ]
-                },
-                {
-                    id: 'dir-constitucional', nome: 'Direito Constitucional', grupo: 'especificas', peso: 2, topicos: [
+                    ] },
+                { id: 'dir-constitucional', nome: 'Direito Constitucional', grupo: 'especificas', peso: 2, topicos: [
                         'Constituição da República Federativa do Brasil de 1988: princípios fundamentais',
                         'Aplicabilidade das normas constitucionais: eficácia plena, contida e limitada; normas programáticas',
                         'Direitos e garantias fundamentais: direitos e deveres individuais e coletivos',
@@ -619,10 +709,8 @@
                         'Conselho Nacional de Justiça: composição e competências',
                         'Funções essenciais à justiça: Ministério Público e Advocacia Pública',
                         'Ordem Econômica e Financeira: princípios gerais da atividade econômica'
-                    ]
-                },
-                {
-                    id: 'dir-administrativo', nome: 'Direito Administrativo', grupo: 'especificas', peso: 2, topicos: [
+                    ] },
+                { id: 'dir-administrativo', nome: 'Direito Administrativo', grupo: 'especificas', peso: 2, topicos: [
                         'Estado, governo e Administração Pública: conceitos e elementos',
                         'Direito administrativo: conceito, objeto e fontes',
                         'Ato administrativo: conceito, requisitos, atributos, classificação e espécies',
@@ -647,38 +735,30 @@
                         'LINDB: Decreto-Lei nº 4.657/1942 e Decreto nº 9.830/2019',
                         'Direito de acesso à informação: Lei nº 12.527/2011, Decretos nº 7.724/2012 e nº 8.777/2016',
                         'Tratamento de dados pessoais pelo Poder Público: Capítulos II e IV da Lei nº 13.709/2018 (LGPD)'
-                    ]
-                },
-                {
-                    id: 'afo', nome: 'Administração Financeira e Orçamentária', grupo: 'especificas', peso: 2, topicos: [
+                    ] },
+                { id: 'afo', nome: 'Administração Financeira e Orçamentária', grupo: 'especificas', peso: 2, topicos: [
                         'Orçamento Público: conceitos e princípios orçamentários',
                         'Orçamento na Constituição de 1988: PPA, LDO e LOA',
                         'Lei de Responsabilidade Fiscal - LRF',
                         'Classificação econômica da Receita e da Despesa pública',
                         'Conceito e estágios da Receita e da Despesa pública',
                         'Gestão organizacional das finanças públicas: sistema de planejamento e orçamento (Lei nº 10.180/2001)'
-                    ]
-                },
-                {
-                    id: 'fundamentos-auditoria', nome: 'Fundamentos de Auditoria Governamental', grupo: 'especificas', peso: 2, topicos: [
+                    ] },
+                { id: 'fundamentos-auditoria', nome: 'Fundamentos de Auditoria Governamental', grupo: 'especificas', peso: 2, topicos: [
                         'Sistema de Controle Interno do Poder Executivo Federal: finalidades, atividades, organização e competências',
                         'Lei nº 10.180/2001 e Decreto nº 3.591/2000',
                         'Manual de Orientações Técnicas da Atividade de Auditoria Interna Governamental - MOT 2017',
                         'Instrução Normativa SFC nº 3, de 9 de julho de 2017'
-                    ]
-                },
-                {
-                    id: 'cgu', nome: 'CGU: Organização, Competências e Sistemas Estruturantes', grupo: 'especificas', peso: 1.5, topicos: [
+                    ] },
+                { id: 'cgu', nome: 'CGU: Organização, Competências e Sistemas Estruturantes', grupo: 'especificas', peso: 1.5, topicos: [
                         'Estrutura e competência: Lei nº 13.844/2019 (áreas de competência da CGU, competências do Ministro, estrutura básica)',
                         'Decreto nº 9.681/2019: natureza, competência, estrutura organizacional e unidades descentralizadas',
                         'Sistema de Controle Interno do Poder Executivo Federal (Lei nº 10.180/2001 e Decreto nº 3.591/2000)',
                         'Sistema de Correição do Poder Executivo Federal (Decreto nº 5.480/2005)',
                         'Sistema de Ouvidorias Públicas do Poder Executivo Federal (Decreto nº 9.492/2018)',
                         'Sistema de Integridade Pública do Poder Executivo Federal (Decreto nº 10.756/2021)'
-                    ]
-                },
-                {
-                    id: 'auditoria-governamental', nome: 'Auditoria Governamental e Controle Interno', grupo: 'especializadas', peso: 3, topicos: [
+                    ] },
+                { id: 'auditoria-governamental', nome: 'Auditoria Governamental e Controle Interno', grupo: 'especializadas', peso: 3, topicos: [
                         'Sistema de Controle Interno do Poder Executivo Federal: Lei nº 10.180/2001 e Decreto nº 3.591/2000',
                         'MOT 2017 e Instrução Normativa SFC nº 3/2017',
                         'Orientação Prática: Relatório de Auditoria (Portaria nº 1.037/2019)',
@@ -688,10 +768,8 @@
                         'O papel da auditoria interna na gestão de riscos',
                         'O modelo de três linhas',
                         'Instrução Normativa Conjunta MPOG/CGU nº 1, de 10 de maio de 2016'
-                    ]
-                },
-                {
-                    id: 'contabilidade-publica', nome: 'Contabilidade Aplicada ao Setor Público', grupo: 'especializadas', peso: 3, topicos: [
+                    ] },
+                { id: 'contabilidade-publica', nome: 'Contabilidade Aplicada ao Setor Público', grupo: 'especializadas', peso: 3, topicos: [
                         'NBC TSP Estrutura Conceitual: objetivos e usuários da informação contábil de propósito geral',
                         'Características qualitativas da informação contábil',
                         'Entidade que reporta a informação contábil',
@@ -707,17 +785,13 @@
                         'Procedimentos Contábeis Orçamentários e Patrimoniais conforme MCASP 9ª edição',
                         'Sistema de Informações de Custos: NBC T 16.11',
                         'Manual de Informações de Custos do Governo Federal (Portaria STN nº 518/2018)'
-                    ]
-                },
-                {
-                    id: 'avaliacao-politicas', nome: 'Avaliação de Políticas Públicas', grupo: 'especializadas', peso: 2, topicos: [
+                    ] },
+                { id: 'avaliacao-politicas', nome: 'Avaliação de Políticas Públicas', grupo: 'especializadas', peso: 2, topicos: [
                         'Análise Ex Ante: "Avaliação de políticas públicas: guia prático de análise ex ante", volume 1 (Casa Civil/IPEA 2018)',
                         'Análise Ex Post: "Avaliação de políticas públicas: guia prático de análise ex post", volume 2 (Casa Civil et al. 2018)',
                         'Conselho de Monitoramento e Avaliação de Políticas Públicas - CMAP (Decreto nº 9.834/2019)'
-                    ]
-                },
-                {
-                    id: 'financas-publicas', nome: 'Finanças Públicas', grupo: 'especializadas', peso: 3, topicos: [
+                    ] },
+                { id: 'financas-publicas', nome: 'Finanças Públicas', grupo: 'especializadas', peso: 3, topicos: [
                         'Objetivos, metas, abrangência e definição de Finanças Públicas',
                         'Funções do Estado e financiamento dos gastos públicos: tributação e equidade',
                         'A função do bem-estar; políticas alocativas, distributivas e de estabilização',
@@ -737,8 +811,7 @@
                         'Conceito de déficit público; financiamento do déficit; sustentabilidade da política fiscal',
                         'Resultado Fiscal do Governo (NFSP): Resultado Primário e Resultado Nominal',
                         'Tópicos selecionados da LRF: princípios, objetivos, conceitos, planejamento, transparência da gestão fiscal, prestação de contas e fiscalização'
-                    ]
-                }
+                    ] }
             ]
         };
 
@@ -759,7 +832,7 @@
         };
         function getIcon(id) { return `<i class="${disciplinaIconMap[id] || 'fa-solid fa-circle-question'}"></i>`; }
 
-        const STORAGE_KEY = 'affc_cgu_study_v9_edital_completo';
+        const STORAGE_KEY = 'affc_cgu_study_v10_responsivo';
         let appState = {
             metaQuestoesDiaria:50, metaHorasDiaria:5, metaRevisoesSemana:4,
             dataInicio: new Date().toISOString().split('T')[0],
@@ -897,19 +970,27 @@
         function renderDashboard() {
             const geral=getProgressoGeral(); const questoes=getTotalQuestoes(); const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24))); const streak=getStreak(); const horasEst=Math.round(appState.metaHorasDiaria*dias); const saudacao=new Date().getHours()<12?'Bom dia':new Date().getHours()<18?'Boa tarde':'Boa noite'; registrarAtividadeHoje();
             return `
-            <div style="background:linear-gradient(135deg,#820AD1,#9333EA,#A855F7);border-radius:20px;padding:36px 40px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(130,10,209,.25);">
+            <div class="hero" style="background:linear-gradient(135deg,#820AD1,#9333EA,#A855F7);border-radius:20px;padding:36px 40px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(130,10,209,.25);">
                 <h2 style="font-size:1.9rem;font-weight:800;">${saudacao} 👋</h2>
                 <p style="opacity:.85;margin-bottom:24px;">Sua preparação para AFFC CGU está avançando.</p>
-                <div style="display:flex;gap:20px;flex-wrap:wrap;">
-                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-chart-line" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">${geral.pct}%</div><div style="font-size:.7rem;opacity:.8;">Edital</div></div></div>
-                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-clock" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">+${horasEst}h</div><div style="font-size:.7rem;opacity:.8;">Horas</div></div></div>
-                    <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-fire" style="font-size:1.8rem;"></i><div><div style="font-size:1.6rem;font-weight:800;">${streak} dias</div><div style="font-size:.7rem;opacity:.8;">Sequência</div></div></div>
+                <div class="hero-stats" style="display:flex;gap:20px;flex-wrap:wrap;">
+                    <div class="hero-stat" style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-chart-line" style="font-size:1.8rem;"></i><div><div class="hero-stat-value" style="font-size:1.6rem;font-weight:800;">${geral.pct}%</div><div style="font-size:.7rem;opacity:.8;">Edital</div></div></div>
+                    <div class="hero-stat" style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-clock" style="font-size:1.8rem;"></i><div><div class="hero-stat-value" style="font-size:1.6rem;font-weight:800;">+${horasEst}h</div><div style="font-size:.7rem;opacity:.8;">Horas</div></div></div>
+                    <div class="hero-stat" style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 22px;"><i class="fa-solid fa-fire" style="font-size:1.8rem;"></i><div><div class="hero-stat-value" style="font-size:1.6rem;font-weight:800;">${streak} dias</div><div style="font-size:.7rem;opacity:.8;">Sequência</div></div></div>
                 </div>
             </div>
             ${renderizarFraseMotivacional()}
-            <div class="card"><div class="card-header"><h3><i class="fa-solid fa-rocket" style="color:#820AD1;"></i> Missão AFFC CGU</h3><span>${geral.concluidos}/${geral.total} tópicos</span></div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-rocket" style="color:#820AD1;"></i> Missão AFFC CGU</h3>
+                    <div style="display:flex;align-items:center;gap:16px;">
+                        <span>${geral.concluidos}/${geral.total} tópicos</span>
+                        <span class="badge" style="background:#DCFCE7;color:#059669;font-size:0.75rem;padding:6px 14px;">
+                            <i class="fa-solid fa-flag-checkered"></i> Aprovação
+                        </span>
+                    </div>
+                </div>
                 <div class="foguete-container">
-                    <div class="foguete-meta"><i class="fa-solid fa-flag-checkered"></i> Aprovação</div>
                     <div class="foguete-icone" style="left:${Math.min(geral.pct,97)}%;"><i class="fa-solid fa-rocket"></i></div>
                     <div class="foguete-track"><div class="foguete-progress" style="width:${geral.pct}%;"></div></div>
                     <div class="foguete-label" style="left:${Math.min(geral.pct,90)}%;">${geral.pct}%</div>
@@ -928,14 +1009,19 @@
         }
 
         function renderDisciplinas() {
-            let html = `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-book-open"></i> Disciplinas</h3><div style="display:flex;gap:8px;align-items:center;"><input type="text" class="search-input" placeholder="🔍 Pesquisar disciplina..." id="searchDisciplina" oninput="filtrarDisciplinas()"><button class="btn btn-outline btn-sm" onclick="filtrarGrupo('todas')">Todas</button>`;
+            let html = `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-book-open"></i> Disciplinas</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><input type="text" class="search-input" placeholder="🔍 Pesquisar..." id="searchDisciplina" oninput="filtrarDisciplinas()"><button class="btn btn-outline btn-sm" onclick="filtrarGrupo('todas')">Todas</button>`;
             Object.entries(editalData.grupos).forEach(([k,v])=>html+=`<button class="btn btn-outline btn-sm" style="margin-left:4px;" onclick="filtrarGrupo('${k}')">${v.nome}</button>`);
             html+=`</div></div><div id="disciplinasList">`;
             editalData.disciplinas.forEach(d=>{
                 const p=getProgressoDisciplina(d.id); const q=getQuestoesDisciplina(d.id);
                 html+=`<div class="disciplina-row" data-grupo="${d.grupo}" data-nome="${d.nome.toLowerCase()}" onclick="abrirDisciplina('${d.id}')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:1px solid var(--border);border-radius:12px;margin-bottom:6px;cursor:pointer;transition:all .25s;">
-                    <div><div style="font-weight:600;">${getIcon(d.id)} ${d.nome}</div><div style="font-size:.7rem;color:var(--text-secondary);"><span class="badge ${editalData.grupos[d.grupo].badgeClass}">${editalData.grupos[d.grupo].nome}</span> · Peso ${d.peso} · ${p.total} tópicos</div></div>
-                    <div style="display:flex;gap:20px;align-items:center;"><div style="text-align:center;"><div style="font-weight:700;">${p.pct}%</div><div style="font-size:.62rem;color:var(--text-secondary);">Progresso</div></div><div style="text-align:center;"><div style="font-weight:700;">${p.concluidos}/${p.total}</div><div style="font-size:.62rem;color:var(--text-secondary);">Tópicos</div></div><div style="text-align:center;"><div style="font-weight:700;">${q.resolvidas||0}</div><div style="font-size:.62rem;color:var(--text-secondary);">Questões</div></div></div></div>`;
+                    <div style="flex:1;min-width:180px;"><div style="font-weight:600;">${getIcon(d.id)} ${d.nome}</div><div style="font-size:.7rem;color:var(--text-secondary);"><span class="badge ${editalData.grupos[d.grupo].badgeClass}">${editalData.grupos[d.grupo].nome}</span> · Peso ${d.peso} · ${p.total} tópicos</div></div>
+                    <div class="disc-stats" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+                        <div style="text-align:center;"><div style="font-weight:700;">${p.pct}%</div><div style="font-size:.62rem;color:var(--text-secondary);">Progresso</div></div>
+                        <div style="text-align:center;"><div style="font-weight:700;">${p.concluidos}/${p.total}</div><div style="font-size:.62rem;color:var(--text-secondary);">Tópicos</div></div>
+                        <div style="text-align:center;"><div style="font-weight:700;">${q.resolvidas||0}</div><div style="font-size:.62rem;color:var(--text-secondary);">Questões</div></div>
+                    </div>
+                </div>`;
             });
             return html+`</div></div>`;
         }
@@ -954,7 +1040,7 @@
             const disc=editalData.disciplinas.find(d=>d.id===discId); if(!disc) return;
             const p=getProgressoDisciplina(discId); const q=getQuestoesDisciplina(discId);
             let topicosHtml='';
-            disc.topicos.forEach((t,i)=>{ const ok=!!appState.topicosConcluidos[`${discId}-${i}`]; topicosHtml+=`<div class="topico-item ${ok?'concluido':''}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;"><input type="checkbox" ${ok?'checked':''} onchange="toggleTopico('${discId}',${i},this.checked)"><span class="topico-nome">${t}</span><span class="badge" style="font-size:.68rem;">${ok?'<i class="fa-solid fa-check"></i> Concluído':'<i class="fa-regular fa-circle"></i> Pendente'}</span></div>`; });
+            disc.topicos.forEach((t,i)=>{ const ok=!!appState.topicosConcluidos[`${discId}-${i}`]; topicosHtml+=`<div class="topico-item ${ok?'concluido':''}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;"><input type="checkbox" ${ok?'checked':''} onchange="toggleTopico('${discId}',${i},this.checked)"><span class="topico-nome" style="flex:1;">${t}</span><span class="badge" style="font-size:.68rem;">${ok?'<i class="fa-solid fa-check"></i> Concluído':'<i class="fa-regular fa-circle"></i> Pendente'}</span></div>`; });
             const anotacao = (appState.anotacoes[discId] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
             const modal=document.createElement('div'); modal.className='modal-overlay'; modal.id='modalDisciplina'; modal.onclick=e=>{if(e.target===modal)fecharModal();};
             modal.innerHTML=`<div class="modal"><button style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#A1A1AA;" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button><h2>${getIcon(discId)} ${disc.nome}</h2><p><span class="badge ${editalData.grupos[disc.grupo].badgeClass}">${editalData.grupos[disc.grupo].nome}</span> <span class="badge badge-peso">Peso ${disc.peso}</span> Progresso: <strong>${p.pct}%</strong></p><div style="display:flex;gap:12px;margin:16px 0;"><div><label>Resolvidas</label><input type="number" id="qtdResolvidas" value="${q.resolvidas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><label>Corretas</label><input type="number" id="qtdCorretas" value="${q.corretas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><strong>${q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0}%</strong></div></div><div style="margin-bottom:12px;"><label>Anotações</label><textarea id="anotacaoDisc" style="width:100%;min-height:60px;">${anotacao}</textarea><button class="btn btn-sm btn-outline" onclick="salvarAnotacao('${discId}')">Salvar</button></div><h4>Tópicos do Edital (${p.concluidos}/${p.total})</h4><div style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:12px;">${topicosHtml}</div><div style="margin-top:12px;display:flex;gap:8px;"><button class="btn btn-sm btn-accent" onclick="marcarTodos('${discId}',true)">Marcar Todos</button><button class="btn btn-outline btn-sm" onclick="marcarTodos('${discId}',false)">Desmarcar</button></div></div>`;
