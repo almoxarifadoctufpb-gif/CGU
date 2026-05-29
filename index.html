@@ -77,19 +77,20 @@
             text-align: center;
         }
         .sidebar-header .logo-img {
-            width: 90px;
-            height: 90px;
-            border-radius: 22px;
-            object-fit: cover;
+            width: 110px;
+            height: 110px;
+            border-radius: 24px;
+            object-fit: contain;
             margin: 0 auto 10px;
-            box-shadow: 0 8px 28px rgba(130, 10, 209, 0.6), 0 0 40px rgba(130, 10, 209, 0.3);
+            background: rgba(255,255,255,0.08);
+            padding: 8px;
+            box-shadow: 0 12px 40px rgba(130, 10, 209, 0.8), 0 0 60px rgba(130, 10, 209, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: rgba(255,255,255,0.05);
             display: block;
         }
         .sidebar-header .logo-img:hover {
             transform: scale(1.08);
-            box-shadow: 0 12px 36px rgba(130, 10, 209, 0.75), 0 0 56px rgba(130, 10, 209, 0.4);
+            box-shadow: 0 16px 48px rgba(130, 10, 209, 0.95), 0 0 80px rgba(130, 10, 209, 0.6);
         }
         .sidebar-header h2 {
             font-size: 1.05rem;
@@ -175,8 +176,14 @@
             animation: fadeSlideIn 0.4s ease;
         }
         @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .card {
             background: var(--surface);
@@ -215,10 +222,22 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
-        .badge-basicas { background: #F3E8FF; color: #6811B8; }
-        .badge-especificas { background: #FEF3C7; color: #92400E; }
-        .badge-especializadas { background: #DCFCE7; color: #065F46; }
-        .badge-peso { background: #F4F4F5; color: #52525B; }
+        .badge-basicas {
+            background: #F3E8FF;
+            color: #6811B8;
+        }
+        .badge-especificas {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .badge-especializadas {
+            background: #DCFCE7;
+            color: #065F46;
+        }
+        .badge-peso {
+            background: #F4F4F5;
+            color: #52525B;
+        }
 
         .progress-bar {
             height: 10px;
@@ -233,9 +252,18 @@
             background: linear-gradient(90deg, #820AD1 0%, #A855F7 100%);
             box-shadow: 0 0 16px rgba(130, 10, 209, 0.35);
         }
-        .progress-fill.low { background: linear-gradient(90deg, #EF4444, #F87171); box-shadow: 0 0 14px rgba(239, 68, 68, 0.3); }
-        .progress-fill.mid { background: linear-gradient(90deg, #F59E0B, #FBBF24); box-shadow: 0 0 14px rgba(245, 158, 11, 0.3); }
-        .progress-fill.high { background: linear-gradient(90deg, #22C55E, #4ADE80); box-shadow: 0 0 14px rgba(34, 197, 94, 0.3); }
+        .progress-fill.low {
+            background: linear-gradient(90deg, #EF4444, #F87171);
+            box-shadow: 0 0 14px rgba(239, 68, 68, 0.3);
+        }
+        .progress-fill.mid {
+            background: linear-gradient(90deg, #F59E0B, #FBBF24);
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.3);
+        }
+        .progress-fill.high {
+            background: linear-gradient(90deg, #22C55E, #4ADE80);
+            box-shadow: 0 0 14px rgba(34, 197, 94, 0.3);
+        }
         .btn {
             padding: 9px 18px;
             border-radius: 24px;
@@ -249,12 +277,31 @@
             gap: 6px;
             font-family: var(--font);
         }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(130, 10, 209, 0.3); }
-        .btn-outline { background: transparent; border: 2px solid #E4E4E7; color: var(--text-primary); }
-        .btn-sm { padding: 6px 14px; font-size: 0.72rem; }
-        .btn-accent { background: #22C55E; color: #fff; }
-        .btn-warning { background: #F59E0B; color: #fff; }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(130, 10, 209, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #E4E4E7;
+            color: var(--text-primary);
+        }
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.72rem;
+        }
+        .btn-accent {
+            background: #22C55E;
+            color: #fff;
+        }
+        .btn-warning {
+            background: #F59E0B;
+            color: #fff;
+        }
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -272,7 +319,10 @@
             align-items: center;
             gap: 16px;
         }
-        .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
         .kpi-icon {
             width: 52px;
             height: 52px;
@@ -283,38 +333,97 @@
             font-size: 1.5rem;
             flex-shrink: 0;
         }
-        .kpi-icon.purple { background: #F3E8FF; color: #820AD1; }
-        .kpi-icon.green { background: #DCFCE7; color: #059669; }
+        .kpi-icon.purple {
+            background: #F3E8FF;
+            color: #820AD1;
+        }
+        .kpi-icon.green {
+            background: #DCFCE7;
+            color: #059669;
+        }
+        .kpi-icon.amber {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+        .kpi-icon.blue {
+            background: #DBEAFE;
+            color: #2563EB;
+        }
         .kpi-info .kpi-value {
             font-size: 1.7rem;
             font-weight: 800;
             letter-spacing: -0.4px;
             line-height: 1.1;
         }
-        .kpi-info .kpi-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; }
-        .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--surface-alt); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        tbody tr:nth-child(odd) { background: var(--zebra-odd); }
-        tbody tr:nth-child(even) { background: var(--zebra-even); }
-        tbody tr:hover td { background: #F3E8FF !important; }
+        .kpi-info .kpi-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--surface-alt);
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        tbody tr:nth-child(odd) {
+            background: var(--zebra-odd);
+        }
+        tbody tr:nth-child(even) {
+            background: var(--zebra-even);
+        }
+        tbody tr:hover td {
+            background: #F3E8FF !important;
+        }
 
-        .disciplina-row:nth-child(odd) { background: var(--zebra-odd); }
-        .disciplina-row:nth-child(even) { background: var(--zebra-even); }
-        .disciplina-row:hover { background: #F3E8FF !important; }
+        .disciplina-row:nth-child(odd) {
+            background: var(--zebra-odd);
+        }
+        .disciplina-row:nth-child(even) {
+            background: var(--zebra-even);
+        }
+        .disciplina-row:hover {
+            background: #F3E8FF !important;
+        }
 
-        .chart-container { position: relative; width: 100%; max-height: 300px; }
-        .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-height: 300px;
+        }
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
         /* FOGUETE */
-        .foguete-container { position: relative; margin: 20px 0 30px; padding: 10px 0; }
+        .foguete-container {
+            position: relative;
+            margin: 20px 0 30px;
+            padding: 10px 0;
+        }
         .foguete-track {
             height: 16px;
             background: linear-gradient(90deg, #F4F4F5 0%, #E9D5FF 50%, #C084FC 100%);
             border-radius: 20px;
             position: relative;
             overflow: visible;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
         }
         .foguete-progress {
             height: 100%;
@@ -335,10 +444,25 @@
             animation: fogueteFlutuar 2s ease-in-out infinite;
         }
         @keyframes fogueteFlutuar {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-6px); }
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-6px);
+            }
         }
-        .foguete-label { position: absolute; left: 50%; transform: translateX(-50%); bottom: -28px; font-weight: 700; font-size: 0.9rem; color: var(--primary); transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; }
+        .foguete-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -28px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary);
+            transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
 
         .motivational-card {
             background: linear-gradient(135deg, #F8F7FC 0%, #F3E8FF 100%);
@@ -418,35 +542,159 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        .search-input:focus { border-color: var(--primary); }
+        .search-input:focus {
+            border-color: var(--primary);
+        }
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(24, 24, 27, 0.6); backdrop-filter: blur(4px);
-            z-index: 200; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease;
+            position: fixed;
+            inset: 0;
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
         .modal {
-            background: #fff; border-radius: var(--radius); padding: 28px 32px; max-width: 750px; width: 95%;
-            max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 48px rgba(130,10,209,0.15);
-            position: relative; animation: slideUp 0.3s ease;
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            max-width: 750px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 48px rgba(130, 10, 209, 0.15);
+            position: relative;
+            animation: slideUp 0.3s ease;
         }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .toast {
-            position: fixed; bottom: 28px; right: 28px; background: #18181B; color: #fff; padding: 12px 22px;
-            border-radius: 28px; font-size: 0.82rem; z-index: 999; animation: toastIn 0.35s ease;
-            box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px;
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #18181B;
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 28px;
+            font-size: 0.82rem;
+            z-index: 999;
+            animation: toastIn 0.35s ease;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        @keyframes toastIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        .hidden { display: none !important; }
-        .hamburger { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; }
-        .overlay-bg { position: fixed; inset: 0; background: rgba(24, 24, 27, 0.5); z-index: 99; }
-        .insight-box { background: #F8F7FC; border-radius: 16px; padding: 18px 20px; border-left: 4px solid #820AD1; margin-bottom: 16px; }
-        .tag { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
-        .tag-high { background: #FEE2E2; color: #DC2626; }
-        .tag-medium { background: #FEF3C7; color: #D97706; }
-        .tag-low { background: #DCFCE7; color: #059669; }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hidden {
+            display: none !important;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+        .overlay-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(24, 24, 27, 0.5);
+            z-index: 99;
+        }
+        .insight-box {
+            background: #F8F7FC;
+            border-radius: 16px;
+            padding: 18px 20px;
+            border-left: 4px solid #820AD1;
+            margin-bottom: 16px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .tag-high {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+        .tag-medium {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+        .tag-low {
+            background: #DCFCE7;
+            color: #059669;
+        }
 
-        .topico-item:nth-child(odd) { background: #FAFAFD; }
-        .topico-item:nth-child(even) { background: #FFFFFF; }
+        .topico-item:nth-child(odd) {
+            background: #FAFAFD;
+        }
+        .topico-item:nth-child(even) {
+            background: #FFFFFF;
+        }
+
+        /* Botões de estado do tópico */
+        .estado-btns {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .estado-btn {
+            padding: 4px 10px;
+            border-radius: 16px;
+            border: 1.5px solid var(--border);
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.68rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: var(--font);
+        }
+        .estado-btn.estado-ativo-0 {
+            background: #F4F4F5;
+            border-color: #D4D4D8;
+            color: #52525B;
+        }
+        .estado-btn.estado-ativo-1 {
+            background: #FEF3C7;
+            border-color: #F59E0B;
+            color: #92400E;
+        }
+        .estado-btn.estado-ativo-2 {
+            background: #DCFCE7;
+            border-color: #22C55E;
+            color: #065F46;
+        }
 
         /* RESPONSIVIDADE */
         @media (max-width: 1024px) {
@@ -560,7 +808,7 @@
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="https://res.cloudinary.com/dew6hgzpv/image/upload/v1780013499/ChatGPT_Image_28_de_mai._de_2026_21_10_39_luiyov.png" 
+            <img src="https://res.cloudinary.com/dqmuoc3o0/image/upload/v1780049455/LOGO_bbqykr.png" 
                  alt="Logo CGU AFFC" 
                  class="logo-img"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
@@ -630,16 +878,24 @@
                 </div>
             </div>`;
         }
-        function proximaFrase() { indiceFraseAtual = (indiceFraseAtual + 1) % frasesMotivacionais.length; atualizarFraseNoDOM(); }
-        function fraseAnterior() { indiceFraseAtual = (indiceFraseAtual - 1 + frasesMotivacionais.length) % frasesMotivacionais.length; atualizarFraseNoDOM(); }
+
+        function proximaFrase() { indiceFraseAtual = (indiceFraseAtual + 1) % frasesMotivacionais.length;
+            atualizarFraseNoDOM(); }
+
+        function fraseAnterior() { indiceFraseAtual = (indiceFraseAtual - 1 + frasesMotivacionais.length) % frasesMotivacionais
+            .length;
+            atualizarFraseNoDOM(); }
+
         function atualizarFraseNoDOM() {
             const card = document.getElementById('motivationalCard');
             if (card) {
                 const frase = frasesMotivacionais[indiceFraseAtual];
                 card.querySelector('.frase-texto').textContent = frase.texto;
                 card.querySelector('.frase-categoria').textContent = frase.categoria;
-                card.style.opacity = '0.6'; card.style.transform = 'scale(0.99)';
-                setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 150);
+                card.style.opacity = '0.6';
+                card.style.transform = 'scale(0.99)';
+                setTimeout(() => { card.style.opacity = '1';
+                    card.style.transform = 'scale(1)'; }, 150);
             }
         }
 
@@ -648,7 +904,8 @@
             grupos: {
                 'basicas': { nome: 'Conhecimentos Básicos', badgeClass: 'badge-basicas', pesoGrupo: 1 },
                 'especificas': { nome: 'Conhecimentos Específicos', badgeClass: 'badge-especificas', pesoGrupo: 2 },
-                'especializadas': { nome: 'Conhecimentos Especializados', badgeClass: 'badge-especializadas', pesoGrupo: 3 }
+                'especializadas': { nome: 'Conhecimentos Especializados', badgeClass: 'badge-especializadas',
+                    pesoGrupo: 3 }
             },
             disciplinas: [
                 { id: 'portugues', nome: 'Língua Portuguesa', grupo: 'basicas', peso: 1, topicos: [
@@ -679,7 +936,8 @@
                         'Relações de subordinação e coordenação',
                         'Voz passiva, discurso direto e indireto'
                     ] },
-                { id: 'adm-publica', nome: 'Administração Pública e Políticas Públicas', grupo: 'basicas', peso: 1, topicos: [
+                { id: 'adm-publica', nome: 'Administração Pública e Políticas Públicas', grupo: 'basicas', peso: 1,
+                    topicos: [
                         'Políticas públicas: ciclo (construção de agenda, formulação, processo decisório, implementação, avaliação)',
                         'Processos participativos de gestão pública: conselhos de gestão, orçamento participativo, parceria governo-sociedade',
                         'Governo Aberto: Decreto nº 10.160/2019 e Comitê Interministerial',
@@ -744,13 +1002,15 @@
                         'Conceito e estágios da Receita e da Despesa pública',
                         'Gestão organizacional das finanças públicas: sistema de planejamento e orçamento (Lei nº 10.180/2001)'
                     ] },
-                { id: 'fundamentos-auditoria', nome: 'Fundamentos de Auditoria Governamental', grupo: 'especificas', peso: 2, topicos: [
+                { id: 'fundamentos-auditoria', nome: 'Fundamentos de Auditoria Governamental', grupo: 'especificas', peso: 2,
+                    topicos: [
                         'Sistema de Controle Interno do Poder Executivo Federal: finalidades, atividades, organização e competências',
                         'Lei nº 10.180/2001 e Decreto nº 3.591/2000',
                         'Manual de Orientações Técnicas da Atividade de Auditoria Interna Governamental - MOT 2017',
                         'Instrução Normativa SFC nº 3, de 9 de julho de 2017'
                     ] },
-                { id: 'cgu', nome: 'CGU: Organização, Competências e Sistemas Estruturantes', grupo: 'especificas', peso: 1.5, topicos: [
+                { id: 'cgu', nome: 'CGU: Organização, Competências e Sistemas Estruturantes', grupo: 'especificas', peso: 1.5,
+                    topicos: [
                         'Estrutura e competência: Lei nº 13.844/2019 (áreas de competência da CGU, competências do Ministro, estrutura básica)',
                         'Decreto nº 9.681/2019: natureza, competência, estrutura organizacional e unidades descentralizadas',
                         'Sistema de Controle Interno do Poder Executivo Federal (Lei nº 10.180/2001 e Decreto nº 3.591/2000)',
@@ -758,7 +1018,8 @@
                         'Sistema de Ouvidorias Públicas do Poder Executivo Federal (Decreto nº 9.492/2018)',
                         'Sistema de Integridade Pública do Poder Executivo Federal (Decreto nº 10.756/2021)'
                     ] },
-                { id: 'auditoria-governamental', nome: 'Auditoria Governamental e Controle Interno', grupo: 'especializadas', peso: 3, topicos: [
+                { id: 'auditoria-governamental', nome: 'Auditoria Governamental e Controle Interno',
+                    grupo: 'especializadas', peso: 3, topicos: [
                         'Sistema de Controle Interno do Poder Executivo Federal: Lei nº 10.180/2001 e Decreto nº 3.591/2000',
                         'MOT 2017 e Instrução Normativa SFC nº 3/2017',
                         'Orientação Prática: Relatório de Auditoria (Portaria nº 1.037/2019)',
@@ -769,7 +1030,8 @@
                         'O modelo de três linhas',
                         'Instrução Normativa Conjunta MPOG/CGU nº 1, de 10 de maio de 2016'
                     ] },
-                { id: 'contabilidade-publica', nome: 'Contabilidade Aplicada ao Setor Público', grupo: 'especializadas', peso: 3, topicos: [
+                { id: 'contabilidade-publica', nome: 'Contabilidade Aplicada ao Setor Público', grupo: 'especializadas',
+                    peso: 3, topicos: [
                         'NBC TSP Estrutura Conceitual: objetivos e usuários da informação contábil de propósito geral',
                         'Características qualitativas da informação contábil',
                         'Entidade que reporta a informação contábil',
@@ -786,7 +1048,8 @@
                         'Sistema de Informações de Custos: NBC T 16.11',
                         'Manual de Informações de Custos do Governo Federal (Portaria STN nº 518/2018)'
                     ] },
-                { id: 'avaliacao-politicas', nome: 'Avaliação de Políticas Públicas', grupo: 'especializadas', peso: 2, topicos: [
+                { id: 'avaliacao-politicas', nome: 'Avaliação de Políticas Públicas', grupo: 'especializadas', peso: 2,
+                    topicos: [
                         'Análise Ex Ante: "Avaliação de políticas públicas: guia prático de análise ex ante", volume 1 (Casa Civil/IPEA 2018)',
                         'Análise Ex Post: "Avaliação de políticas públicas: guia prático de análise ex post", volume 2 (Casa Civil et al. 2018)',
                         'Conselho de Monitoramento e Avaliação de Políticas Públicas - CMAP (Decreto nº 9.834/2019)'
@@ -816,159 +1079,321 @@
         };
 
         const dadosProvaCGU = {
-            totalQuestoes: 140, ano: 2023,
-            distribuição: { 'portugues':18,'ingles':8,'adm-publica':10,'dir-constitucional':12,'dir-administrativo':16,'afo':8,'fundamentos-auditoria':10,'cgu':6,'auditoria-governamental':14,'contabilidade-publica':12,'avaliacao-politicas':6,'financas-publicas':20 },
-            pesoMedioPorDisciplina: { 'portugues':1,'ingles':1,'adm-publica':1,'dir-constitucional':2,'dir-administrativo':2,'afo':2,'fundamentos-auditoria':2,'cgu':1.5,'auditoria-governamental':3,'contabilidade-publica':3,'avaliacao-politicas':2,'financas-publicas':3 },
-            notaCorteEstimada: 84, percentualAcertoMedio: 68
+            totalQuestoes: 140,
+            ano: 2023,
+            distribuição: { 'portugues': 18, 'ingles': 8, 'adm-publica': 10, 'dir-constitucional': 12,
+                'dir-administrativo': 16, 'afo': 8, 'fundamentos-auditoria': 10, 'cgu': 6, 'auditoria-governamental': 14,
+                'contabilidade-publica': 12, 'avaliacao-politicas': 6, 'financas-publicas': 20 },
+            pesoMedioPorDisciplina: { 'portugues': 1, 'ingles': 1, 'adm-publica': 1, 'dir-constitucional': 2,
+                'dir-administrativo': 2, 'afo': 2, 'fundamentos-auditoria': 2, 'cgu': 1.5, 'auditoria-governamental': 3,
+                'contabilidade-publica': 3, 'avaliacao-politicas': 2, 'financas-publicas': 3 },
+            notaCorteEstimada: 84,
+            percentualAcertoMedio: 68
         };
 
         const disciplinaIconMap = {
-            'portugues':'fa-solid fa-book','ingles':'fa-solid fa-globe','adm-publica':'fa-solid fa-building-columns',
-            'dir-constitucional':'fa-solid fa-scale-balanced','dir-administrativo':'fa-solid fa-file-contract',
-            'afo':'fa-solid fa-coins','fundamentos-auditoria':'fa-solid fa-magnifying-glass-chart',
-            'cgu':'fa-solid fa-shield-haltered','auditoria-governamental':'fa-solid fa-check-double',
-            'contabilidade-publica':'fa-solid fa-calculator','avaliacao-politicas':'fa-solid fa-clipboard-check',
-            'financas-publicas':'fa-solid fa-chart-column'
+            'portugues': 'fa-solid fa-book',
+            'ingles': 'fa-solid fa-globe',
+            'adm-publica': 'fa-solid fa-building-columns',
+            'dir-constitucional': 'fa-solid fa-scale-balanced',
+            'dir-administrativo': 'fa-solid fa-file-contract',
+            'afo': 'fa-solid fa-coins',
+            'fundamentos-auditoria': 'fa-solid fa-magnifying-glass-chart',
+            'cgu': 'fa-solid fa-shield-haltered',
+            'auditoria-governamental': 'fa-solid fa-check-double',
+            'contabilidade-publica': 'fa-solid fa-calculator',
+            'avaliacao-politicas': 'fa-solid fa-clipboard-check',
+            'financas-publicas': 'fa-solid fa-chart-column'
         };
+
         function getIcon(id) { return `<i class="${disciplinaIconMap[id] || 'fa-solid fa-circle-question'}"></i>`; }
 
         const STORAGE_KEY = 'affc_cgu_study_v10_responsivo';
         let appState = {
-            metaQuestoesDiaria:50, metaHorasDiaria:5, metaRevisoesSemana:4,
+            metaQuestoesDiaria: 50,
+            metaHorasDiaria: 5,
+            metaRevisoesSemana: 4,
             dataInicio: new Date().toISOString().split('T')[0],
-            topicosConcluidos:{}, questoes:{}, anotacoes:{}, metasPorDisciplina:{}, cicloAtual:1,
-            historicoDiario:{}, ultimaAtividade: new Date().toISOString()
+            topicosConcluidos: {}, // Agora: 0 = Não iniciado, 1 = Iniciado, 2 = Concluído
+            questoes: {},
+            anotacoes: {},
+            metasPorDisciplina: {},
+            cicloAtual: 1,
+            historicoDiario: {},
+            ultimaAtividade: new Date().toISOString()
         };
 
         const progressoCache = {};
+
         function getProgressoDisciplinaCache(discId) {
             if (progressoCache[discId]) return progressoCache[discId];
-            const disc = editalData.disciplinas.find(d=>d.id===discId);
-            if(!disc||!disc.topicos||disc.topicos.length===0) return {pct:0,concluidos:0,total:0};
-            const total = disc.topicos.length; let concluidos=0;
-            disc.topicos.forEach((_,i)=>{ if(appState.topicosConcluidos[`${discId}-${i}`]) concluidos++; });
-            const res = {pct:Math.round((concluidos/total)*100),concluidos,total};
+            const disc = editalData.disciplinas.find(d => d.id === discId);
+            if (!disc || !disc.topicos || disc.topicos.length === 0) return { pct: 0, concluidos: 0, iniciados: 0,
+                total: 0 };
+            const total = disc.topicos.length;
+            let concluidos = 0;
+            let iniciados = 0;
+            disc.topicos.forEach((_, i) => {
+                const estado = appState.topicosConcluidos[`${discId}-${i}`] || 0;
+                if (estado === 2) concluidos++;
+                else if (estado === 1) iniciados++;
+            });
+            // Percentual base: concluídos = 100%, iniciados = 50% de avanço
+            const pct = Math.round(((concluidos + iniciados * 0.5) / total) * 100);
+            const res = { pct, concluidos, iniciados, total };
             progressoCache[discId] = res;
             return res;
         }
+
         function invalidateProgressoCache(discId) { delete progressoCache[discId]; }
-        function invalidateAllCache() { for(let k in progressoCache) delete progressoCache[k]; }
+
+        function invalidateAllCache() { for (let k in progressoCache) delete progressoCache[k]; }
 
         function carregarState() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) { appState = { ...appState, ...JSON.parse(saved) }; }
-                if(!appState.topicosConcluidos) appState.topicosConcluidos={};
-                if(!appState.questoes) appState.questoes={};
-                if(!appState.anotacoes) appState.anotacoes={};
-                if(!appState.metasPorDisciplina) appState.metasPorDisciplina={};
-                if(!appState.historicoDiario) appState.historicoDiario={};
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                    // Migração de dados antigos (boolean true) para novo formato numérico
+                    if (appState.topicosConcluidos) {
+                        const migrado = {};
+                        for (const [key, val] of Object.entries(appState.topicosConcluidos)) {
+                            if (val === true || val === 1 || val === 2) {
+                                migrado[key] = val === true ? 2 : val; // true antigo vira Concluído (2)
+                            } else if (val === false || val === 0) {
+                                migrado[key] = 0; // Não iniciado
+                            } else {
+                                migrado[key] = 0; // fallback
+                            }
+                        }
+                        appState.topicosConcluidos = migrado;
+                    }
+                }
+                if (!appState.topicosConcluidos) appState.topicosConcluidos = {};
+                if (!appState.questoes) appState.questoes = {};
+                if (!appState.anotacoes) appState.anotacoes = {};
+                if (!appState.metasPorDisciplina) appState.metasPorDisciplina = {};
+                if (!appState.historicoDiario) appState.historicoDiario = {};
                 invalidateAllCache();
-            } catch(e){}
+            } catch (e) {}
         }
-        function salvarState() { appState.ultimaAtividade = new Date().toISOString(); localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); invalidateAllCache(); }
-        function toast(msg) { const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.remove('hidden'); clearTimeout(t._timeout); t._timeout=setTimeout(()=>t.classList.add('hidden'),2800); }
+
+        function salvarState() { appState.ultimaAtividade = new Date().toISOString();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            invalidateAllCache(); }
+
+        function toast(msg) { const t = document.getElementById('toast');
+            t.innerHTML = msg;
+            t.classList.remove('hidden');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.add('hidden'), 2800); }
+
         function getProgressoDisciplina(discId) { return getProgressoDisciplinaCache(discId); }
+
         function getProgressoGeral() {
-            let total=0,concluidos=0;
-            editalData.disciplinas.forEach(d=>{ if(!d.topicos) return; d.topicos.forEach((_,i)=>{ total++; if(appState.topicosConcluidos[`${d.id}-${i}`]) concluidos++; }); });
-            return {pct:total>0?Math.round((concluidos/total)*100):0,concluidos,total};
+            let total = 0,
+                concluidos = 0,
+                iniciados = 0;
+            editalData.disciplinas.forEach(d => {
+                if (!d.topicos) return;
+                d.topicos.forEach((_, i) => {
+                    total++;
+                    const estado = appState.topicosConcluidos[`${d.id}-${i}`] || 0;
+                    if (estado === 2) concluidos++;
+                    else if (estado === 1) iniciados++;
+                });
+            });
+            const pct = total > 0 ? Math.round(((concluidos + iniciados * 0.5) / total) * 100) : 0;
+            return { pct, concluidos, iniciados, total };
         }
-        function getTotalQuestoes() { let total=0,corretas=0; Object.values(appState.questoes).forEach(q=>{total+=(q.resolvidas||0);corretas+=(q.corretas||0);}); return {total,corretas,pct:total>0?Math.round((corretas/total)*100):0}; }
-        function getQuestoesDisciplina(id) { return appState.questoes[id]||{resolvidas:0,corretas:0}; }
-        function getStreak() { const hoje=new Date(); hoje.setHours(0,0,0,0); let streak=0; const check=new Date(hoje); while(true){ const key=check.toISOString().split('T')[0]; if(appState.historicoDiario[key]){streak++;check.setDate(check.getDate()-1);}else break; } return streak; }
-        function registrarAtividadeHoje() { const hoje=new Date().toISOString().split('T')[0]; appState.historicoDiario[hoje]=true; salvarState(); }
+
+        function getTotalQuestoes() {
+            let total = 0,
+                corretas = 0;
+            Object.values(appState.questoes).forEach(q => {
+                total += (q.resolvidas || 0);
+                corretas += (q.corretas || 0);
+            });
+            return { total, corretas, pct: total > 0 ? Math.round((corretas / total) * 100) : 0 };
+        }
+
+        function getQuestoesDisciplina(id) { return appState.questoes[id] || { resolvidas: 0, corretas: 0 }; }
+
+        function getStreak() { const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0); let streak = 0; const check = new Date(hoje); while (true) { const key = check
+                    .toISOString().split('T')[0]; if (appState.historicoDiario[key]) { streak++;
+                    check.setDate(check.getDate() - 1); } else break; } return streak; }
+
+        function registrarAtividadeHoje() { const hoje = new Date().toISOString().split('T')[0];
+            appState.historicoDiario[hoje] = true;
+            salvarState(); }
 
         function exportarBackup() {
-            const dados = JSON.stringify(appState,null,2); const blob = new Blob([dados],{type:'application/json'});
-            const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url;
-            a.download=`backup_affc_cgu_${new Date().toISOString().split('T')[0]}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            const dados = JSON.stringify(appState, null, 2);
+            const blob = new Blob([dados], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup_affc_cgu_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
             toast('<i class="fa-solid fa-download"></i> Backup exportado!');
         }
+
         function importarBackup() {
-            const input = document.createElement('input'); input.type='file'; input.accept='.json';
-            input.onchange=(e)=>{ const file=e.target.files[0]; if(!file) return; const reader=new FileReader();
-                reader.onload=(event)=>{ try{ const dados=JSON.parse(event.target.result); if(dados.topicosConcluidos===undefined||dados.questoes===undefined) throw new Error('Inválido');
-                    if(confirm('⚠️ Substituir todos os dados pelo backup?')){ appState={...appState,...dados}; salvarState(); toast('<i class="fa-solid fa-upload"></i> Restaurado!'); setTimeout(()=>location.reload(),1500); }
-                }catch(err){ toast('<i class="fa-solid fa-circle-exclamation"></i> Arquivo inválido.'); } }; reader.readAsText(file); }; input.click();
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader();
+                reader.onload = (event) => { try { const dados = JSON.parse(event.target.result); if (dados
+                            .topicosConcluidos === undefined || dados.questoes === undefined) throw new Error(
+                            'Inválido'); if (confirm(
+                            '⚠️ Substituir todos os dados pelo backup?')) { appState = { ...appState,
+                            ...dados };
+                        carregarState(); // re-migrar após restore
+                        salvarState();
+                        toast('<i class="fa-solid fa-upload"></i> Restaurado!');
+                        setTimeout(() => location.reload(), 1500); } } catch (err) { toast(
+                            '<i class="fa-solid fa-circle-exclamation"></i> Arquivo inválido.'); } };
+                reader.readAsText(file); };
+            input.click();
         }
 
-        let currentTab='dashboard'; let chartInstances={};
-        function destruirGraficos() { Object.values(chartInstances).forEach(c=>{try{c.destroy();}catch(e){}}); chartInstances={}; }
+        let currentTab = 'dashboard';
+        let chartInstances = {};
+
+        function destruirGraficos() { Object.values(chartInstances).forEach(c => { try { c.destroy(); } catch (e) {} });
+            chartInstances = {}; }
+
         function navegar(tab) {
-            destruirGraficos(); currentTab=tab;
-            document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.remove('active'));
-            const link=document.querySelector(`.sidebar-nav a[data-tab="${tab}"]`); if(link) link.classList.add('active');
-            const icons={'dashboard':'fa-chart-pie','disciplinas':'fa-book-open','questoes':'fa-file-pen','metas':'fa-bullseye','estatisticas':'fa-chart-line'};
-            const titles={'dashboard':'Dashboard','disciplinas':'Disciplinas','questoes':'Questões','metas':'Metas','estatisticas':'Estatísticas'};
-            document.getElementById('pageTitle').innerHTML=`<i class="fa-solid ${icons[tab]}"></i> ${titles[tab]}`;
+            destruirGraficos();
+            currentTab = tab;
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            const link = document.querySelector(`.sidebar-nav a[data-tab="${tab}"]`);
+            if (link) link.classList.add('active');
+            const icons = { 'dashboard': 'fa-chart-pie', 'disciplinas': 'fa-book-open', 'questoes': 'fa-file-pen',
+                'metas': 'fa-bullseye', 'estatisticas': 'fa-chart-line' };
+            const titles = { 'dashboard': 'Dashboard', 'disciplinas': 'Disciplinas', 'questoes': 'Questões',
+                'metas': 'Metas', 'estatisticas': 'Estatísticas' };
+            document.getElementById('pageTitle').innerHTML = `<i class="fa-solid ${icons[tab]}"></i> ${titles[tab]}`;
             renderizarTab(tab);
-            if(tab==='dashboard') setTimeout(initGraficosDashboard,400);
-            if(tab==='estatisticas') setTimeout(initGraficosEstatisticas,500);
+            if (tab === 'dashboard') setTimeout(initGraficosDashboard, 400);
+            if (tab === 'estatisticas') setTimeout(initGraficosEstatisticas, 500);
             fecharSidebar();
         }
-        function renderizarTab(tab) { const area=document.getElementById('contentArea'); const renders={'dashboard':renderDashboard,'disciplinas':renderDisciplinas,'questoes':renderQuestoes,'metas':renderMetas,'estatisticas':renderEstatisticas}; area.innerHTML=(renders[tab]||renderDashboard)(); }
+
+        function renderizarTab(tab) { const area = document.getElementById('contentArea');
+            const renders = { 'dashboard': renderDashboard, 'disciplinas': renderDisciplinas, 'questoes': renderQuestoes,
+                'metas': renderMetas, 'estatisticas': renderEstatisticas };
+            area.innerHTML = (renders[tab] || renderDashboard)(); }
 
         function initGraficosDashboard() {
             const ctxBar = document.getElementById('chartDisciplinas')?.getContext('2d');
-            if(ctxBar) {
-                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,25)+'...');
-                const data = editalData.disciplinas.map(d=>getProgressoDisciplina(d.id).pct);
-                const colors = data.map(v=>v<30?'#EF4444':v<70?'#F59E0B':'#22C55E');
-                chartInstances['bar'] = new Chart(ctxBar,{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:8,barThickness:14}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{max:100,grid:{color:'#F4F4F5'}}}}});
+            if (ctxBar) {
+                const labels = editalData.disciplinas.map(d => d.nome.substring(0, 25) + '...');
+                const data = editalData.disciplinas.map(d => getProgressoDisciplina(d.id).pct);
+                const colors = data.map(v => v < 30 ? '#EF4444' : v < 70 ? '#F59E0B' : '#22C55E');
+                chartInstances['bar'] = new Chart(ctxBar, { type: 'bar', data: { labels,
+                        datasets: [{ data, backgroundColor: colors, borderRadius: 8, barThickness: 14 }] },
+                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } }, scales: { x: { max: 100,
+                                grid: { color: '#F4F4F5' } } } } });
             }
             const ctxDonut = document.getElementById('chartGrupos')?.getContext('2d');
-            if(ctxDonut) {
+            if (ctxDonut) {
                 const gruposData = {};
-                editalData.disciplinas.forEach(d=>{ const g=d.grupo; if(!gruposData[g]) gruposData[g]={total:0,concluidos:0}; const p=getProgressoDisciplina(d.id); gruposData[g].total+=p.total; gruposData[g].concluidos+=p.concluidos; });
-                const labels = Object.keys(gruposData).map(k=>editalData.grupos[k].nome);
-                const data = Object.values(gruposData).map(v=>v.total>0?Math.round((v.concluidos/v.total)*100):0);
-                chartInstances['donut'] = new Chart(ctxDonut,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:['#820AD1','#F59E0B','#22C55E'],borderWidth:3,borderColor:'#fff',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}},cutout:'65%'}});
+                editalData.disciplinas.forEach(d => { const g = d.grupo; if (!gruposData[g]) gruposData[g] = { total: 0,
+                        concluidos: 0, iniciados: 0 }; const p = getProgressoDisciplina(d.id);
+                    gruposData[g].total += p.total;
+                    gruposData[g].concluidos += p.concluidos;
+                    gruposData[g].iniciados += p.iniciados; });
+                const labels = Object.keys(gruposData).map(k => editalData.grupos[k].nome);
+                const data = Object.values(gruposData).map(v => v.total > 0 ? Math.round(((v.concluidos + v.iniciados *
+                    0.5) / v.total) * 100) : 0);
+                chartInstances['donut'] = new Chart(ctxDonut, { type: 'doughnut', data: { labels,
+                        datasets: [{ data, backgroundColor: ['#820AD1', '#F59E0B', '#22C55E'],
+                            borderWidth: 3, borderColor: '#fff', borderRadius: 6 }] },
+                    options: { responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom', labels: { padding: 16,
+                                usePointStyle: true } } }, cutout: '65%' } });
             }
         }
 
         function initGraficosEstatisticas() {
             const ctxDist = document.getElementById('chartDistribuicaoProva')?.getContext('2d');
-            if(ctxDist) {
-                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,20)+'...');
-                const data = editalData.disciplinas.map(d=>dadosProvaCGU.distribuição[d.id]||0);
-                chartInstances['distProva'] = new Chart(ctxDist,{type:'bar',data:{labels,datasets:[{data,backgroundColor:'#820AD1',borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+            if (ctxDist) {
+                const labels = editalData.disciplinas.map(d => d.nome.substring(0, 20) + '...');
+                const data = editalData.disciplinas.map(d => dadosProvaCGU.distribuição[d.id] || 0);
+                chartInstances['distProva'] = new Chart(ctxDist, { type: 'bar', data: { labels,
+                        datasets: [{ data, backgroundColor: '#820AD1', borderRadius: 8 }] },
+                    options: { responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } } } });
             }
             const ctxBubble = document.getElementById('chartImportanciaProgresso')?.getContext('2d');
-            if(ctxBubble) {
-                const pontos = editalData.disciplinas.map(d=>({
+            if (ctxBubble) {
+                const pontos = editalData.disciplinas.map(d => ({
                     x: getProgressoDisciplina(d.id).pct,
                     y: (dadosProvaCGU.distribuição[d.id] || 0),
                     r: (dadosProvaCGU.pesoMedioPorDisciplina[d.id] || 1) * 8,
                     label: d.nome
                 }));
-                chartInstances['bubble'] = new Chart(ctxBubble,{
+                chartInstances['bubble'] = new Chart(ctxBubble, {
                     type: 'bubble',
-                    data: { datasets: [{ data: pontos, backgroundColor: 'rgba(130,10,209,0.6)', borderColor: '#820AD1', borderWidth: 1 }] },
+                    data: { datasets: [{ data: pontos, backgroundColor: 'rgba(130,10,209,0.6)',
+                            borderColor: '#820AD1', borderWidth: 1 }] },
                     options: {
-                        responsive: true, maintainAspectRatio: false,
-                        plugins: { tooltip: { callbacks: { label: (ctx) => `${ctx.raw.label}: Progresso ${ctx.raw.x}%, Questões ${ctx.raw.y}` } }, legend: { display: false } },
-                        scales: { x: { title: { display: true, text: 'Seu Progresso (%)' }, max: 100, grid: { color: '#F4F4F5' } }, y: { title: { display: true, text: 'Questões na Prova' }, grid: { color: '#F4F4F5' } } }
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { tooltip: { callbacks: { label: (ctx) =>
+                                    `${ctx.raw.label}: Progresso ${ctx.raw.x}%, Questões ${ctx.raw.y}` } },
+                            legend: { display: false } },
+                        scales: { x: { title: { display: true, text: 'Seu Progresso (%)' }, max: 100,
+                                grid: { color: '#F4F4F5' } }, y: { title: { display: true,
+                                text: 'Questões na Prova' }, grid: { color: '#F4F4F5' } } }
                     }
                 });
             }
             const ctxRadar = document.getElementById('chartRadarDesempenho')?.getContext('2d');
-            if(ctxRadar) {
-                const labels = editalData.disciplinas.map(d=>d.nome.substring(0,16)+'...');
-                const progressoAtual = editalData.disciplinas.map(d=>getProgressoDisciplina(d.id).pct);
-                chartInstances['radar'] = new Chart(ctxRadar,{
+            if (ctxRadar) {
+                const labels = editalData.disciplinas.map(d => d.nome.substring(0, 16) + '...');
+                const progressoAtual = editalData.disciplinas.map(d => getProgressoDisciplina(d.id).pct);
+                chartInstances['radar'] = new Chart(ctxRadar, {
                     type: 'radar',
-                    data: { labels, datasets: [
-                        { label: 'Seu Progresso', data: progressoAtual, backgroundColor: 'rgba(130,10,209,0.2)', borderColor: '#820AD1', borderWidth: 2, pointBackgroundColor: '#820AD1' },
-                        { label: 'Meta Ideal (75%)', data: labels.map(()=>75), backgroundColor: 'rgba(34,197,94,0.1)', borderColor: '#22C55E', borderWidth: 2, borderDash: [6,4], pointBackgroundColor: '#22C55E' }
-                    ] },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } } }, scales: { r: { max: 100, ticks: { stepSize: 20 }, grid: { color: '#E4E4E7' }, pointLabels: { font: { size: 10 } } } } }
+                    data: {
+                        labels,
+                        datasets: [
+                            { label: 'Seu Progresso', data: progressoAtual,
+                                backgroundColor: 'rgba(130,10,209,0.2)', borderColor: '#820AD1',
+                                borderWidth: 2, pointBackgroundColor: '#820AD1' },
+                            { label: 'Meta Ideal (75%)', data: labels.map(() => 75),
+                                backgroundColor: 'rgba(34,197,94,0.1)', borderColor: '#22C55E',
+                                borderWidth: 2, borderDash: [6, 4], pointBackgroundColor: '#22C55E' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true,
+                                padding: 16 } } },
+                        scales: { r: { max: 100, ticks: { stepSize: 20 }, grid: { color: '#E4E4E7' },
+                                pointLabels: { font: { size: 10 } } } }
+                    }
                 });
             }
         }
 
         function renderDashboard() {
-            const geral=getProgressoGeral(); const questoes=getTotalQuestoes(); const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24))); const streak=getStreak(); const horasEst=Math.round(appState.metaHorasDiaria*dias); const saudacao=new Date().getHours()<12?'Bom dia':new Date().getHours()<18?'Boa tarde':'Boa noite'; registrarAtividadeHoje();
+            const geral = getProgressoGeral();
+            const questoes = getTotalQuestoes();
+            const dias = Math.max(1, Math.floor((new Date() - new Date(appState.dataInicio)) / (1000 * 60 * 60 * 24)));
+            const streak = getStreak();
+            const horasEst = Math.round(appState.metaHorasDiaria * dias);
+            const saudacao = new Date().getHours() < 12 ? 'Bom dia' : new Date().getHours() < 18 ? 'Boa tarde' :
+                'Boa noite';
+            registrarAtividadeHoje();
             return `
             <div class="hero" style="background:linear-gradient(135deg,#820AD1,#9333EA,#A855F7);border-radius:20px;padding:36px 40px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(130,10,209,.25);">
                 <h2 style="font-size:1.9rem;font-weight:800;">${saudacao} 👋</h2>
@@ -984,7 +1409,7 @@
                 <div class="card-header">
                     <h3><i class="fa-solid fa-rocket" style="color:#820AD1;"></i> Missão AFFC CGU</h3>
                     <div style="display:flex;align-items:center;gap:16px;">
-                        <span>${geral.concluidos}/${geral.total} tópicos</span>
+                        <span>${geral.concluidos} concluídos · ${geral.iniciados} iniciados · ${geral.total} total</span>
                         <span class="badge" style="background:#DCFCE7;color:#059669;font-size:0.75rem;padding:6px 14px;">
                             <i class="fa-solid fa-flag-checkered"></i> Aprovação
                         </span>
@@ -997,10 +1422,10 @@
                 </div>
             </div>
             <div class="kpi-grid">
-                <div class="kpi-card"><div class="kpi-icon purple"><i class="fa-solid fa-bullseye"></i></div><div class="kpi-info"><div class="kpi-value">${geral.concluidos}/${geral.total}</div><div class="kpi-label">Tópicos</div></div></div>
-                <div class="kpi-card"><div class="kpi-icon green"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões</div></div></div>
-                <div class="kpi-card"><div class="kpi-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-calendar-check"></i></div><div class="kpi-info"><div class="kpi-value">${dias}</div><div class="kpi-label">Dias</div></div></div>
-                <div class="kpi-card"><div class="kpi-icon" style="background:#DBEAFE;color:#2563EB;"><i class="fa-solid fa-trophy"></i></div><div class="kpi-info"><div class="kpi-value">${Math.round(questoes.total/dias)}</div><div class="kpi-label">Média/dia</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon green"><i class="fa-solid fa-circle-check"></i></div><div class="kpi-info"><div class="kpi-value">${geral.concluidos}</div><div class="kpi-label">Tópicos Concluídos</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon amber"><i class="fa-solid fa-spinner"></i></div><div class="kpi-info"><div class="kpi-value">${geral.iniciados}</div><div class="kpi-label">Tópicos Iniciados</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon purple"><i class="fa-solid fa-bullseye"></i></div><div class="kpi-info"><div class="kpi-value">${geral.total}</div><div class="kpi-label">Total de Tópicos</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon blue"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões Resolvidas</div></div></div>
             </div>
             <div class="charts-row">
                 <div class="card"><div class="card-header"><h3>Progresso por Disciplina</h3></div><div class="chart-container"><canvas id="chartDisciplinas"></canvas></div></div>
@@ -1009,27 +1434,36 @@
         }
 
         function renderDisciplinas() {
-            let html = `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-book-open"></i> Disciplinas</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><input type="text" class="search-input" placeholder="🔍 Pesquisar..." id="searchDisciplina" oninput="filtrarDisciplinas()"><button class="btn btn-outline btn-sm" onclick="filtrarGrupo('todas')">Todas</button>`;
-            Object.entries(editalData.grupos).forEach(([k,v])=>html+=`<button class="btn btn-outline btn-sm" style="margin-left:4px;" onclick="filtrarGrupo('${k}')">${v.nome}</button>`);
-            html+=`</div></div><div id="disciplinasList">`;
-            editalData.disciplinas.forEach(d=>{
-                const p=getProgressoDisciplina(d.id); const q=getQuestoesDisciplina(d.id);
-                html+=`<div class="disciplina-row" data-grupo="${d.grupo}" data-nome="${d.nome.toLowerCase()}" onclick="abrirDisciplina('${d.id}')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:1px solid var(--border);border-radius:12px;margin-bottom:6px;cursor:pointer;transition:all .25s;">
+            let html =
+                `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-book-open"></i> Disciplinas</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><input type="text" class="search-input" placeholder="🔍 Pesquisar..." id="searchDisciplina" oninput="filtrarDisciplinas()"><button class="btn btn-outline btn-sm" onclick="filtrarGrupo('todas')">Todas</button>`;
+            Object.entries(editalData.grupos).forEach(([k, v]) => html +=
+                `<button class="btn btn-outline btn-sm" style="margin-left:4px;" onclick="filtrarGrupo('${k}')">${v.nome}</button>`
+                );
+            html += `</div></div><div id="disciplinasList">`;
+            editalData.disciplinas.forEach(d => {
+                const p = getProgressoDisciplina(d.id);
+                const q = getQuestoesDisciplina(d.id);
+                html +=
+                    `<div class="disciplina-row" data-grupo="${d.grupo}" data-nome="${d.nome.toLowerCase()}" onclick="event.stopPropagation(); abrirDisciplina('${d.id}')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:1px solid var(--border);border-radius:12px;margin-bottom:6px;cursor:pointer;transition:all .25s;">
                     <div style="flex:1;min-width:180px;"><div style="font-weight:600;">${getIcon(d.id)} ${d.nome}</div><div style="font-size:.7rem;color:var(--text-secondary);"><span class="badge ${editalData.grupos[d.grupo].badgeClass}">${editalData.grupos[d.grupo].nome}</span> · Peso ${d.peso} · ${p.total} tópicos</div></div>
-                    <div class="disc-stats" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+                    <div class="disc-stats" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:4px;" onclick="event.stopPropagation();">
                         <div style="text-align:center;"><div style="font-weight:700;">${p.pct}%</div><div style="font-size:.62rem;color:var(--text-secondary);">Progresso</div></div>
-                        <div style="text-align:center;"><div style="font-weight:700;">${p.concluidos}/${p.total}</div><div style="font-size:.62rem;color:var(--text-secondary);">Tópicos</div></div>
+                        <div style="text-align:center;"><div style="font-weight:700;color:#059669;">${p.concluidos}</div><div style="font-size:.62rem;color:var(--text-secondary);">Concluídos</div></div>
+                        <div style="text-align:center;"><div style="font-weight:700;color:#D97706;">${p.iniciados}</div><div style="font-size:.62rem;color:var(--text-secondary);">Iniciados</div></div>
                         <div style="text-align:center;"><div style="font-weight:700;">${q.resolvidas||0}</div><div style="font-size:.62rem;color:var(--text-secondary);">Questões</div></div>
                     </div>
                 </div>`;
             });
-            return html+`</div></div>`;
+            return html + `</div></div>`;
         }
         let filtroGrupoAtual = 'todas';
-        function filtrarGrupo(g) { filtroGrupoAtual = g; filtrarDisciplinas(); }
+
+        function filtrarGrupo(g) { filtroGrupoAtual = g;
+            filtrarDisciplinas(); }
+
         function filtrarDisciplinas() {
             const termo = document.getElementById('searchDisciplina')?.value.toLowerCase() || '';
-            document.querySelectorAll('#disciplinasList .disciplina-row').forEach(r=>{
+            document.querySelectorAll('#disciplinasList .disciplina-row').forEach(r => {
                 const grupoOk = filtroGrupoAtual === 'todas' || r.dataset.grupo === filtroGrupoAtual;
                 const nomeOk = !termo || r.dataset.nome.includes(termo);
                 r.style.display = (grupoOk && nomeOk) ? '' : 'none';
@@ -1037,37 +1471,154 @@
         }
 
         function abrirDisciplina(discId) {
-            const disc=editalData.disciplinas.find(d=>d.id===discId); if(!disc) return;
-            const p=getProgressoDisciplina(discId); const q=getQuestoesDisciplina(discId);
-            let topicosHtml='';
-            disc.topicos.forEach((t,i)=>{ const ok=!!appState.topicosConcluidos[`${discId}-${i}`]; topicosHtml+=`<div class="topico-item ${ok?'concluido':''}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;"><input type="checkbox" ${ok?'checked':''} onchange="toggleTopico('${discId}',${i},this.checked)"><span class="topico-nome" style="flex:1;">${t}</span><span class="badge" style="font-size:.68rem;">${ok?'<i class="fa-solid fa-check"></i> Concluído':'<i class="fa-regular fa-circle"></i> Pendente'}</span></div>`; });
-            const anotacao = (appState.anotacoes[discId] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            const modal=document.createElement('div'); modal.className='modal-overlay'; modal.id='modalDisciplina'; modal.onclick=e=>{if(e.target===modal)fecharModal();};
-            modal.innerHTML=`<div class="modal"><button style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#A1A1AA;" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button><h2>${getIcon(discId)} ${disc.nome}</h2><p><span class="badge ${editalData.grupos[disc.grupo].badgeClass}">${editalData.grupos[disc.grupo].nome}</span> <span class="badge badge-peso">Peso ${disc.peso}</span> Progresso: <strong>${p.pct}%</strong></p><div style="display:flex;gap:12px;margin:16px 0;"><div><label>Resolvidas</label><input type="number" id="qtdResolvidas" value="${q.resolvidas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><label>Corretas</label><input type="number" id="qtdCorretas" value="${q.corretas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div><div><strong>${q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0}%</strong></div></div><div style="margin-bottom:12px;"><label>Anotações</label><textarea id="anotacaoDisc" style="width:100%;min-height:60px;">${anotacao}</textarea><button class="btn btn-sm btn-outline" onclick="salvarAnotacao('${discId}')">Salvar</button></div><h4>Tópicos do Edital (${p.concluidos}/${p.total})</h4><div style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:12px;">${topicosHtml}</div><div style="margin-top:12px;display:flex;gap:8px;"><button class="btn btn-sm btn-accent" onclick="marcarTodos('${discId}',true)">Marcar Todos</button><button class="btn btn-outline btn-sm" onclick="marcarTodos('${discId}',false)">Desmarcar</button></div></div>`;
-            document.getElementById('modalDisciplina')?.remove(); document.body.appendChild(modal);
+            const disc = editalData.disciplinas.find(d => d.id === discId);
+            if (!disc) return;
+            const p = getProgressoDisciplina(discId);
+            const q = getQuestoesDisciplina(discId);
+            let topicosHtml = '';
+            disc.topicos.forEach((t, i) => {
+                const estado = appState.topicosConcluidos[`${discId}-${i}`] || 0;
+                const labelsEstado = ['Não iniciado', 'Iniciado', 'Concluído'];
+                const iconsEstado = ['fa-regular fa-circle', 'fa-solid fa-spinner', 'fa-solid fa-circle-check'];
+                const badgeClasses = ['', 'badge-especificas', 'badge-especializadas'];
+                topicosHtml += `
+                <div class="topico-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;flex-wrap:wrap;">
+                    <span class="topico-nome" style="flex:1;min-width:200px;">${t}</span>
+                    <div class="estado-btns" style="display:flex;gap:4px;">
+                        <button class="estado-btn ${estado===0?'estado-ativo-0':''}" onclick="event.stopPropagation();setEstadoTopico('${discId}',${i},0)" title="Não iniciado"><i class="fa-regular fa-circle"></i> Não iniciado</button>
+                        <button class="estado-btn ${estado===1?'estado-ativo-1':''}" onclick="event.stopPropagation();setEstadoTopico('${discId}',${i},1)" title="Iniciado"><i class="fa-solid fa-spinner"></i> Iniciado</button>
+                        <button class="estado-btn ${estado===2?'estado-ativo-2':''}" onclick="event.stopPropagation();setEstadoTopico('${discId}',${i},2)" title="Concluído"><i class="fa-solid fa-circle-check"></i> Concluído</button>
+                    </div>
+                </div>`;
+            });
+            const anotacao = (appState.anotacoes[discId] || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.id = 'modalDisciplina';
+            modal.onclick = e => { if (e.target === modal) fecharModal(); };
+            modal.innerHTML = `
+            <div class="modal" onclick="event.stopPropagation();">
+                <button style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#A1A1AA;" onclick="event.stopPropagation();fecharModal()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>${getIcon(discId)} ${disc.nome}</h2>
+                <p>
+                    <span class="badge ${editalData.grupos[disc.grupo].badgeClass}">${editalData.grupos[disc.grupo].nome}</span>
+                    <span class="badge badge-peso">Peso ${disc.peso}</span>
+                    Progresso: <strong>${p.pct}%</strong> ·
+                    <span style="color:#059669;">${p.concluidos} concluídos</span> ·
+                    <span style="color:#D97706;">${p.iniciados} iniciados</span> ·
+                    ${p.total} total
+                </p>
+                <div style="display:flex;gap:12px;margin:16px 0;">
+                    <div><label>Resolvidas</label><input type="number" id="qtdResolvidas" value="${q.resolvidas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div>
+                    <div><label>Corretas</label><input type="number" id="qtdCorretas" value="${q.corretas||0}" min="0" style="width:70px;padding:8px;border:2px solid var(--border);border-radius:8px;" onchange="atualizarQuestoes('${discId}')"></div>
+                    <div><strong>${q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0}%</strong></div>
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label>Anotações</label>
+                    <textarea id="anotacaoDisc" style="width:100%;min-height:60px;">${anotacao}</textarea>
+                    <button class="btn btn-sm btn-outline" onclick="event.stopPropagation();salvarAnotacao('${discId}')">Salvar</button>
+                </div>
+                <h4>Tópicos do Edital (${p.concluidos} concluídos / ${p.iniciados} iniciados / ${p.total} total)</h4>
+                <div style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:12px;">
+                    ${topicosHtml}
+                </div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <button class="btn btn-sm btn-accent" onclick="event.stopPropagation();marcarTodos('${discId}',2)"><i class="fa-solid fa-circle-check"></i> Marcar Todos Concluídos</button>
+                    <button class="btn btn-sm btn-outline" onclick="event.stopPropagation();marcarTodos('${discId}',1)" style="color:#D97706;border-color:#F59E0B;"><i class="fa-solid fa-spinner"></i> Marcar Todos Iniciados</button>
+                    <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();marcarTodos('${discId}',0)">Resetar Todos</button>
+                </div>
+            </div>`;
+            document.getElementById('modalDisciplina')?.remove();
+            document.body.appendChild(modal);
         }
-        function fecharModal() { document.getElementById('modalDisciplina')?.remove(); renderizarTab(currentTab); salvarState(); }
-        function toggleTopico(discId,i,checked) { const key=`${discId}-${i}`; if(checked) appState.topicosConcluidos[key]=true; else delete appState.topicosConcluidos[key]; invalidateProgressoCache(discId); registrarAtividadeHoje(); salvarState(); }
-        function marcarTodos(discId,v) {
-            if(!v && !confirm('Tem certeza que deseja desmarcar todos os tópicos? Isso zerará o progresso desta disciplina.')) return;
-            const disc=editalData.disciplinas.find(d=>d.id===discId); if(!disc) return;
-            disc.topicos.forEach((_,i)=>{ const key=`${discId}-${i}`; if(v) appState.topicosConcluidos[key]=true; else delete appState.topicosConcluidos[key]; });
-            invalidateProgressoCache(discId); registrarAtividadeHoje(); salvarState(); fecharModal();
-            toast(v?'Todos marcados!':'Todos desmarcados.');
+
+        function fecharModal() { document.getElementById('modalDisciplina')?.remove();
+            renderizarTab(currentTab);
+            salvarState(); }
+
+        function setEstadoTopico(discId, i, estado) {
+            const key = `${discId}-${i}`;
+            if (estado === 0) delete appState.topicosConcluidos[key];
+            else appState.topicosConcluidos[key] = estado;
+            invalidateProgressoCache(discId);
+            registrarAtividadeHoje();
+            salvarState();
+            // Atualizar visualmente apenas os botões de estado sem fechar o modal
+            const modal = document.getElementById('modalDisciplina');
+            if (modal) {
+                const botoes = modal.querySelectorAll(`.topico-item`)[i]?.querySelectorAll('.estado-btn');
+                if (botoes) {
+                    botoes.forEach(btn => {
+                        btn.classList.remove('estado-ativo-0', 'estado-ativo-1', 'estado-ativo-2');
+                        const btnEstado = parseInt(btn.getAttribute('onclick').match(/setEstadoTopico\([^,]+,\d+,(\d)\)/)[1]);
+                        if (btnEstado === estado) btn.classList.add(`estado-ativo-${estado}`);
+                    });
+                }
+                // Atualizar cabeçalho de progresso no modal
+                const p = getProgressoDisciplina(discId);
+                const h4 = modal.querySelector('h4');
+                if (h4) h4.textContent =
+                    `Tópicos do Edital (${p.concluidos} concluídos / ${p.iniciados} iniciados / ${p.total} total)`;
+                const progressoTexto = modal.querySelector('p strong');
+                if (progressoTexto) progressoTexto.textContent = `${p.pct}%`;
+            }
         }
-        function atualizarQuestoes(discId) { const r=parseInt(document.getElementById('qtdResolvidas')?.value)||0; const c=Math.min(r,parseInt(document.getElementById('qtdCorretas')?.value)||0); appState.questoes[discId]={resolvidas:r,corretas:c}; registrarAtividadeHoje(); salvarState(); }
-        function salvarAnotacao(discId) { appState.anotacoes[discId]=document.getElementById('anotacaoDisc')?.value||''; salvarState(); toast('Anotação salva!'); }
+
+        function marcarTodos(discId, estado) {
+            const mensagens = { 0: 'Tem certeza que deseja resetar todos os tópicos? Isso zerará o progresso desta disciplina.',
+                1: 'Marcar todos como Iniciados?', 2: 'Marcar todos como Concluídos?' };
+            if (estado === 0 && !confirm(mensagens[0])) return;
+            if (!confirm(mensagens[estado] || 'Confirmar?')) return;
+            const disc = editalData.disciplinas.find(d => d.id === discId);
+            if (!disc) return;
+            disc.topicos.forEach((_, i) => {
+                const key = `${discId}-${i}`;
+                if (estado === 0) delete appState.topicosConcluidos[key];
+                else appState.topicosConcluidos[key] = estado;
+            });
+            invalidateProgressoCache(discId);
+            registrarAtividadeHoje();
+            salvarState();
+            fecharModal();
+            toast(estado === 2 ? 'Todos marcados como concluídos!' : estado === 1 ? 'Todos marcados como iniciados!' :
+                'Todos resetados!');
+        }
+
+        function atualizarQuestoes(discId) { const r = parseInt(document.getElementById('qtdResolvidas')?.value) || 0;
+            const c = Math.min(r, parseInt(document.getElementById('qtdCorretas')?.value) || 0);
+            appState.questoes[discId] = { resolvidas: r, corretas: c };
+            registrarAtividadeHoje();
+            salvarState(); }
+
+        function salvarAnotacao(discId) { appState.anotacoes[discId] = document.getElementById('anotacaoDisc')?.value || '';
+            salvarState();
+            toast('Anotação salva!'); }
 
         function renderQuestoes() {
-            const t=getTotalQuestoes();
-            let html=`<div class="card"><div class="card-header"><h3><i class="fa-solid fa-file-pen"></i> Controle de Questões</h3></div><p>Total: <strong>${t.total}</strong> · Corretas: <strong>${t.corretas}</strong> · <strong>${t.pct}%</strong> acerto</p><div class="progress-bar"><div class="progress-fill${t.pct<50?' low':t.pct<75?' mid':' high'}" style="width:${t.pct}%;"></div></div></div><div class="card"><div class="card-header"><h3>Por Disciplina</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Resolvidas</th><th>Corretas</th><th>%</th><th>Ações</th></tr></thead><tbody>`;
-            editalData.disciplinas.forEach(d=>{ const q=getQuestoesDisciplina(d.id); const p=q.resolvidas>0?Math.round((q.corretas/q.resolvidas)*100):0; html+=`<tr><td>${getIcon(d.id)} ${d.nome}</td><td>${q.resolvidas||0}</td><td>${q.corretas||0}</td><td><strong>${p}%</strong></td><td><button class="btn btn-sm btn-primary" onclick="abrirDisciplina('${d.id}')"><i class="fa-solid fa-gear"></i></button> <button class="btn btn-sm btn-outline" onclick="addQuestoes('${d.id}')">+10</button></td></tr>`; });
-            return html+`</tbody></table></div></div>`;
+            const t = getTotalQuestoes();
+            let html =
+                `<div class="card"><div class="card-header"><h3><i class="fa-solid fa-file-pen"></i> Controle de Questões</h3></div><p>Total: <strong>${t.total}</strong> · Corretas: <strong>${t.corretas}</strong> · <strong>${t.pct}%</strong> acerto</p><div class="progress-bar"><div class="progress-fill${t.pct<50?' low':t.pct<75?' mid':' high'}" style="width:${t.pct}%;"></div></div></div><div class="card"><div class="card-header"><h3>Por Disciplina</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Resolvidas</th><th>Corretas</th><th>%</th><th>Ações</th></tr></thead><tbody>`;
+            editalData.disciplinas.forEach(d => { const q = getQuestoesDisciplina(d.id); const p = q.resolvidas > 0 ? Math
+                    .round((q.corretas / q.resolvidas) * 100) : 0;
+                html +=
+                    `<tr><td>${getIcon(d.id)} ${d.nome}</td><td>${q.resolvidas||0}</td><td>${q.corretas||0}</td><td><strong>${p}%</strong></td><td><button class="btn btn-sm btn-primary" onclick="abrirDisciplina('${d.id}')"><i class="fa-solid fa-gear"></i></button> <button class="btn btn-sm btn-outline" onclick="addQuestoes('${d.id}')">+10</button></td></tr>`; });
+            return html + `</tbody></table></div></div>`;
         }
-        function addQuestoes(discId) { if(!appState.questoes[discId]) appState.questoes[discId]={resolvidas:0,corretas:0}; appState.questoes[discId].resolvidas+=10; appState.questoes[discId].corretas+=7; registrarAtividadeHoje(); salvarState(); renderizarTab('questoes'); toast('+10 questões!'); }
+
+        function addQuestoes(discId) { if (!appState.questoes[discId]) appState.questoes[discId] = { resolvidas: 0,
+                corretas: 0 };
+            appState.questoes[discId].resolvidas += 10;
+            appState.questoes[discId].corretas += 7;
+            registrarAtividadeHoje();
+            salvarState();
+            renderizarTab('questoes');
+            toast('+10 questões!'); }
 
         function renderMetas() {
-            const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24))); const totalQ=getTotalQuestoes(); const metaAc=appState.metaQuestoesDiaria*dias; const pctMeta=Math.min(100,Math.round((totalQ.total/metaAc)*100));
+            const dias = Math.max(1, Math.floor((new Date() - new Date(appState.dataInicio)) / (1000 * 60 * 60 * 24)));
+            const totalQ = getTotalQuestoes();
+            const metaAc = appState.metaQuestoesDiaria * dias;
+            const pctMeta = Math.min(100, Math.round((totalQ.total / metaAc) * 100));
             return `
             <div class="card"><div class="card-header"><h3><i class="fa-solid fa-bullseye"></i> Metas Gerais</h3></div>
                 <div style="display:flex;gap:12px;margin:8px 0;"><label style="font-weight:600;">Questões/dia:</label><input type="number" id="metaQDiaria" value="${appState.metaQuestoesDiaria}" style="width:80px;padding:8px;border:2px solid var(--border);border-radius:8px;"></div>
@@ -1080,21 +1631,45 @@
             <div class="card"><div class="card-header"><h3>Metas por Disciplina</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Meta</th><th>Realizado</th></tr></thead><tbody>${editalData.disciplinas.map(d=>{const m=appState.metasPorDisciplina[d.id]?.questoes||0;const r=(appState.questoes[d.id]?.resolvidas)||0;return`<tr><td>${getIcon(d.id)} ${d.nome}</td><td><input type="number" value="${m}" style="width:80px;" onchange="atualizarMetaDisciplina('${d.id}','questoes',this.value)"></td><td>${r}</td></tr>`;}).join('')}</tbody></table></div></div>
             <div class="card" style="border:2px solid #820AD1;"><div class="card-header"><h3><i class="fa-solid fa-database" style="color:#820AD1;"></i> Backup</h3></div><p style="font-size:0.85rem;margin-bottom:16px;">Exporte seus dados para segurança.</p><div style="display:flex;gap:12px;"><button class="btn btn-primary" onclick="exportarBackup()"><i class="fa-solid fa-download"></i> Exportar</button><button class="btn btn-warning" onclick="importarBackup()"><i class="fa-solid fa-upload"></i> Restaurar</button></div></div>`;
         }
-        function salvarMetasGerais() { appState.metaQuestoesDiaria=parseInt(document.getElementById('metaQDiaria')?.value)||50; appState.metaHorasDiaria=parseFloat(document.getElementById('metaHDiaria')?.value)||5; appState.metaRevisoesSemana=parseInt(document.getElementById('metaRevSemana')?.value)||4; appState.dataInicio=document.getElementById('dataInicio')?.value||appState.dataInicio; salvarState(); toast('Metas salvas!'); renderizarTab('metas'); }
-        function atualizarMetaDisciplina(discId,tipo,val) { if(!appState.metasPorDisciplina[discId]) appState.metasPorDisciplina[discId]={questoes:0,horas:0}; appState.metasPorDisciplina[discId][tipo]=parseInt(val)||0; salvarState(); }
+
+        function salvarMetasGerais() { appState.metaQuestoesDiaria = parseInt(document.getElementById('metaQDiaria')?.value) ||
+                50;
+            appState.metaHorasDiaria = parseFloat(document.getElementById('metaHDiaria')?.value) || 5;
+            appState.metaRevisoesSemana = parseInt(document.getElementById('metaRevSemana')?.value) || 4;
+            appState.dataInicio = document.getElementById('dataInicio')?.value || appState.dataInicio;
+            salvarState();
+            toast('Metas salvas!');
+            renderizarTab('metas'); }
+
+        function atualizarMetaDisciplina(discId, tipo, val) { if (!appState.metasPorDisciplina[discId]) appState
+                .metasPorDisciplina[discId] = { questoes: 0, horas: 0 };
+            appState.metasPorDisciplina[discId][tipo] = parseInt(val) || 0;
+            salvarState(); }
 
         function renderEstatisticas() {
-            const geral=getProgressoGeral(); const questoes=getTotalQuestoes(); const dias=Math.max(1,Math.floor((new Date()-new Date(appState.dataInicio))/(1000*60*60*24)));
-            let notaEstimada=0,notaMaxima=0; editalData.disciplinas.forEach(d=>{const qtd=dadosProvaCGU.distribuição[d.id]||0;const prog=getProgressoDisciplina(d.id).pct/100;const peso=dadosProvaCGU.pesoMedioPorDisciplina[d.id]||1;notaEstimada+=qtd*prog*(peso/2);notaMaxima+=qtd*(peso/2);});
-            const notaProjetada=Math.round((notaMaxima>0?Math.round((notaEstimada/notaMaxima)*100):0)/100*dadosProvaCGU.totalQuestoes);
-            const criticas=editalData.disciplinas.map(d=>({id:d.id,nome:d.nome,questoesProva:dadosProvaCGU.distribuição[d.id]||0,progresso:getProgressoDisciplina(d.id).pct,gap:((dadosProvaCGU.distribuição[d.id]||0)*(100-getProgressoDisciplina(d.id).pct)/100)})).sort((a,b)=>b.gap-a.gap);
-            const topCriticas=criticas.slice(0,5);
+            const geral = getProgressoGeral();
+            const questoes = getTotalQuestoes();
+            const dias = Math.max(1, Math.floor((new Date() - new Date(appState.dataInicio)) / (1000 * 60 * 60 * 24)));
+            let notaEstimada = 0,
+                notaMaxima = 0;
+            editalData.disciplinas.forEach(d => { const qtd = dadosProvaCGU.distribuição[d.id] || 0; const prog =
+                    getProgressoDisciplina(d.id).pct / 100; const peso = dadosProvaCGU.pesoMedioPorDisciplina[d.id] ||
+                    1;
+                notaEstimada += qtd * prog * (peso / 2);
+                notaMaxima += qtd * (peso / 2); });
+            const notaProjetada = Math.round((notaMaxima > 0 ? Math.round((notaEstimada / notaMaxima) * 100) : 0) / 100 *
+                dadosProvaCGU.totalQuestoes);
+            const criticas = editalData.disciplinas.map(d => ({ id: d.id, nome: d.nome, questoesProva: dadosProvaCGU
+                    .distribuição[d.id] || 0, progresso: getProgressoDisciplina(d.id).pct,
+                gap: ((dadosProvaCGU.distribuição[d.id] || 0) * (100 - getProgressoDisciplina(d.id).pct) / 100) }))
+                .sort((a, b) => b.gap - a.gap);
+            const topCriticas = criticas.slice(0, 5);
             return `
             <div class="kpi-grid">
                 <div class="kpi-card"><div class="kpi-icon purple"><i class="fa-solid fa-chart-pie"></i></div><div class="kpi-info"><div class="kpi-value">${geral.pct}%</div><div class="kpi-label">Progresso</div></div></div>
                 <div class="kpi-card"><div class="kpi-icon green"><i class="fa-solid fa-calendar"></i></div><div class="kpi-info"><div class="kpi-value">${dias}</div><div class="kpi-label">Dias</div></div></div>
-                <div class="kpi-card"><div class="kpi-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões</div></div></div>
-                <div class="kpi-card"><div class="kpi-icon" style="background:#DBEAFE;color:#2563EB;"><i class="fa-solid fa-gauge-high"></i></div><div class="kpi-info"><div class="kpi-value">${(questoes.total/dias).toFixed(1)}</div><div class="kpi-label">Média/dia</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon amber"><i class="fa-solid fa-file-pen"></i></div><div class="kpi-info"><div class="kpi-value">${questoes.total}</div><div class="kpi-label">Questões</div></div></div>
+                <div class="kpi-card"><div class="kpi-icon blue"><i class="fa-solid fa-gauge-high"></i></div><div class="kpi-info"><div class="kpi-value">${(questoes.total/dias).toFixed(1)}</div><div class="kpi-label">Média/dia</div></div></div>
             </div>
             <div class="card" style="border:2px solid #820AD1;"><div class="card-header"><h3>Coaching Estratégico</h3></div><div class="insight-box"><strong>Nota Projetada:</strong> <span style="font-size:1.4rem;font-weight:800;color:#820AD1;">~${notaProjetada} pts</span> de ${dadosProvaCGU.totalQuestoes} | Corte: ${dadosProvaCGU.notaCorteEstimada} pts</div></div>
             <div class="charts-row">
@@ -1105,17 +1680,27 @@
             <div class="card"><div class="card-header"><h3>Top 5 Críticas</h3></div><div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Qtd</th><th>Prog</th><th>Gap</th></tr></thead><tbody>${topCriticas.map(d=>`<tr><td>${getIcon(d.id)} ${d.nome}</td><td>${d.questoesProva}</td><td>${d.progresso}%</td><td>${Math.round(d.gap)} pts</td></tr>`).join('')}</tbody></table></div></div>`;
         }
 
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('hidden'); }
-        function fecharSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.add('hidden'); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('hidden'); }
+
+        function fecharSidebar() { document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.add('hidden'); }
+
         function init() {
             carregarState();
-            document.getElementById('dateText').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-            editalData.disciplinas.forEach(d=>{if(!appState.questoes[d.id]) appState.questoes[d.id]={resolvidas:0,corretas:0}; if(!appState.metasPorDisciplina[d.id]) appState.metasPorDisciplina[d.id]={questoes:0,horas:0};});
-            salvarState(); navegar('dashboard');
+            document.getElementById('dateText').textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long',
+                day: 'numeric', month: 'long', year: 'numeric' });
+            editalData.disciplinas.forEach(d => { if (!appState.questoes[d.id]) appState.questoes[d.id] = { resolvidas: 0,
+                    corretas: 0 }; if (!appState.metasPorDisciplina[d.id]) appState.metasPorDisciplina[d.id] = {
+                    questoes: 0,
+                    horas: 0 }; });
+            salvarState();
+            navegar('dashboard');
         }
-        document.addEventListener('DOMContentLoaded',init);
-        document.addEventListener('keydown',e=>{if(e.key==='Escape'){fecharModal();fecharSidebar();}});
-        window.addEventListener('beforeunload',()=>salvarState());
+        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { fecharModal();
+                fecharSidebar(); } });
+        window.addEventListener('beforeunload', () => salvarState());
     </script>
 </body>
 </html>
