@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -2091,6 +2090,15 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Meus Downloads
                 </div>
+                <div class="sidebar-section-title">Questões</div>
+                <div class="sidebar-item" onclick="window.open('https://vulpmaisconcursosquestoes.vercel.app/', '_blank')" style="cursor:pointer;">
+                    <span class="sidebar-icon"><img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/trofeu_imvpxm.png" alt="Questões de Fixação" width="20" height="20" style="object-fit:contain;"></span>
+                    Questões de Fixação
+                </div>
+                <div class="sidebar-item" onclick="window.open('https://vulpmaisconcursosquestoes2.vercel.app/', '_blank')" style="cursor:pointer;">
+                    <span class="sidebar-icon"><img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/foguete_1_ch5gkw.png" alt="Questões de Treino" width="20" height="20" style="object-fit:contain;"></span>
+                    Questões de Treino
+                </div>
             </nav>
             <div class="sidebar-footer">
                 <div class="sidebar-item" onclick="App.syncData()">
@@ -2139,7 +2147,7 @@
                 </button>
                 <button class="nav-btn notification-bell" id="btnNotifications" onclick="NotificationPanel.toggle()" title="Notificações" aria-label="Notificações">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M18 8A6 6 0 0 0 6 8c 0 7-3 9-3 9h18s-3-2-3-9"/>
                         <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                     </svg>
                     <span class="notification-count" id="notificationCount" style="display:none;">0</span>
@@ -2171,7 +2179,7 @@
             </div>
             <div class="notification-list" id="notificationList">
                 <div class="notification-empty">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c 0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                     <p>Nenhuma notificação</p>
                 </div>
             </div>
@@ -3181,7 +3189,7 @@
 
                 if (notifications.length === 0) {
                     container.innerHTML = '<div class="notification-empty">' +
-                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c 0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' +
                         '<p>Nenhuma notificação</p></div>';
                     return;
                 }
