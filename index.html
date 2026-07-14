@@ -182,19 +182,18 @@
             transition: background var(--transition), border var(--transition), box-shadow var(--transition);
         }
         .login-card .app-logo {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 68px;
-            height: 68px;
-            background: var(--primary-bg);
-            color: var(--primary);
-            border-radius: var(--radius-md);
-            margin-bottom: 26px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 26px;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            font-size: 2rem;
-            font-weight: 800;
+        }
+        .login-card .app-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .login-card h2 {
             font-size: 1.65rem;
@@ -293,14 +292,6 @@
             transform: translateY(0);
             box-shadow: var(--shadow-sm);
         }
-        .password-hint {
-            font-size: 0.77rem;
-            color: var(--text-muted);
-            margin-top: 22px;
-            text-align: left;
-            line-height: 1.5;
-            letter-spacing: -0.01em;
-        }
 
         .welcome-overlay {
             position: fixed;
@@ -350,8 +341,8 @@
             }
         }
         .welcome-modal .welcome-logo {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px;
             display: block;
             object-fit: contain;
@@ -422,8 +413,8 @@
                 padding: 36px 22px 32px;
             }
             .welcome-modal .welcome-logo {
-                width: 110px;
-                height: 110px;
+                width: 140px;
+                height: 140px;
                 margin-bottom: 14px;
             }
             .welcome-modal .welcome-title {
@@ -468,7 +459,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 22px;
+            padding: 12px 18px;
             height: var(--navbar-height);
             border-bottom: 1px solid var(--border-light);
             flex-shrink: 0;
@@ -477,11 +468,16 @@
         .sidebar-logo {
             display: flex;
             align-items: center;
-            gap: 11px;
+            gap: 10px;
             font-weight: 700;
             font-size: 1.22rem;
             color: var(--primary);
             letter-spacing: -0.02em;
+        }
+        .sidebar-logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
         }
         .sidebar-logo-text {
             display: flex;
@@ -720,15 +716,21 @@
             white-space: nowrap;
             flex-shrink: 0;
             letter-spacing: -0.02em;
-            flex-direction: column;
-            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
             line-height: 1.2;
+        }
+        .navbar-logo img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
         }
         .navbar-logo .logo-tagline {
             font-size: 0.6rem;
             color: var(--text-muted);
             font-weight: 500;
             letter-spacing: -0.01em;
+            margin-left: 4px;
         }
         .navbar-search {
             flex: 1;
@@ -1077,6 +1079,14 @@
             color: var(--text);
             letter-spacing: -0.02em;
             line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-header h1 img {
+            height: 1.8rem;
+            width: auto;
+            vertical-align: middle;
         }
         .section-header p {
             color: var(--text-secondary);
@@ -1084,9 +1094,24 @@
             margin-top: 4px;
             letter-spacing: -0.01em;
         }
+        .home-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .home-logo-container img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
         @media (min-width: 768px) {
             .section-header h1 {
                 font-size: 2rem;
+            }
+            .section-header h1 img {
+                height: 2rem;
             }
         }
 
@@ -2012,7 +2037,9 @@
 
     <div id="loginPage" class="login-page" style="display: none;">
         <div class="login-card">
-            <div class="app-logo">V+</div>
+            <div class="app-logo">
+                <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024825/ChatGPT_Image_14_de_jul._de_2026_07_12_29_yrwytg.png" alt="VULP +">
+            </div>
             <h2>VULP +</h2>
             <p class="login-subtitle">Estude com inteligência</p>
             <div class="input-group">
@@ -2029,15 +2056,12 @@
             </div>
             <div class="login-error" id="loginError"></div>
             <button class="login-btn" id="loginBtn">Entrar</button>
-            <div class="password-hint">
-                🔐 A senha deve conter exatamente 8 caracteres, incluir pelo menos uma das letras V, U ou P e pelo menos um número entre 5 e 9.
-            </div>
         </div>
     </div>
 
     <div id="welcomeOverlay" class="welcome-overlay" style="display: none;">
         <div class="welcome-modal">
-            <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092990/ChatGPT_Image_3_de_jul._de_2026_11_01_34_t5hexq.png" alt="VULP +" class="welcome-logo">
+            <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024825/ChatGPT_Image_14_de_jul._de_2026_07_12_29_yrwytg.png" alt="VULP +" class="welcome-logo">
             <div class="welcome-title">VULP +</div>
             <div class="welcome-subtitle">Estude com inteligência</div>
             <div class="welcome-greeting" id="welcomeGreeting"></div>
@@ -2059,6 +2083,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
+                    <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024825/ChatGPT_Image_14_de_jul._de_2026_07_12_29_yrwytg.png" alt="VULP +">
                     <div class="sidebar-logo-text">
                         <span class="logo-main">VULP +</span>
                         <span class="logo-tagline">Estude com inteligência</span>
@@ -2121,7 +2146,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="navbar-logo">
-                <span>VULP +</span>
+                <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024825/ChatGPT_Image_14_de_jul._de_2026_07_12_29_yrwytg.png" alt="VULP +">
                 <span class="logo-tagline">Estude com inteligência</span>
             </div>
             <div class="navbar-search" id="searchContainer">
@@ -2187,8 +2212,14 @@
 
         <main class="main-content" id="mainContent">
             <div class="page active" id="pageHome">
+                <div class="home-logo-container">
+                    <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024825/ChatGPT_Image_14_de_jul._de_2026_07_12_29_yrwytg.png" alt="VULP +">
+                </div>
                 <div class="section-header">
-                    <h1>📚 Disciplinas</h1>
+                    <h1>
+                        <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024824/estude_1_mixz8y.png" alt="Disciplinas">
+                        Disciplinas
+                    </h1>
                     <p>Explore os conteúdos disponíveis e acompanhe seu progresso</p>
                 </div>
                 <div class="cards-grid" id="disciplinesGrid">
@@ -3292,8 +3323,20 @@
             showAppScreen() { document.getElementById('loginPage').style.display = 'none'; document.getElementById('appContainer').style.display = 'block'; },
             setupLoginEvents() {
                 const passwordInput = document.getElementById('loginPassword'), loginBtn = document.getElementById('loginBtn'), errorEl = document.getElementById('loginError'), toggleBtn = document.getElementById('togglePassword');
-                const performLogin = function() { const senha = passwordInput.value.trim(); if (!Utils.validatePassword(senha)) { errorEl.textContent = 'Senha inválida. Deve ter 8 caracteres, incluir V, U ou P e número entre 5 e 9.'; passwordInput.focus(); return; } Storage.setLoggedIn(true); errorEl.textContent = ''; App.showAppScreen(); App.init(); };
-                loginBtn.addEventListener('click', performLogin); passwordInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') performLogin(); });
+                const performLogin = function() {
+                    const senha = passwordInput.value.trim();
+                    if (!Utils.validatePassword(senha)) {
+                        errorEl.textContent = 'Usuário ou senha inválidos. Caso o problema persista, entre em contato com o administrador do sistema.';
+                        passwordInput.focus();
+                        return;
+                    }
+                    Storage.setLoggedIn(true);
+                    errorEl.textContent = '';
+                    App.showAppScreen();
+                    App.init();
+                };
+                loginBtn.addEventListener('click', performLogin);
+                passwordInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') performLogin(); });
                 toggleBtn.addEventListener('click', function() { const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password'; passwordInput.setAttribute('type', type); });
             },
             logout() { Storage.setLoggedIn(false); this.allMaterials = []; Render.showSkeletons(); document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); }); var el = document.getElementById('pageHome'); if (el) el.classList.add('active'); document.getElementById('searchInput').value = ''; Navigation.currentPage = 'home'; document.getElementById('loginPassword').value = ''; Sidebar.close(); AutoUpdater.stop(); this.showLoginScreen(); },
