@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -308,14 +309,10 @@
             gap: 2px;
         }
         .welcome-modal .welcome-greeting .greeting-name {
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--text);
-        }
-        .welcome-modal .welcome-greeting .greeting-time {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary);
+            line-height: 1.3;
         }
         .welcome-modal .welcome-message {
             font-size: 0.92rem;
@@ -1671,8 +1668,7 @@
         <div class="welcome-title">VULP +</div>
         <div class="welcome-subtitle">Estude com inteligência</div>
         <div class="welcome-greeting">
-            <span class="greeting-name">Olá, Lenda!</span>
-            <span class="greeting-time" id="welcomeGreetingTime"></span>
+            <span class="greeting-name">Olá, Bem-vindo à Central da Aprovação. Siga para a próxima meta.</span>
         </div>
         <div class="welcome-message" id="welcomeMessage"></div>
         <button class="welcome-start-btn" id="welcomeStartBtn">
@@ -1703,6 +1699,14 @@
             <div class="sidebar-item active" data-page="home" onclick="Sidebar.navigateTo('home')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 Início
+            </div>
+            <!-- NOVO ITEM FERRAMENTAS -->
+            <div class="sidebar-item" onclick="window.open('https://vulpmaisoutrasferramentas.vercel.app/', '_blank')" style="cursor:pointer;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                Ferramentas
             </div>
             <div class="sidebar-section-title">Disciplinas</div>
             <div id="sidebarDisciplines"></div>
@@ -2078,18 +2082,7 @@
             const overlay = document.getElementById('welcomeOverlay');
             if (!overlay) return;
 
-            const hour = new Date().getHours();
-            let saudacao = 'Bom dia';
-            let emoji = '🌅';
-            if (hour >= 12 && hour < 18) { saudacao = 'Boa tarde';
-                emoji = '☀️'; } else if (hour >= 18 || hour < 5) { saudacao = 'Boa noite';
-                emoji = '🌙'; }
-
-            const timeEl = document.getElementById('welcomeGreetingTime');
-            if (timeEl) {
-                timeEl.textContent = saudacao;
-            }
-
+            // A saudação é agora fixa no HTML, não precisa mais de lógica de horário
             const msgEl = document.getElementById('welcomeMessage');
             if (msgEl) {
                 const msgs = [
