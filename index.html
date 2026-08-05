@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -125,6 +124,104 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-full); }
         ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* ESTILOS DO BOTÃO FLUTUANTE DE METAS - NOVO */
+        .floating-meta-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9990;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 6px 28px rgba(79, 70, 229, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .dark .floating-meta-btn { border-color: rgba(255, 255, 255, 0.1); }
+        .floating-meta-btn::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid var(--primary);
+            animation: pulse-ring 2s ease-out infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        .floating-meta-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 8px 36px rgba(79, 70, 229, 0.6);
+        }
+        .floating-meta-btn:active { transform: scale(0.94); }
+        .floating-meta-btn svg {
+            width: 32px;
+            height: 32px;
+            color: #fff;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .floating-meta-btn .close-float-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+            z-index: 9991;
+            padding: 0;
+            line-height: 1;
+            font-family: sans-serif;
+        }
+        .floating-meta-btn .close-float-btn:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+        .floating-meta-btn .label {
+            position: absolute;
+            bottom: -28px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            background: var(--surface);
+            padding: 2px 10px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .dark .floating-meta-btn .label {
+            background: var(--surface);
+            border-color: var(--border);
+        }
+
+        @media (max-width: 480px) {
+            .floating-meta-btn { width: 64px; height: 64px; bottom: 20px; right: 20px; }
+            .floating-meta-btn svg { width: 28px; height: 28px; }
+            .floating-meta-btn .close-float-btn { width: 22px; height: 22px; font-size: 11px; top: -6px; right: -6px; }
+            .floating-meta-btn .label { font-size: 10px; bottom: -24px; padding: 1px 8px; }
+        }
 
         .login-page {
             display: flex;
@@ -3646,6 +3743,8 @@
             }
             await LogManager.logLogin();
             Welcome.show();
+            // === NOVA FUNCIONALIDADE: Localizador de Metas (Botão Flutuante) ===
+            MetaLocator.init();
             console.log('[VULP+] Pronto com ' + this.allMaterials.length + ' materiais.');
         },
         showLoginScreen() { document.getElementById('loginPage').style.display = 'flex';
@@ -3801,6 +3900,202 @@
             searchInput.addEventListener('keydown', function(e) { if (e.key === 'Escape') { searchInput.value = '';
                     Search.performSearch('');
                     searchInput.blur(); } }); },
+    };
+
+    // ========================= LOCALIZADOR DE METAS (BOTÃO FLUTUANTE) =========================
+    // Nova funcionalidade – não altera nada existente.
+    // O botão aparece no canto inferior direito, estilo WhatsApp, com pulse e fechável.
+    const MetaLocator = {
+        floatingClosed: false,
+
+        init() {
+            // Mantém o botão na navbar (opcional, não removemos)
+            if (!document.getElementById('btnMetaLocator')) {
+                const navbarActions = document.querySelector('.navbar-actions');
+                if (navbarActions) {
+                    const btn = document.createElement('button');
+                    btn.className = 'nav-btn';
+                    btn.id = 'btnMetaLocator';
+                    btn.title = 'Localizar Metas';
+                    btn.setAttribute('aria-label', 'Localizar Metas');
+                    btn.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="2" x2="12" y2="4"/>
+                            <line x1="12" y1="20" x2="12" y2="22"/>
+                            <line x1="2" y1="12" x2="4" y2="12"/>
+                            <line x1="20" y1="12" x2="22" y2="12"/>
+                            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                        </svg>
+                        <span class="nav-label">Metas</span>
+                    `;
+                    btn.onclick = () => MetaLocator.open();
+                    const themeBtn = document.getElementById('btnDarkMode');
+                    if (themeBtn) navbarActions.insertBefore(btn, themeBtn);
+                    else navbarActions.appendChild(btn);
+                }
+            }
+
+            // Cria o modal se não existir
+            if (!document.getElementById('metaLocatorOverlay')) {
+                const modalHTML = `
+                    <div id="metaLocatorOverlay" class="pdf-viewer-overlay" style="display:none;">
+                        <div class="pdf-viewer-modal" style="max-width:600px;">
+                            <div class="pdf-viewer-header">
+                                <h3>🎯 Localizador de Metas</h3>
+                                <div class="pdf-viewer-actions">
+                                    <button class="icon-btn" onclick="MetaLocator.close()" title="Fechar">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="padding:16px;">
+                                <input type="text" id="metaSearchInput" placeholder="Filtrar metas..." style="width:100%; padding:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:0.95rem; margin-bottom:16px;">
+                                <div id="metaListContainer" style="max-height:400px; overflow-y:auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+                document.getElementById('metaLocatorOverlay').addEventListener('click', function(e) {
+                    if (e.target === this) MetaLocator.close();
+                });
+            }
+
+            // CRIA O BOTÃO FLUTUANTE (se não existir e não estiver fechado)
+            if (!document.getElementById('floatingMetaBtn') && !this.floatingClosed) {
+                this.createFloatingButton();
+            }
+        },
+
+        createFloatingButton() {
+            const floatBtn = document.createElement('div');
+            floatBtn.className = 'floating-meta-btn';
+            floatBtn.id = 'floatingMetaBtn';
+            floatBtn.setAttribute('role', 'button');
+            floatBtn.setAttribute('tabindex', '0');
+            floatBtn.setAttribute('aria-label', 'Localizar Metas');
+            floatBtn.innerHTML = `
+                <span class="close-float-btn" onclick="event.stopPropagation(); MetaLocator.closeFloating();" title="Fechar" aria-label="Fechar localizador">✕</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="2" x2="12" y2="4"/>
+                    <line x1="12" y1="20" x2="12" y2="22"/>
+                    <line x1="2" y1="12" x2="4" y2="12"/>
+                    <line x1="20" y1="12" x2="22" y2="12"/>
+                    <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                    <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                    <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                    <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                </svg>
+                <span class="label">Localizar Metas</span>
+            `;
+            // Abre o modal ao clicar no botão (exceto no X)
+            floatBtn.onclick = function(e) {
+                if (e.target.closest('.close-float-btn')) return;
+                MetaLocator.open();
+            };
+            document.body.appendChild(floatBtn);
+        },
+
+        closeFloating() {
+            const floatBtn = document.getElementById('floatingMetaBtn');
+            if (floatBtn) floatBtn.remove();
+            this.floatingClosed = true;
+        },
+
+        open() {
+            const overlay = document.getElementById('metaLocatorOverlay');
+            if (!overlay) return;
+            overlay.style.display = 'flex';
+            this.renderList();
+            document.body.style.overflow = 'hidden';
+            const searchInput = document.getElementById('metaSearchInput');
+            if (searchInput) {
+                searchInput.value = '';
+                searchInput.focus();
+                searchInput.oninput = () => this.renderList(searchInput.value);
+            }
+        },
+
+        close() {
+            const overlay = document.getElementById('metaLocatorOverlay');
+            if (!overlay) return;
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        },
+
+        renderList(filter = '') {
+            const container = document.getElementById('metaListContainer');
+            if (!container) return;
+            if (!App.allMaterials || App.allMaterials.length === 0) {
+                container.innerHTML = '<div class="empty-state"><h3>Nenhuma meta encontrada</h3></div>';
+                return;
+            }
+
+            const metaMaterials = App.allMaterials.filter(mat => {
+                const title = (mat['Título'] || mat.Titulo || '');
+                return title.toLowerCase().includes('meta');
+            });
+
+            const filtered = metaMaterials.filter(mat => {
+                const title = (mat['Título'] || mat.Titulo || '');
+                const disciplina = mat.Disciplina || '';
+                const search = filter.toLowerCase().trim();
+                return title.toLowerCase().includes(search) || disciplina.toLowerCase().includes(search);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><h3>Nenhuma meta encontrada</h3></div>';
+                return;
+            }
+
+            let html = '<div style="display:flex; flex-direction:column; gap:8px;">';
+            filtered.forEach(mat => {
+                const title = Utils.escapeHTML(mat['Título'] || mat.Titulo || 'Sem título');
+                const disciplina = Utils.escapeHTML(mat.Disciplina || '');
+                const tipo = Utils.isVideoType(mat.Tipo) ? '🎬 Vídeo' : '📄 PDF';
+                const id = mat.ID;
+                const icon = Utils.getDisciplineIcon(mat.Disciplina);
+                html += `
+                    <div class="material-card" style="cursor:pointer; padding:12px 16px;" onclick="MetaLocator.navigateToMeta('${id}', '${disciplina}')">
+                        <div style="display:flex; align-items:center; gap:12px; width:100%;">
+                            <span style="font-size:1.2rem;">${icon}</span>
+                            <div style="flex:1;">
+                                <div style="font-weight:600; font-size:0.95rem;">${title}</div>
+                                <div style="font-size:0.8rem; color:var(--text-muted);">${disciplina} • ${tipo}</div>
+                            </div>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        },
+
+        navigateToMeta(materialId, disciplineName) {
+            this.close();
+            Navigation.openDiscipline(disciplineName);
+            setTimeout(() => {
+                const element = document.getElementById('material-' + materialId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.style.transition = 'border 0.3s, box-shadow 0.3s';
+                    element.style.border = '2px solid var(--primary)';
+                    element.style.boxShadow = '0 0 0 4px var(--primary-bg)';
+                    setTimeout(() => {
+                        element.style.border = '';
+                        element.style.boxShadow = '';
+                    }, 3000);
+                } else {
+                    Toast.info('Material não encontrado na lista.');
+                }
+            }, 300);
+        }
     };
 
     // ========================= INICIALIZAÇÃO =========================
