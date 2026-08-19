@@ -50,7 +50,7 @@
       --radius-xl: 32px;
       --radius-full: 9999px;
       --font: 'Inter', system-ui, -apple-system, sans-serif;
-      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --navbar-height: 68px;
       --sidebar-width: 280px;
       --max-width: 1280px;
@@ -152,6 +152,40 @@
       background: var(--text-muted);
     }
 
+    /* ===== LOADING OVERLAY ===== */
+    .page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .dark .page-transition-overlay {
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .page-transition-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .page-transition-overlay .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     /* ===== LOGIN ===== */
     .login-page {
       display: flex;
@@ -171,6 +205,7 @@
       border: 1px solid var(--border-light);
       text-align: center;
       transition: background var(--transition), border var(--transition);
+      animation: fadeSlideIn 0.5s ease-out;
     }
     .login-card .app-logo {
       width: 100px;
@@ -281,7 +316,7 @@
       padding: 20px;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      animation: fadeIn 0.25s ease-out;
+      animation: fadeIn 0.3s ease-out;
     }
     .welcome-modal {
       background: var(--surface);
@@ -292,26 +327,22 @@
       padding: 48px 36px 40px;
       text-align: center;
       border: 1px solid var(--border-light);
-      animation: welcomeScaleIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: welcomeScaleIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
       transition: background var(--transition), border var(--transition);
     }
     @keyframes welcomeScaleIn {
       from {
         opacity: 0;
-        transform: scale(0.92);
+        transform: scale(0.9) translateY(20px);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
       }
     }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     .welcome-modal .welcome-logo {
       width: 140px;
@@ -990,7 +1021,7 @@
     }
     .page {
       display: none;
-      animation: fadeSlideIn 0.3s ease-out;
+      animation: fadeSlideIn 0.35s ease-out;
     }
     .page.active {
       display: block;
@@ -1104,6 +1135,51 @@
       }
     }
 
+    /* ===== STATS GRID ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    .stat-card .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .stat-card .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .stat-card .stat-icon {
+      margin-bottom: 4px;
+      color: var(--primary-light);
+      opacity: 0.7;
+    }
+    .stat-card .stat-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
     /* ===== CARDS GRID ===== */
     .cards-grid {
       display: grid;
@@ -1121,7 +1197,7 @@
       background: var(--surface);
       border-radius: var(--radius-md);
       padding: 28px 24px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
       cursor: pointer;
       transition: all var(--transition);
       border: 1px solid var(--border-light);
@@ -1131,7 +1207,22 @@
       position: relative;
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
+      animation: cardFadeIn 0.5s ease-out forwards;
+      opacity: 0;
     }
+    .discipline-card:nth-child(1) { animation-delay: 0.05s; }
+    .discipline-card:nth-child(2) { animation-delay: 0.10s; }
+    .discipline-card:nth-child(3) { animation-delay: 0.15s; }
+    .discipline-card:nth-child(4) { animation-delay: 0.20s; }
+    .discipline-card:nth-child(5) { animation-delay: 0.25s; }
+    .discipline-card:nth-child(6) { animation-delay: 0.30s; }
+    .discipline-card:nth-child(7) { animation-delay: 0.35s; }
+    .discipline-card:nth-child(8) { animation-delay: 0.40s; }
+    .discipline-card:nth-child(9) { animation-delay: 0.45s; }
+    .discipline-card:nth-child(10) { animation-delay: 0.50s; }
+    .discipline-card:nth-child(11) { animation-delay: 0.55s; }
+    .discipline-card:nth-child(12) { animation-delay: 0.60s; }
+
     .discipline-card::after {
       content: '';
       position: absolute;
@@ -1145,7 +1236,7 @@
       border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
     .discipline-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       box-shadow: var(--shadow-lg);
       border-color: var(--primary);
       background: var(--surface-hover);
@@ -1169,14 +1260,9 @@
       color: var(--primary);
       box-shadow: var(--shadow-sm);
     }
-    .discipline-card .card-icon img {
+    .discipline-card .card-icon svg {
       width: 26px;
       height: 26px;
-      object-fit: contain;
-      filter: brightness(0) saturate(100%) invert(25%) sepia(80%) saturate(5000%) hue-rotate(210deg) brightness(95%) contrast(90%);
-    }
-    .dark .discipline-card .card-icon img {
-      filter: brightness(0) saturate(100%) invert(60%) sepia(40%) saturate(2000%) hue-rotate(195deg) brightness(100%) contrast(90%);
     }
     .discipline-card .card-info h3 {
       font-size: 1.1rem;
@@ -1259,7 +1345,20 @@
       gap: 18px;
       align-items: flex-start;
       position: relative;
+      animation: cardFadeIn 0.4s ease-out forwards;
+      opacity: 0;
     }
+    .material-card:nth-child(1) { animation-delay: 0.03s; }
+    .material-card:nth-child(2) { animation-delay: 0.06s; }
+    .material-card:nth-child(3) { animation-delay: 0.09s; }
+    .material-card:nth-child(4) { animation-delay: 0.12s; }
+    .material-card:nth-child(5) { animation-delay: 0.15s; }
+    .material-card:nth-child(6) { animation-delay: 0.18s; }
+    .material-card:nth-child(7) { animation-delay: 0.21s; }
+    .material-card:nth-child(8) { animation-delay: 0.24s; }
+    .material-card:nth-child(9) { animation-delay: 0.27s; }
+    .material-card:nth-child(10) { animation-delay: 0.30s; }
+
     .material-card:hover {
       box-shadow: var(--shadow-md);
       border-color: var(--primary);
@@ -1286,10 +1385,9 @@
       align-items: center;
       justify-content: center;
     }
-    .material-card .material-thumb .icon-placeholder img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
+    .material-card .material-thumb .icon-placeholder svg {
+      width: 38px;
+      height: 38px;
     }
     .material-card .material-info {
       flex: 1;
@@ -1446,7 +1544,7 @@
     .video-card-premium {
       background: var(--surface);
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
       border: 1px solid var(--border-light);
       transition: all var(--transition);
       display: flex;
@@ -1459,7 +1557,20 @@
       -webkit-tap-highlight-color: transparent;
       flex-direction: row;
       align-items: stretch;
+      animation: cardFadeIn 0.4s ease-out forwards;
+      opacity: 0;
     }
+    .video-card-premium:nth-child(1) { animation-delay: 0.03s; }
+    .video-card-premium:nth-child(2) { animation-delay: 0.06s; }
+    .video-card-premium:nth-child(3) { animation-delay: 0.09s; }
+    .video-card-premium:nth-child(4) { animation-delay: 0.12s; }
+    .video-card-premium:nth-child(5) { animation-delay: 0.15s; }
+    .video-card-premium:nth-child(6) { animation-delay: 0.18s; }
+    .video-card-premium:nth-child(7) { animation-delay: 0.21s; }
+    .video-card-premium:nth-child(8) { animation-delay: 0.24s; }
+    .video-card-premium:nth-child(9) { animation-delay: 0.27s; }
+    .video-card-premium:nth-child(10) { animation-delay: 0.30s; }
+
     .video-card-premium:hover {
       box-shadow: var(--shadow-lg);
       border-color: var(--primary);
@@ -1546,12 +1657,6 @@
       justify-content: center;
       background: var(--bg);
       color: var(--primary);
-    }
-    .video-thumb-placeholder img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      opacity: 0.7;
     }
     .video-thumb-placeholder svg {
       width: 48px;
@@ -1673,7 +1778,7 @@
     .skeleton {
       background: linear-gradient(90deg, var(--border-light) 25%, var(--bg) 50%, var(--border-light) 75%);
       background-size: 200% 100%;
-      animation: shimmer 1.6s infinite;
+      animation: shimmer 1.6s ease-in-out infinite;
       border-radius: var(--radius-xs);
     }
     .skeleton-card {
@@ -1690,6 +1795,10 @@
     }
     .skeleton-line.medium {
       width: 80%;
+    }
+    .skeleton-stats {
+      height: 80px;
+      border-radius: var(--radius);
     }
 
     /* ===== TOAST ===== */
@@ -2013,12 +2122,8 @@
       background: var(--surface);
     }
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     @media (max-width: 768px) {
       .pdf-viewer-modal {
@@ -2034,113 +2139,6 @@
       .pdf-viewer-header h3 {
         font-size: 0.9rem;
         max-width: 60%;
-      }
-    }
-
-    /* ===== FLOATING META BUTTON (REFINADO) ===== */
-    .floating-meta-btn {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 9990;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--surface);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      color: var(--primary);
-    }
-    .floating-meta-btn:hover {
-      transform: scale(1.05);
-      box-shadow: var(--shadow-xl);
-      background: var(--primary-bg);
-    }
-    .floating-meta-btn:active {
-      transform: scale(0.94);
-    }
-    .floating-meta-btn svg {
-      width: 26px;
-      height: 26px;
-      stroke-width: 1.8;
-    }
-    .floating-meta-btn .close-float-btn {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-      z-index: 9991;
-      padding: 0;
-      line-height: 1;
-      font-family: sans-serif;
-    }
-    .floating-meta-btn .close-float-btn:hover {
-      background: var(--danger);
-      color: #fff;
-      border-color: var(--danger);
-    }
-    .floating-meta-btn .label {
-      position: absolute;
-      bottom: -26px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      white-space: nowrap;
-      background: var(--surface);
-      padding: 2px 10px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      letter-spacing: 0.02em;
-    }
-    .dark .floating-meta-btn .label {
-      background: var(--surface);
-      border-color: var(--border);
-    }
-    @media (max-width: 480px) {
-      .floating-meta-btn {
-        width: 48px;
-        height: 48px;
-        bottom: 18px;
-        right: 18px;
-      }
-      .floating-meta-btn svg {
-        width: 22px;
-        height: 22px;
-      }
-      .floating-meta-btn .close-float-btn {
-        width: 18px;
-        height: 18px;
-        font-size: 9px;
-        top: -5px;
-        right: -5px;
-      }
-      .floating-meta-btn .label {
-        font-size: 9px;
-        bottom: -22px;
-        padding: 1px 8px;
       }
     }
 
@@ -2206,6 +2204,13 @@
         width: 100%;
         justify-content: flex-end;
       }
+      .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+      .stat-card .stat-value {
+        font-size: 1.5rem;
+      }
     }
     @media (max-width: 480px) {
       .navbar {
@@ -2247,10 +2252,65 @@
       .login-card {
         padding: 32px 20px 28px;
       }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+    }
+
+    /* ===== DISCIPLINE HEADER ICON ===== */
+    .discipline-header-icon {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      vertical-align: middle;
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+    .discipline-header-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--primary);
+    }
+    .section-header h1 .discipline-header-icon {
+      width: 40px;
+      height: 40px;
+    }
+    @media (max-width: 480px) {
+      .section-header h1 .discipline-header-icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    /* ===== CARD ANIMATION ===== */
+    @keyframes cardFadeIn {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== APRENDA AQUI DESTAQUE ===== */
+    .sidebar-item.aprenda-aqui-item {
+      background: linear-gradient(135deg, var(--primary-bg), var(--surface));
+      border-left: 3px solid var(--accent);
+      font-weight: 600;
+    }
+    .sidebar-item.aprenda-aqui-item:hover {
+      background: var(--primary-bg);
+      border-color: var(--primary);
+    }
+    .sidebar-item.aprenda-aqui-item.active {
+      background: var(--primary-bg);
+      border-left-color: var(--primary);
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== PAGE TRANSITION OVERLAY ===== -->
+  <div class="page-transition-overlay" id="pageTransitionOverlay">
+    <div class="spinner"></div>
+  </div>
 
   <!-- ===== LOGIN ===== -->
   <div id="loginPage" class="login-page" style="display:none;">
@@ -2323,6 +2383,11 @@
         <div class="sidebar-item active" data-page="home" onclick="Sidebar.navigateTo('home')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Início
+        </div>
+        <!-- NOVA ABA: APRENDA AQUI -->
+        <div class="sidebar-item aprenda-aqui-item" data-page="aprenda-aqui" onclick="Sidebar.navigateTo('aprenda-aqui')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Aprenda Aqui
         </div>
         <div class="sidebar-item" onclick="window.open('https://vulpmaisoutrasferramentas.vercel.app/', '_blank')" style="cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -2467,6 +2532,7 @@
           </h1>
           <p>Explore os conteúdos disponíveis e acompanhe seu progresso</p>
         </div>
+        <div id="statsContainer"></div>
         <div class="cards-grid" id="disciplinesGrid">
           <div class="skeleton skeleton-card"></div>
           <div class="skeleton skeleton-card"></div>
@@ -2503,6 +2569,39 @@
           </button>
         </div>
         <div id="disciplineMaterials"></div>
+      </div>
+
+      <!-- ===== APRENDA AQUI ===== -->
+      <div class="page" id="pageAprendaAqui">
+        <button class="back-btn" onclick="Navigation.navigateTo('home')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Voltar para Disciplinas
+        </button>
+        <div class="breadcrumb">
+          <a href="#" onclick="Navigation.navigateTo('home'); return false;">Início</a>
+          <span class="sep">›</span>
+          <span>Aprenda Aqui</span>
+        </div>
+        <div class="section-header">
+          <h1>
+            <span class="discipline-header-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </span>
+            Aprenda Aqui
+          </h1>
+          <p id="aprendaSubtitle">Materiais exclusivos para você aprender com qualidade.</p>
+        </div>
+        <div class="tabs" id="aprendaTabs">
+          <button class="tab-btn active" onclick="Render.switchAprendaTab('pdfs')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            PDFs
+          </button>
+          <button class="tab-btn" onclick="Render.switchAprendaTab('videos')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            Vídeos
+          </button>
+        </div>
+        <div id="aprendaMaterials"></div>
       </div>
 
       <!-- ===== FAVORITES ===== -->
@@ -2649,33 +2748,33 @@
       PDF_ICON_URL: 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/simbolo-de-formato-de-arquivo-pdf_j0spve.png',
       VIDEO_ICON_URL: 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/camera-de-video_c5p1ae.png',
       DISCIPLINE_ICONS: {
-        'Língua Portuguesa': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/abra-o-livro_oytuad.png',
-        'Português': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/abra-o-livro_oytuad.png',
-        'Raciocínio Lógico': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/cerebro_xb7fma.png',
-        'Noções de Informática': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/computador_ckxnwj.png',
-        'Informática': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/computador_ckxnwj.png',
-        'Legislação Aplicada ao Cargo': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/mace_nhmu7r.png',
-        'Conhecimentos Específicos Nível Médio': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/pilha-de-tres-livros_eidxmm.png',
-        'Dicas de Estudos para Concursos': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092486/foguete_bppg3w.png',
-        'Simulados': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/trofeu_imvpxm.png',
-        'Bateria de Questões': 'https://res.cloudinary.com/dk8ta3dfy/image/upload/v1783092487/trofeu_imvpxm.png',
-        'Matemática': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/></svg>',
-        'Direito Constitucional': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
-        'Direito Administrativo': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>',
-        'Administração': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
-        'Contabilidade': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
-        'Economia': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="m16 10-4 4-4-4"/></svg>',
-        'Inglês': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-        'Espanhol': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>',
-        'História': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-        'Geografia': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>',
-        'Atualidades': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>',
-        'Ética': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 11h-3V8a2 2 0 0 0-4 0v3H7a2 2 0 0 0 0 4h3v3a2 2 0 0 0 4 0v-3h3a2 2 0 0 0 0-4z"/></svg>',
-        'Filosofia': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>',
-        'Sociologia': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-        'Biologia': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>',
-        'Física': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
-        'Química': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6v4l4 10H5l4-10V3z"/><line x1="5" y1="21" x2="19" y2="21"/></svg>',
+        'Língua Portuguesa': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+        'Português': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+        'Raciocínio Lógico': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4a4 4 0 0 1 3.5 6.1 4 4 0 0 1 0 7.8 4 4 0 0 1-7 0 4 4 0 0 1 0-7.8A4 4 0 0 1 12 4z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4 12H2"/><path d="M22 12h-2"/><path d="M19.07 4.93l-1.41 1.41"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M17.66 6.34l1.41-1.41"/><path d="M6.34 6.34L4.93 4.93"/></svg>',
+        'Noções de Informática': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+        'Informática': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+        'Legislação Aplicada ao Cargo': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>',
+        'Conhecimentos Específicos Nível Médio': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+        'Dicas de Estudos para Concursos': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+        'Simulados': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M8 2h8"/></svg>',
+        'Bateria de Questões': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M8 2h8"/></svg>',
+        'Matemática': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/></svg>',
+        'Direito Constitucional': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+        'Direito Administrativo': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>',
+        'Administração': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
+        'Contabilidade': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+        'Economia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="m16 10-4 4-4-4"/></svg>',
+        'Inglês': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>',
+        'Espanhol': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>',
+        'História': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+        'Geografia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>',
+        'Atualidades': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>',
+        'Ética': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 11h-3V8a2 2 0 0 0-4 0v3H7a2 2 0 0 0 0 4h3v3a2 2 0 0 0 4 0v-3h3a2 2 0 0 0 0-4z"/></svg>',
+        'Filosofia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>',
+        'Sociologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        'Biologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>',
+        'Física': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l.06-.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+        'Química': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6v4l4 10H5l4-10V3z"/><line x1="5" y1="21" x2="19" y2="21"/></svg>',
       },
     };
 
@@ -2778,15 +2877,13 @@
         const icons = Config.DISCIPLINE_ICONS;
         for (const [k, v] of Object.entries(icons)) {
           if (name.toLowerCase().includes(k.toLowerCase())) {
-            if (typeof v === 'string' && v.startsWith('http')) return '<img src="' + v + '" alt="' + k +
-              '" width="24" height="24" style="object-fit:contain;">';
             return v;
           }
         }
         return this.defaultIcon();
       },
       defaultIcon() {
-        return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>';
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>';
       },
       isVideoType(tipo) { if (!tipo) return false; const t = tipo.toUpperCase().trim(); return t === 'VÍDEO' || t === 'VIDEO' ||
           t === 'YOUTUBE'; },
@@ -2815,9 +2912,8 @@
         return d.innerHTML; },
       truncate(str, maxLen) { if (!str) return ''; return str.length > maxLen ? str.substring(0, maxLen) + '...' : str; },
       validatePassword(password) { return /^(?=.{8}$)(?=.*[VUP])(?=.*[5-9]).*$/.test(password); },
-      getMiniIcon(html) { if (!html) return ''; if (html.includes('<img')) return html.replace('width="24"',
-          'width="18"').replace('height="24"', 'height="18"'); return html.replace(/width="24"/g, 'width="18"').replace(
-          /height="24"/g, 'height="18"'); },
+      getMiniIcon(html) { if (!html) return ''; return html.replace(/width="24"/g, 'width="18"').replace(/height="24"/g,
+          'height="18"'); },
       formatFileSize(bytes) { if (!bytes || bytes === 0) return ''; if (bytes < 1024) return bytes + ' B'; if (bytes < 1024 *
           1024) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / (1024 * 1024)).toFixed(2) + ' MB'; },
       pdfIconSVG() {
@@ -2825,6 +2921,15 @@
       },
       videoIconSVG() {
         return '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>';
+      },
+      getStats(materials) {
+        const total = materials.length;
+        const done = Storage.getDone().filter(id => materials.some(m => String(m.ID) === String(id))).length;
+        const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+        const fav = Storage.getFavorites().filter(id => materials.some(m => String(m.ID) === String(id))).length;
+        const pdfs = materials.filter(m => !Utils.isVideoType(m.Tipo)).length;
+        const videos = materials.filter(m => Utils.isVideoType(m.Tipo)).length;
+        return { total, done, progress, fav, pdfs, videos };
       },
     };
 
@@ -2985,7 +3090,8 @@
       },
       navigateTo(page, disciplineName, tab) {
         if (window.innerWidth <= 768) this.close();
-        const map = { home: 'home', favorites: 'favorites', done: 'done', downloads: 'downloads', report: 'report' };
+        const map = { home: 'home', favorites: 'favorites', done: 'done', downloads: 'downloads', report: 'report',
+          'aprenda-aqui': 'aprenda-aqui' };
         if (map[page]) { Navigation.navigateTo(page);
           this.setActiveItem(page); } else if (page === 'discipline' && disciplineName) {
           Navigation.openDiscipline(disciplineName);
@@ -2997,15 +3103,13 @@
         document.querySelectorAll('.sidebar-item[data-page]').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.sidebar-discipline-item').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.sidebar-subitem').forEach(el => el.classList.remove('active'));
-        if (page === 'home') { const el = document.querySelector('.sidebar-item[data-page="home"]'); if (el) el.classList
-            .add('active'); } else if (page === 'favorites') { const el = document.querySelector(
-            '.sidebar-item[data-page="favorites"]'); if (el) el.classList.add('active'); } else if (page === 'done') {
-          const el = document.querySelector('.sidebar-item[data-page="done"]'); if (el) el.classList.add('active'); } else if (
-          page === 'downloads') { const el = document.querySelector('.sidebar-item[data-page="downloads"]'); if (el) el
-            .classList.add('active'); } else if (page === 'report') { const el = document.querySelector(
-            '.sidebar-item[data-page="report"]'); if (el) el.classList.add('active'); } else if (page === 'discipline' &&
-          disciplineName) { const el = document.querySelector('.sidebar-discipline-item[data-discipline="' + CSS.escape(
-            disciplineName) + '"]'); if (el) el.classList.add('active'); }
+        const map = { home: 'home', favorites: 'favorites', done: 'done', downloads: 'downloads', report: 'report',
+          'aprenda-aqui': 'aprenda-aqui' };
+        if (map[page]) { const el = document.querySelector('.sidebar-item[data-page="' + page + '"]'); if (el) el.classList
+            .add('active'); } else if (page === 'discipline' && disciplineName) {
+          const el = document.querySelector('.sidebar-discipline-item[data-discipline="' + CSS.escape(disciplineName) +
+            '"]'); if (el) el.classList.add('active');
+        }
       },
       render(disciplines) {
         const container = document.getElementById('sidebarDisciplines');
@@ -3067,6 +3171,54 @@
     const Render = {
       currentDiscipline: null,
       currentDisciplineTab: 'pdfs',
+      aprendaTab: 'pdfs',
+
+      renderStats(materials) {
+        const container = document.getElementById('statsContainer');
+        if (!container) return;
+        const stats = Utils.getStats(materials);
+        const total = stats.total;
+        const done = stats.done;
+        const progress = stats.progress;
+        const fav = stats.fav;
+        const pdfs = stats.pdfs;
+        const videos = stats.videos;
+
+        container.innerHTML = `
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+              <div class="stat-value">${total}</div>
+              <div class="stat-label">Total de Materiais</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="stat-value">${done}</div>
+              <div class="stat-label">Concluídos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="stat-value">${progress}%</div>
+              <div class="stat-label">Progresso Geral</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+              <div class="stat-value">${fav}</div>
+              <div class="stat-label">Favoritos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="stat-value">${pdfs}</div>
+              <div class="stat-label">PDFs</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+              <div class="stat-value">${videos}</div>
+              <div class="stat-label">Vídeos</div>
+            </div>
+          </div>
+        `;
+      },
 
       renderHome(disciplines) {
         const grid = document.getElementById('disciplinesGrid');
@@ -3074,6 +3226,8 @@
           grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg><h3>Nenhuma disciplina encontrada</h3><p>Tente sincronizar os dados.</p></div>';
           return;
         }
+        if (App.allMaterials) this.renderStats(App.allMaterials);
+
         grid.innerHTML = disciplines.map(disc => {
           const total = disc.all.length;
           const doneCount = disc.all.filter(m => Storage.isDone(m.ID)).length;
@@ -3099,7 +3253,8 @@
       renderDiscipline(disc) {
         this.currentDiscipline = disc;
         this.currentDisciplineTab = 'pdfs';
-        document.getElementById('disciplineTitle').innerHTML = disc.icon + ' ' + Utils.escapeHTML(disc.name);
+        document.getElementById('disciplineTitle').innerHTML = '<span class="discipline-header-icon">' + disc.icon +
+          '</span> ' + Utils.escapeHTML(disc.name);
         document.getElementById('disciplineSubtitle').textContent = disc.pdfs.length + ' PDFs · ' + disc.videos.length +
           ' Vídeos · ' + disc.all.length + ' materiais no total';
         document.getElementById('disciplineBreadcrumb').textContent = disc.name;
@@ -3128,6 +3283,42 @@
           return;
         }
         container.innerHTML = materials.map(mat => this.createMaterialCard(mat)).join('');
+      },
+
+      // ----- APRENDA AQUI -----
+      renderAprendaAqui() {
+        const all = App.allMaterials || [];
+        const filtrados = all.filter(m => (m.Disciplina || '').toLowerCase().includes('aprenda aqui'));
+        const pdfs = filtrados.filter(m => !Utils.isVideoType(m.Tipo));
+        const videos = filtrados.filter(m => Utils.isVideoType(m.Tipo));
+        const container = document.getElementById('aprendaMaterials');
+        const subtitle = document.getElementById('aprendaSubtitle');
+        if (filtrados.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Nenhum material encontrado para "Aprenda Aqui"</h3><p>Verifique se há conteúdos com essa disciplina na planilha.</p></div>';
+          if (subtitle) subtitle.textContent = 'Nenhum material disponível no momento.';
+          return;
+        }
+        if (subtitle) subtitle.textContent = pdfs.length + ' PDFs · ' + videos.length + ' Vídeos · ' + filtrados.length +
+          ' materiais no total';
+        const materials = this.aprendaTab === 'pdfs' ? pdfs : videos;
+        if (materials.length === 0) {
+          container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Nenhum ' + (
+            this.aprendaTab === 'pdfs' ? 'PDF' : 'vídeo') + ' em "Aprenda Aqui"</h3></div>';
+          return;
+        }
+        container.innerHTML = materials.map(mat => this.createMaterialCard(mat)).join('');
+        // Atualizar abas ativas
+        document.querySelectorAll('#aprendaTabs .tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(this.aprendaTab));
+        });
+      },
+
+      switchAprendaTab(tab) {
+        this.aprendaTab = tab;
+        this.renderAprendaAqui();
+        // Atualizar badge no sidebar
+        document.querySelectorAll('.sidebar-item[data-page="aprenda-aqui"]').forEach(el => el.classList.add('active'));
       },
 
       createMaterialCard(mat) {
@@ -3265,20 +3456,43 @@
       showSkeletons() {
         document.getElementById('disciplinesGrid').innerHTML = Array(6).fill(
           '<div class="skeleton skeleton-card"></div>').join('');
+        const statsContainer = document.getElementById('statsContainer');
+        if (statsContainer) statsContainer.innerHTML =
+          '<div class="stats-grid">' + Array(6).fill('<div class="skeleton skeleton-stats"></div>').join('') + '</div>';
       },
     };
 
     // ============================================================
-    //  NAVIGATION
+    //  NAVIGATION (com transição mais suave)
     // ============================================================
     const Navigation = {
       currentPage: 'home',
+      _transitionTimeout: null,
 
       navigateTo(page) {
+        if (this.currentPage === page) {
+          this.refreshCurrentPage();
+          return;
+        }
+        const overlay = document.getElementById('pageTransitionOverlay');
+        if (overlay) {
+          overlay.classList.add('active');
+          void overlay.offsetWidth;
+        }
+        clearTimeout(this._transitionTimeout);
+        this._transitionTimeout = setTimeout(() => {
+          this._doNavigate(page);
+          setTimeout(() => {
+            if (overlay) overlay.classList.remove('active');
+          }, 300);
+        }, 350);
+      },
+
+      _doNavigate(page) {
         this.currentPage = page;
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const map = { home: 'pageHome', discipline: 'pageDiscipline', favorites: 'pageFavorites', done: 'pageDone',
-          downloads: 'pageDownloads', report: 'pageReport' };
+          downloads: 'pageDownloads', report: 'pageReport', 'aprenda-aqui': 'pageAprendaAqui' };
         const id = map[page];
         if (id) document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
@@ -3288,18 +3502,18 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.refreshCurrentPage();
         const searchInput = document.getElementById('searchInput');
-        if (searchInput && page !== 'home') searchInput.value = '';
+        if (searchInput && page !== 'home' && page !== 'aprenda-aqui') searchInput.value = '';
         if (page === 'home' && searchInput && searchInput.value === '' && App.allMaterials && App.allMaterials.length > 0) {
           const disciplines = Utils.groupByDiscipline(App.allMaterials);
           Render.renderHome(disciplines);
         }
+        if (page === 'aprenda-aqui') Render.renderAprendaAqui();
         if (page === 'downloads') DownloadManager.renderDownloads();
         Sidebar.setActiveItem(page);
-        // breadcrumb
         const bc = document.querySelector('.breadcrumb span:last-child');
         if (bc) {
           const titles = { home: 'Início', favorites: 'Favoritos', done: 'Concluídos', downloads: 'Meus Downloads',
-            report: 'Relatório' };
+            report: 'Relatório', 'aprenda-aqui': 'Aprenda Aqui' };
           bc.textContent = titles[page] || page;
         }
       },
@@ -3311,6 +3525,8 @@
           Render.renderDiscipline(disc);
           this.navigateTo('discipline');
           document.getElementById('disciplineTitle').scrollIntoView({ behavior: 'smooth' });
+        } else {
+          Toast.error('Disciplina "' + disciplineName + '" não encontrada.');
         }
       },
 
@@ -3332,6 +3548,9 @@
             break;
           case 'downloads':
             DownloadManager.renderDownloads();
+            break;
+          case 'aprenda-aqui':
+            Render.renderAprendaAqui();
             break;
         }
         this.updateBadges();
@@ -3972,164 +4191,12 @@
     };
 
     // ============================================================
-    //  META LOCATOR (botão flutuante refinado)
-    // ============================================================
-    const MetaLocator = {
-      floatingClosed: false,
-
-      init() {
-        // navbar button
-        if (!document.getElementById('btnMetaLocator')) {
-          const actions = document.querySelector('.navbar-actions');
-          if (actions) {
-            const btn = document.createElement('button');
-            btn.className = 'nav-btn';
-            btn.id = 'btnMetaLocator';
-            btn.title = 'Localizar Metas';
-            btn.innerHTML =
-              `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Metas</span>`;
-            btn.onclick = () => MetaLocator.open();
-            const themeBtn = document.getElementById('btnDarkMode');
-            if (themeBtn) actions.insertBefore(btn, themeBtn);
-            else actions.appendChild(btn);
-          }
-        }
-        if (!document.getElementById('metaLocatorOverlay')) {
-          const modalHTML = `
-            <div id="metaLocatorOverlay" class="pdf-viewer-overlay" style="display:none;">
-              <div class="pdf-viewer-modal" style="max-width:600px;">
-                <div class="pdf-viewer-header">
-                  <h3>🎯 Localizador de Metas</h3>
-                  <div class="pdf-viewer-actions">
-                    <button class="icon-btn" onclick="MetaLocator.close()" title="Fechar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-                  </div>
-                </div>
-                <div style="padding:16px;">
-                  <input type="text" id="metaSearchInput" placeholder="Filtrar metas..." style="width:100%; padding:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text); font-size:0.95rem; margin-bottom:16px;">
-                  <div id="metaListContainer" style="max-height:400px; overflow-y:auto;"></div>
-                </div>
-              </div>
-            </div>
-          `;
-          document.body.insertAdjacentHTML('beforeend', modalHTML);
-          document.getElementById('metaLocatorOverlay').addEventListener('click', function(e) {
-            if (e.target === this) MetaLocator.close();
-          });
-        }
-        if (!document.getElementById('floatingMetaBtn') && !this.floatingClosed) this.createFloatingButton();
-      },
-
-      createFloatingButton() {
-        const floatBtn = document.createElement('div');
-        floatBtn.className = 'floating-meta-btn';
-        floatBtn.id = 'floatingMetaBtn';
-        floatBtn.innerHTML = `
-          <span class="close-float-btn" onclick="event.stopPropagation(); MetaLocator.closeFloating();" title="Fechar">✕</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span class="label">Localizar Metas</span>
-        `;
-        floatBtn.onclick = function(e) {
-          if (e.target.closest('.close-float-btn')) return;
-          MetaLocator.open();
-        };
-        document.body.appendChild(floatBtn);
-      },
-
-      closeFloating() {
-        const el = document.getElementById('floatingMetaBtn');
-        if (el) el.remove();
-        this.floatingClosed = true;
-      },
-
-      open() {
-        const overlay = document.getElementById('metaLocatorOverlay');
-        if (!overlay) return;
-        overlay.style.display = 'flex';
-        this.renderList();
-        document.body.style.overflow = 'hidden';
-        const input = document.getElementById('metaSearchInput');
-        if (input) { input.value = '';
-          input.focus();
-          input.oninput = () => this.renderList(input.value); }
-      },
-
-      close() {
-        const overlay = document.getElementById('metaLocatorOverlay');
-        if (!overlay) return;
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-      },
-
-      renderList(filter = '') {
-        const container = document.getElementById('metaListContainer');
-        if (!container) return;
-        if (!App.allMaterials || App.allMaterials.length === 0) {
-          container.innerHTML = '<div class="empty-state"><h3>Nenhuma meta encontrada</h3></div>';
-          return;
-        }
-        const metaMaterials = App.allMaterials.filter(mat => {
-          const title = (mat['Título'] || mat.Titulo || '');
-          return title.toLowerCase().includes('meta');
-        });
-        const filtered = metaMaterials.filter(mat => {
-          const title = (mat['Título'] || mat.Titulo || '');
-          const disciplina = mat.Disciplina || '';
-          const search = filter.toLowerCase().trim();
-          return title.toLowerCase().includes(search) || disciplina.toLowerCase().includes(search);
-        });
-        if (filtered.length === 0) {
-          container.innerHTML = '<div class="empty-state"><h3>Nenhuma meta encontrada</h3></div>';
-          return;
-        }
-        let html = '<div style="display:flex; flex-direction:column; gap:8px;">';
-        filtered.forEach(mat => {
-          const title = Utils.escapeHTML(mat['Título'] || mat.Titulo || 'Sem título');
-          const disciplina = Utils.escapeHTML(mat.Disciplina || '');
-          const tipo = Utils.isVideoType(mat.Tipo) ? '🎬 Vídeo' : '📄 PDF';
-          const id = mat.ID;
-          const icon = Utils.getDisciplineIcon(mat.Disciplina);
-          html += `
-            <div class="material-card" style="cursor:pointer; padding:12px 16px;" onclick="MetaLocator.navigateToMeta('${id}', '${disciplina}')">
-              <div style="display:flex; align-items:center; gap:12px; width:100%;">
-                <span style="font-size:1.2rem;">${icon}</span>
-                <div style="flex:1;">
-                  <div style="font-weight:600; font-size:0.95rem;">${title}</div>
-                  <div style="font-size:0.8rem; color:var(--text-muted);">${disciplina} • ${tipo}</div>
-                </div>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </div>
-            </div>
-          `;
-        });
-        html += '</div>';
-        container.innerHTML = html;
-      },
-
-      navigateToMeta(materialId, disciplineName) {
-        this.close();
-        Navigation.openDiscipline(disciplineName);
-        setTimeout(() => {
-          const el = document.getElementById('material-' + materialId);
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            el.style.transition = 'border 0.3s, box-shadow 0.3s';
-            el.style.border = '2px solid var(--primary)';
-            el.style.boxShadow = '0 0 0 4px var(--primary-bg)';
-            setTimeout(() => { el.style.border = '';
-              el.style.boxShadow = ''; }, 3000);
-          } else {
-            Toast.info('Material não encontrado na lista.');
-          }
-        }, 300);
-      },
-    };
-
-    // ============================================================
     //  APP PRINCIPAL
     // ============================================================
     const App = {
       allMaterials: [],
       isLoading: false,
+      _loadStartTime: 0,
 
       async init() {
         if (!Storage.isLoggedIn()) { this.showLoginScreen(); return; }
@@ -4137,6 +4204,7 @@
         if (Storage.getDarkMode()) document.body.classList.add('dark');
         this.updateDarkModeIcon();
         Render.showSkeletons();
+        this._loadStartTime = Date.now();
         const cache = Storage.getCache();
         if (cache.data && cache.data.length > 0) {
           this.allMaterials = cache.data;
@@ -4145,6 +4213,7 @@
           Sidebar.render(disciplines);
           Navigation.updateBadges();
           if (!Storage.isCacheValid()) this.fetchAndCache(true);
+          else this._ensureMinimumLoading();
         } else await this.fetchAndCache(false);
         this.setupSearchListener();
         this.setupOpenMaterialListener();
@@ -4156,8 +4225,23 @@
         if (downloadSearch) downloadSearch.addEventListener('input', () => DownloadManager.renderDownloads());
         await LogManager.logLogin();
         Welcome.show();
-        MetaLocator.init();
         console.log('[VULP+] Pronto com ' + this.allMaterials.length + ' materiais.');
+      },
+
+      _ensureMinimumLoading() {
+        const elapsed = Date.now() - this._loadStartTime;
+        const minLoadTime = 800;
+        if (elapsed < minLoadTime) {
+          setTimeout(() => {
+            const disciplines = Utils.groupByDiscipline(this.allMaterials);
+            Render.renderHome(disciplines);
+            Sidebar.render(disciplines);
+          }, minLoadTime - elapsed);
+        } else {
+          const disciplines = Utils.groupByDiscipline(this.allMaterials);
+          Render.renderHome(disciplines);
+          Sidebar.render(disciplines);
+        }
       },
 
       showLoginScreen() { document.getElementById('loginPage').style.display = 'flex';
@@ -4234,7 +4318,7 @@
             this.allMaterials = data;
             Storage.setCache(data);
             const disciplines = Utils.groupByDiscipline(this.allMaterials);
-            if (!silent) { Render.renderHome(disciplines);
+            if (!silent) { this._ensureMinimumLoading();
               Sidebar.render(disciplines);
               Navigation.updateBadges();
               Toast.success('Dados atualizados com sucesso!'); } else { if (Navigation.currentPage === 'home')
@@ -4258,8 +4342,12 @@
         Toast.info('Recarregando plataforma...');
         const icon = document.getElementById('syncIcon');
         if (icon) icon.style.animation = 'spin 0.8s linear infinite';
-        try { await this.fetchAndCache(false);
-          Toast.success('Plataforma recarregada com sucesso!'); } catch (e) { Toast.error('Erro ao recarregar.');
+        try {
+          await this.fetchAndCache(false);
+          // Re-render Aprenda Aqui se estiver visível
+          if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
+          Toast.success('Plataforma recarregada com sucesso!');
+        } catch (e) { Toast.error('Erro ao recarregar.');
           throw e; } finally { if (icon) icon.style.animation = ''; }
         Navigation.refreshCurrentPage();
         Sidebar.render(Utils.groupByDiscipline(this.allMaterials));
@@ -4282,6 +4370,7 @@
         if (Navigation.currentPage === 'done') Render.renderDone(this.allMaterials);
         if (Navigation.currentPage === 'home') Render.renderHome(Utils.groupByDiscipline(this.allMaterials));
         if (Navigation.currentPage === 'discipline' && Render.currentDiscipline) Render.renderDisciplineMaterials();
+        if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
         Sidebar.render(Utils.groupByDiscipline(this.allMaterials));
       },
 
@@ -4293,6 +4382,7 @@
         Storage.markMaterialViewed(id);
         Render.updateMaterialCardButtons(id);
         if (Navigation.currentPage === 'home') Render.renderHome(Utils.groupByDiscipline(this.allMaterials));
+        if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
         if (mat) LogManager.logAcesso(mat).catch(() => {});
         if (!Storage.isDone(id)) this.toggleDone(id);
         setTimeout(() => { const win = window.open(finalLink, '_blank', 'noopener,noreferrer'); if (!win) Toast.error(
@@ -4323,7 +4413,7 @@
     };
 
     // ============================================================
-    //  WELCOME (com barra de progresso)
+    //  WELCOME
     // ============================================================
     const Welcome = {
       show() {
@@ -4386,7 +4476,7 @@
     document.addEventListener('DOMContentLoaded', () => App.init());
     console.log('%c🚀 VULP+ PRO %c100% funcional!', 'font-size:1.3em;font-weight:bold;color:#3b5b9b;',
       'color:#2c3e50;');
-    console.log('%c🎯 Recarga aprimorada • Localizador refinado', 'color:#27ae60;font-weight:bold;');
+    console.log('%c🎯 Interface profissional • Transições suaves • Ícones ajustados', 'color:#27ae60;font-weight:bold;');
   </script>
 </body>
 </html>
