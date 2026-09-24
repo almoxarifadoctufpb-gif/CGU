@@ -434,11 +434,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 18px 16px;
+      padding: 16px 18px 14px;
       border-bottom: 1px solid var(--border-light);
       flex-shrink: 0;
       gap: 12px;
-      min-height: 100px;
+      min-height: 84px;
       position: relative;
     }
     .sidebar-logo {
@@ -448,7 +448,7 @@
       width: 100%;
     }
     .sidebar-logo img {
-      height: 72px;
+      height: 56px;
       width: auto;
       max-width: 100%;
       object-fit: contain;
@@ -854,21 +854,22 @@
       box-shadow: 0 0 0 2px var(--success-bg);
     }
 
-    /* ===== VULPQUEST — BOTÃO DE DESTAQUE ===== */
+    /* ===== VULPQUEST — BOTÃO DE DESTAQUE (COMPACTO) ===== */
     .sidebar-item.vulpquest-item {
       background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
       color: #fff !important;
       font-weight: 700;
       margin: 4px 0 8px;
-      padding: 12px 14px;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.28);
       position: relative;
       overflow: hidden;
-      min-height: 52px;
+      min-height: 44px;
       border: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      gap: 8px;
     }
     .sidebar-item.vulpquest-item::after {
       content: '';
@@ -883,67 +884,71 @@
       pointer-events: none;
     }
     .sidebar-item.vulpquest-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.42);
       background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
     }
     .sidebar-item.vulpquest-item:hover::after { opacity: 1; }
     .sidebar-item.vulpquest-item:active {
       transform: translateY(0);
-      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3);
     }
     .sidebar-item.vulpquest-item svg,
     .sidebar-item.vulpquest-item .sidebar-icon {
       opacity: 1;
       color: #fff;
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
     }
     .vulpquest-content {
       display: flex;
-      flex-direction: column;
-      gap: 1px;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
       min-width: 0;
       flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .vulpquest-title {
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       line-height: 1.2;
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .vulpquest-title .vq-badge {
-      font-size: 0.55rem;
+      font-size: 0.52rem;
       background: #fbbf24;
       color: #1e1b4b;
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: var(--radius-full);
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1.4;
+      flex-shrink: 0;
     }
     .vulpquest-subtitle {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.88);
-      line-height: 1.2;
-      letter-spacing: 0.01em;
+      display: none;
     }
     .vulpquest-arrow {
       margin-left: auto;
-      opacity: 0.75;
+      opacity: 0.7;
       transition: all 0.25s ease;
       flex-shrink: 0;
       color: #fff;
+      width: 14px;
+      height: 14px;
     }
     .sidebar-item.vulpquest-item:hover .vulpquest-arrow {
       opacity: 1;
-      transform: translateX(3px);
+      transform: translateX(2px);
     }
 
     /* ===== FOOTER ===== */
@@ -2318,7 +2323,7 @@
       .stat-card .stat-value { font-size: 1.6rem; }
       .pdf-reader-body { padding: 10px; min-height: 50vh; max-height: 70vh; }
       .profile-avatar { width: 76px; height: 76px; }
-      .sidebar-logo img { height: 60px; }
+      .sidebar-logo img { height: 48px; }
     }
     @media (max-width: 480px) {
       .navbar { padding: 0 10px; gap: 6px; }
@@ -2340,8 +2345,8 @@
       .profile-avatar { width: 68px; height: 68px; }
       .profile-greeting .greeting-text { font-size: 0.75rem; }
       .profile-greeting .greeting-text .highlight-name { font-size: 0.88rem; }
-      .sidebar-logo img { height: 50px; }
-      .sidebar-header { min-height: 80px; padding: 14px 18px 12px; }
+      .sidebar-logo img { height: 42px; }
+      .sidebar-header { min-height: 72px; padding: 12px 18px 10px; }
     }
 
     /* ============================================================
@@ -2596,7 +2601,7 @@
 
       <nav class="sidebar-nav" id="sidebarNav">
 
-        <!-- ===== VULPQUEST — BOTÃO DE DESTAQUE (ACIMA DE INÍCIO) ===== -->
+        <!-- ===== VULPQUEST — BOTÃO DE DESTAQUE (COMPACTO) ===== -->
         <div class="sidebar-item vulpquest-item" onclick="window.open('https://vulpquest-app-questoes.vercel.app/', '_blank', 'noopener,noreferrer')" title="Abrir VulpQuest — Sistema de Questões">
           <span class="sidebar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2607,9 +2612,8 @@
           </span>
           <div class="vulpquest-content">
             <span class="vulpquest-title">VulpQuest <span class="vq-badge">Novo</span></span>
-            <span class="vulpquest-subtitle">Sistema de Questões</span>
           </div>
-          <svg class="vulpquest-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="vulpquest-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/>
             <polyline points="12 5 19 12 12 19"/>
           </svg>
@@ -2725,9 +2729,6 @@
     <main class="main-content" id="mainContent">
 
       <div class="page active" id="pageHome">
-        <div style="text-align:center; margin-bottom:24px;">
-          <img src="https://res.cloudinary.com/dqmuoc3o0/image/upload/v1790257238/ChatGPT_Image_24_de_set._de_2026_07_13_44_dro2ao.png" alt="VULP+" style="max-width:220px; height:auto;" />
-        </div>
         <div class="section-header">
           <h1>
             <img src="https://res.cloudinary.com/dk8ta3dfy/image/upload/v1784024824/estude_1_mixz8y.png" alt="Disciplinas" />
