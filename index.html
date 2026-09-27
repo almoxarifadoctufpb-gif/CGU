@@ -15,7 +15,7 @@
   </script>
   <style>
     /* ============================================================
-       RESET & VARIÁVEIS — IDENTIDADE NEUTRA E PROFISSIONAL
+       RESET & VARIÁVEIS — VULP+ PRO
        ============================================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -56,6 +56,15 @@
       --navbar-height: 68px;
       --sidebar-width: 280px;
       --max-width: 1280px;
+
+      --vulpquest-accent: #7c3aed;
+      --vulpquest-accent-soft: rgba(124, 58, 237, 0.08);
+      --vulpquest-accent-border: rgba(124, 58, 237, 0.20);
+      --vulpquest-accent-hover: rgba(124, 58, 237, 0.14);
+      --gabarita-accent: #059669;
+      --gabarita-accent-soft: rgba(5, 150, 105, 0.08);
+      --gabarita-accent-border: rgba(5, 150, 105, 0.20);
+      --gabarita-accent-hover: rgba(5, 150, 105, 0.14);
     }
 
     .dark {
@@ -83,6 +92,15 @@
       --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
       --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
       --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.7);
+
+      --vulpquest-accent: #a78bfa;
+      --vulpquest-accent-soft: rgba(167, 139, 250, 0.12);
+      --vulpquest-accent-border: rgba(167, 139, 250, 0.28);
+      --vulpquest-accent-hover: rgba(167, 139, 250, 0.18);
+      --gabarita-accent: #34d399;
+      --gabarita-accent-soft: rgba(52, 211, 153, 0.12);
+      --gabarita-accent-border: rgba(52, 211, 153, 0.28);
+      --gabarita-accent-hover: rgba(52, 211, 153, 0.18);
     }
 
     html { scroll-behavior: smooth; }
@@ -409,7 +427,7 @@
     .app-layout { display: flex; min-height: 100vh; }
 
     /* ============================================================
-       SIDEBAR — DESIGN PREMIUM 10/10
+       SIDEBAR
        ============================================================ */
     .sidebar {
       position: fixed;
@@ -429,7 +447,6 @@
       border-right: 1px solid var(--border);
     }
 
-    /* ===== HEADER ===== */
     .sidebar-header {
       display: flex;
       align-items: center;
@@ -456,9 +473,7 @@
       filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.12));
       transition: transform 0.3s ease;
     }
-    .sidebar-logo img:hover {
-      transform: scale(1.03);
-    }
+    .sidebar-logo img:hover { transform: scale(1.03); }
     .sidebar-close-btn {
       display: none;
       width: 34px; height: 34px;
@@ -472,12 +487,8 @@
       top: 50%;
       transform: translateY(-50%);
     }
-    .sidebar-close-btn:hover {
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
+    .sidebar-close-btn:hover { background: var(--danger-bg); color: var(--danger); }
 
-    /* ===== PERFIL — CARD PREMIUM ===== */
     .sidebar-profile {
       padding: 18px 16px 16px;
       border-bottom: 1px solid var(--border-light);
@@ -643,7 +654,6 @@
     }
     .save-name-btn svg { width: 16px; height: 16px; stroke-width: 2.5; }
 
-    /* ===== NAVEGAÇÃO ===== */
     .sidebar-nav {
       flex: 1;
       padding: 10px 10px 8px;
@@ -750,7 +760,6 @@
       color: var(--primary);
     }
 
-    /* Contador de progresso nas disciplinas */
     .sidebar-discipline-item .discipline-count {
       font-size: 0.68rem;
       color: var(--text-muted);
@@ -775,7 +784,6 @@
       color: #fff;
     }
 
-    /* Subitens */
     .sidebar-subitems {
       overflow: hidden;
       max-height: 0;
@@ -854,49 +862,35 @@
       box-shadow: 0 0 0 2px var(--success-bg);
     }
 
-    /* ===== VULPQUEST — BOTÃO DE DESTAQUE (COMPACTO) ===== */
     .sidebar-item.vulpquest-item {
-      background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
-      color: #fff !important;
-      font-weight: 700;
-      margin: 4px 0 8px;
+      background: var(--vulpquest-accent-soft);
+      color: var(--text) !important;
+      font-weight: 600;
+      margin: 4px 0 4px;
       padding: 9px 12px;
       border-radius: var(--radius-sm);
-      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.28);
+      box-shadow: none;
       position: relative;
       overflow: hidden;
-      min-height: 44px;
-      border: none;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 40px;
+      border: 1px solid var(--vulpquest-accent-border);
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
       cursor: pointer;
-      gap: 8px;
+      gap: 10px;
     }
-    .sidebar-item.vulpquest-item::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
+    .sidebar-item.vulpquest-item::after { display: none; }
+    .sidebar-item.vulpquest-item::before { display: none; }
     .sidebar-item.vulpquest-item:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.42);
-      background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+      background: var(--vulpquest-accent-hover);
+      border-color: var(--vulpquest-accent);
+      transform: none;
+      box-shadow: none;
     }
-    .sidebar-item.vulpquest-item:hover::after { opacity: 1; }
-    .sidebar-item.vulpquest-item:active {
-      transform: translateY(0);
-      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3);
-    }
+    .sidebar-item.vulpquest-item:active { transform: none; }
     .sidebar-item.vulpquest-item svg,
     .sidebar-item.vulpquest-item .sidebar-icon {
       opacity: 1;
-      color: #fff;
+      color: var(--vulpquest-accent);
       width: 18px;
       height: 18px;
     }
@@ -911,38 +905,35 @@
       overflow: hidden;
     }
     .vulpquest-title {
-      font-size: 0.88rem;
-      font-weight: 700;
+      font-size: 0.865rem;
+      font-weight: 600;
       letter-spacing: -0.01em;
       line-height: 1.2;
-      color: #fff;
+      color: var(--text);
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .vulpquest-title .vq-badge {
-      font-size: 0.52rem;
-      background: #fbbf24;
-      color: #1e1b4b;
-      padding: 1px 5px;
+      font-size: 0.55rem;
+      background: var(--vulpquest-accent);
+      color: #fff;
+      padding: 1px 6px;
       border-radius: var(--radius-full);
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1.4;
       flex-shrink: 0;
     }
-    .vulpquest-subtitle {
-      display: none;
-    }
     .vulpquest-arrow {
       margin-left: auto;
-      opacity: 0.7;
-      transition: all 0.25s ease;
+      opacity: 0.5;
+      transition: opacity 0.18s ease, transform 0.18s ease;
       flex-shrink: 0;
-      color: #fff;
+      color: var(--vulpquest-accent);
       width: 14px;
       height: 14px;
     }
@@ -951,7 +942,86 @@
       transform: translateX(2px);
     }
 
-    /* ===== FOOTER ===== */
+    .sidebar-item.gabarita-item {
+      background: var(--gabarita-accent-soft);
+      color: var(--text) !important;
+      font-weight: 600;
+      margin: 0 0 8px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      box-shadow: none;
+      position: relative;
+      overflow: hidden;
+      min-height: 40px;
+      border: 1px solid var(--gabarita-accent-border);
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      cursor: pointer;
+      gap: 10px;
+    }
+    .sidebar-item.gabarita-item::after { display: none; }
+    .sidebar-item.gabarita-item::before { display: none; }
+    .sidebar-item.gabarita-item:hover {
+      background: var(--gabarita-accent-hover);
+      border-color: var(--gabarita-accent);
+      transform: none;
+      box-shadow: none;
+    }
+    .sidebar-item.gabarita-item:active { transform: none; }
+    .sidebar-item.gabarita-item svg,
+    .sidebar-item.gabarita-item .sidebar-icon {
+      opacity: 1;
+      color: var(--gabarita-accent);
+      width: 18px;
+      height: 18px;
+    }
+    .gabarita-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .gabarita-title {
+      font-size: 0.865rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gabarita-title .g-badge {
+      font-size: 0.55rem;
+      background: var(--gabarita-accent);
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+    .gabarita-arrow {
+      margin-left: auto;
+      opacity: 0.5;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      flex-shrink: 0;
+      color: var(--gabarita-accent);
+      width: 14px;
+      height: 14px;
+    }
+    .sidebar-item.gabarita-item:hover .gabarita-arrow {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
     .sidebar-footer {
       border-top: 1px solid var(--border-light);
       padding: 10px;
@@ -967,7 +1037,6 @@
       min-height: 36px;
     }
 
-    /* ===== OVERLAY MOBILE ===== */
     .sidebar-overlay {
       display: none;
       position: fixed;
@@ -1286,7 +1355,7 @@
     }
 
     /* ============================================================
-       STATS GRID — COLORIDO E MODERNO
+       STATS GRID
        ============================================================ */
     .stats-grid {
       display: grid;
@@ -2374,7 +2443,7 @@
     }
 
     /* ============================================================
-       PROGRESSO DA DISCIPLINA (SEM FOGUETE)
+       PROGRESSO DA DISCIPLINA
        ============================================================ */
     .discipline-progress {
       background: var(--surface);
@@ -2506,16 +2575,1381 @@
     .dark .sidebar-icon-img {
       filter: brightness(0) saturate(100%) invert(60%) sepia(40%) saturate(2000%) hue-rotate(195deg) brightness(100%) contrast(90%);
     }
+
+    /* ============================================================
+       GABARITA+ — CONTAINER ISOLADO, MAS INTEGRADO AO VULP+ PRO
+       ============================================================ */
+    .gabarita-container {
+      --gp-roxo:#059669;
+      --gp-roxo-600:#10b981;
+      --gp-roxo-700:#047857;
+      --gp-roxo-050:#f0fdf4;
+      --gp-roxo-100:#dcfce7;
+      --gp-roxo-200:#bbf7d0;
+      --gp-verde:#059669; --gp-verde-600:#047857; --gp-verde-050:#f0fdf4; --gp-verde-100:#dcfce7;
+      --gp-ambar-600:#92400E; --gp-ambar-050:#FDF9F0; --gp-ambar-100:#FDE68A;
+      --gp-azul-600:#1E40AF; --gp-azul-050:#F3F6FC; --gp-azul-100:#DBEAFE;
+      --gp-rosa-600:#9D174D; --gp-rosa-050:#FCF5F9; --gp-rosa-100:#FCE7F3;
+      --gp-texto:#0f172a; --gp-texto-2:#334155; --gp-texto-3:#64748b; --gp-texto-4:#94a3b8;
+      --gp-fundo:#f7f8fa; --gp-fundo-2:#f1f3f7;
+      --gp-branco:#ffffff; --gp-borda:#e2e8f0; --gp-borda-forte:#cbd5e1;
+      --gp-sombra-xs:0 1px 2px rgba(15,23,42,.03);
+      --gp-sombra:0 1px 2px rgba(15,23,42,.03), 0 1px 3px rgba(15,23,42,.04);
+      --gp-sombra-md:0 4px 12px rgba(15,23,42,.05), 0 1px 3px rgba(15,23,42,.03);
+      --gp-sombra-hover:0 4px 12px rgba(15,23,42,.06);
+      --gp-sombra-modal:0 24px 60px rgba(15,23,42,.18);
+      --gp-raio-xs:4px; --gp-raio-sm:8px; --gp-raio:12px; --gp-raio-lg:16px;
+      --gp-area-max:1100px;
+      --gp-fonte:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      --gp-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+      font-family: var(--gp-fonte);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--gp-texto);
+      background: var(--gp-fundo);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100%;
+    }
+
+    .gabarita-container *,
+    .gabarita-container *::before,
+    .gabarita-container *::after { box-sizing: border-box; }
+
+    .gabarita-container h1,
+    .gabarita-container h2,
+    .gabarita-container h3,
+    .gabarita-container h4,
+    .gabarita-container p { margin: 0; }
+
+    .gabarita-container button {
+      font: inherit; color: inherit; cursor: pointer;
+      border: none; background: none; padding: 0;
+    }
+    .gabarita-container input,
+    .gabarita-container select { font: inherit; color: inherit; }
+    .gabarita-container a { color: inherit; text-decoration: none; }
+    .gabarita-container :focus-visible {
+      outline: 2px solid var(--gp-roxo);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+    .gabarita-container svg { display: block; flex-shrink: 0; }
+
+    .gabarita-container .gp-app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .gabarita-container .gp-topbar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 24px;
+      min-height: 60px;
+      background: var(--gp-branco);
+      border-bottom: 1px solid var(--gp-borda);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .gabarita-container .gp-topbar-esq {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .gabarita-container .gp-brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--gp-roxo-050);
+      color: var(--gp-roxo-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: -.5px;
+      flex-shrink: 0;
+      border: 1px solid var(--gp-roxo-100);
+    }
+
+    .gabarita-container .gp-topbar-titulo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gp-texto);
+      letter-spacing: -.2px;
+      white-space: nowrap;
+    }
+
+    .gabarita-container .gp-topbar-dir {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .gabarita-container .gp-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 4px;
+    }
+    .gabarita-container .gp-nav::-webkit-scrollbar { display: none; }
+    .gabarita-container .gp-nav-label { display: none; }
+
+    .gabarita-container .gp-nav-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gp-texto-2);
+      transition: background .15s ease, color .15s ease;
+      position: relative;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .gabarita-container .gp-nav-item svg {
+      width: 15px; height: 15px;
+      stroke-width: 1.9;
+      opacity: .75;
+    }
+
+    .gabarita-container .gp-nav-item:hover {
+      background: var(--gp-fundo-2);
+      color: var(--gp-texto);
+    }
+    .gabarita-container .gp-nav-item:hover svg { opacity: 1; }
+
+    .gabarita-container .gp-nav-item.gp-ativo {
+      background: var(--gp-roxo-050);
+      color: var(--gp-roxo-700);
+    }
+    .gabarita-container .gp-nav-item.gp-ativo svg {
+      stroke: var(--gp-roxo);
+      opacity: 1;
+    }
+    .gabarita-container .gp-nav-item.gp-ativo::before { display: none; }
+
+    .gabarita-container .gp-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .gabarita-container .gp-area {
+      flex: 1;
+      width: 100%;
+      max-width: var(--gp-area-max);
+      margin: 0 auto;
+      padding: 28px 28px 80px;
+    }
+
+    .gabarita-container .gp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1;
+      border: 1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .gabarita-container .gp-btn-primario {
+      background: var(--gp-roxo);
+      color: #fff;
+      box-shadow: 0 1px 2px rgba(5,150,105,.15);
+    }
+    .gabarita-container .gp-btn-primario:hover {
+      background: var(--gp-roxo-700);
+      box-shadow: 0 3px 10px rgba(5,150,105,.18);
+    }
+
+    .gabarita-container .gp-btn-secundario {
+      background: var(--gp-branco);
+      border-color: var(--gp-borda);
+      color: var(--gp-texto-2);
+      box-shadow: var(--gp-sombra-xs);
+    }
+    .gabarita-container .gp-btn-secundario:hover {
+      border-color: var(--gp-borda-forte);
+      color: var(--gp-texto);
+      background: #FCFCFD;
+    }
+
+    .gabarita-container .gp-btn-sm {
+      padding: 7px 12px;
+      font-size: 12.5px;
+      border-radius: 8px;
+    }
+    .gabarita-container .gp-btn-bloco { width: 100%; }
+
+    .gabarita-container .gp-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--gp-roxo-700);
+      background: var(--gp-roxo-050);
+      border: 1px solid var(--gp-roxo-100);
+      padding: 3px 8px;
+      border-radius: 999px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    .gabarita-container .gp-tag-verde {
+      color: var(--gp-verde-600);
+      background: var(--gp-verde-050);
+      border-color: var(--gp-verde-100);
+    }
+
+    .gabarita-container .gp-card {
+      background: var(--gp-branco);
+      border: 1px solid var(--gp-borda);
+      border-radius: var(--gp-raio);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--gp-sombra);
+      transition: box-shadow .18s ease, border-color .18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .gabarita-container .gp-card::after { display: none; }
+    .gabarita-container .gp-card:hover {
+      box-shadow: var(--gp-sombra-hover);
+      border-color: var(--gp-borda-forte);
+    }
+
+    .gabarita-container .gp-card-titulo {
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--gp-texto);
+      letter-spacing: -.2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gabarita-container .gp-card-assunto {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--gp-roxo);
+      letter-spacing: .005em;
+    }
+    .gabarita-container .gp-card-trecho {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--gp-texto-3);
+      margin-top: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gabarita-container .gp-card-rodape {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--gp-borda);
+      flex-wrap: wrap;
+    }
+    .gabarita-container .gp-card-data {
+      font-size: 11.5px;
+      color: var(--gp-texto-4);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gabarita-container .gp-card-data::before {
+      content: "";
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gp-borda-forte);
+    }
+    .gabarita-container .gp-card-mentoria { border-top: 2px solid var(--gp-verde); }
+    .gabarita-container .gp-card-mentoria .gp-card-assunto { color: var(--gp-verde-600); }
+
+    .gabarita-container .gp-grid-conteudos {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .gabarita-container .gp-dash-hero { margin-bottom: 28px; }
+    .gabarita-container .gp-dash-hero-saudacao {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gp-roxo);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .gabarita-container .gp-dash-hero-titulo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.7px;
+      color: var(--gp-texto);
+      line-height: 1.15;
+    }
+    .gabarita-container .gp-dash-hero-sub {
+      font-size: 14.5px;
+      color: var(--gp-texto-3);
+      margin-top: 10px;
+      max-width: 62ch;
+      line-height: 1.6;
+    }
+    .gabarita-container .gp-dash-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      margin-bottom: 32px;
+    }
+    .gabarita-container .gp-stat {
+      background: var(--gp-branco);
+      border: 1px solid var(--gp-borda);
+      border-radius: var(--gp-raio);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--gp-sombra);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .18s ease, border-color .18s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .gabarita-container .gp-stat:hover {
+      box-shadow: var(--gp-sombra-hover);
+      border-color: var(--gp-borda-forte);
+    }
+    .gabarita-container .gp-stat-rotulo {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gp-texto-3);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .gabarita-container .gp-stat-rotulo svg {
+      width: 14px; height: 14px;
+      stroke-width: 2;
+      color: var(--gp-roxo);
+      opacity: .75;
+    }
+    .gabarita-container .gp-stat-linha {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 2px;
+    }
+    .gabarita-container .gp-stat-valor {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      color: var(--gp-texto);
+      line-height: 1;
+    }
+    .gabarita-container .gp-stat-sufixo {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gp-texto-3);
+    }
+    .gabarita-container .gp-stat-cta {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gp-roxo);
+      margin-top: auto;
+      padding-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap .18s ease;
+    }
+    .gabarita-container .gp-stat:hover .gp-stat-cta { gap: 8px; }
+    .gabarita-container .gp-stat-erro {
+      font-size: 12.5px;
+      color: #B42318;
+      font-weight: 600;
+    }
+    .gabarita-container .gp-stat-sk {
+      width: 80px; height: 32px;
+      border-radius: 8px;
+      display: block;
+    }
+    .gabarita-container .gp-stat-principal {
+      background: var(--gp-branco);
+      border-color: var(--gp-roxo-100);
+    }
+    .gabarita-container .gp-stat-principal .gp-stat-rotulo { color: var(--gp-roxo-700); }
+    .gabarita-container .gp-stat-principal .gp-stat-rotulo svg { color: var(--gp-roxo); opacity: .9; }
+    .gabarita-container .gp-stat-principal .gp-stat-valor {
+      color: var(--gp-roxo-700);
+      font-size: 36px;
+    }
+    .gabarita-container .gp-stat-principal .gp-stat-sufixo {
+      color: var(--gp-roxo-700);
+      opacity: .75;
+    }
+    .gabarita-container .gp-stat-principal .gp-stat-cta { color: var(--gp-roxo-700); }
+    .gabarita-container .gp-stat-principal:hover { border-color: var(--gp-roxo-200); }
+    .gabarita-container .gp-stat-principal::before { display: none; }
+
+    .gabarita-container .gp-pagina {
+      animation: gp-surgir .24s cubic-bezier(.22,.61,.36,1);
+    }
+    @keyframes gp-surgir {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+    .gabarita-container .gp-pagina-cabecalho {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--gp-borda);
+    }
+    .gabarita-container .gp-pagina-titulo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+      color: var(--gp-texto);
+      line-height: 1.2;
+    }
+    .gabarita-container .gp-pagina-sub {
+      font-size: 14px;
+      color: var(--gp-texto-3);
+      margin-top: 6px;
+      max-width: 62ch;
+      line-height: 1.6;
+    }
+    .gabarita-container .gp-secao-cabecalho {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 0 0 16px;
+      flex-wrap: wrap;
+    }
+    .gabarita-container .gp-secao-titulo {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.25px;
+      color: var(--gp-texto);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gabarita-container .gp-secao-titulo::before {
+      content: "";
+      width: 3px; height: 16px;
+      border-radius: 3px;
+      background: var(--gp-roxo);
+    }
+    .gabarita-container .gp-secao-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gp-roxo);
+      transition: color .15s ease;
+    }
+    .gabarita-container .gp-secao-link:hover {
+      color: var(--gp-roxo-700);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .gabarita-container .gp-busca {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .gabarita-container .gp-busca svg {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 17px; height: 17px;
+      color: var(--gp-texto-4);
+      pointer-events: none;
+      stroke-width: 2;
+    }
+    .gabarita-container .gp-busca input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid var(--gp-borda);
+      border-radius: 10px;
+      background: var(--gp-branco);
+      font-size: 14.5px;
+      color: var(--gp-texto);
+      transition: border-color .15s ease, box-shadow .15s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      box-shadow: var(--gp-sombra-xs);
+    }
+    .gabarita-container .gp-busca input::placeholder { color: var(--gp-texto-4); }
+    .gabarita-container .gp-busca input:focus {
+      outline: none;
+      border-color: var(--gp-roxo);
+      box-shadow: 0 0 0 3px rgba(5,150,105,.10);
+    }
+    .gabarita-container .gp-busca input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+    .gabarita-container .gp-filtros {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .gabarita-container .gp-filtros select {
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 9px 32px 9px 13px;
+      border: 1px solid var(--gp-borda);
+      border-radius: 9px;
+      background-color: var(--gp-branco);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gp-texto-2);
+      cursor: pointer;
+      max-width: 100%;
+      box-shadow: var(--gp-sombra-xs);
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .gabarita-container .gp-filtros select:hover { border-color: var(--gp-borda-forte); }
+    .gabarita-container .gp-filtros select:focus {
+      outline: none;
+      border-color: var(--gp-roxo);
+      box-shadow: 0 0 0 3px rgba(5,150,105,.10);
+    }
+    .gabarita-container .gp-filtros select:disabled { opacity: .55; cursor: not-allowed; }
+
+    .gabarita-container .gp-contagem {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gp-texto-3);
+      margin-bottom: 16px;
+    }
+    .gabarita-container .gp-contagem strong {
+      color: var(--gp-texto);
+      font-weight: 800;
+    }
+
+    .gabarita-container .gp-grid-disciplinas {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .gabarita-container .gp-disc-card {
+      background: var(--gp-branco);
+      border: 1px solid var(--gp-borda);
+      border-radius: var(--gp-raio);
+      padding: 20px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: var(--gp-sombra);
+      text-align: left;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .18s ease, border-color .18s ease;
+    }
+    .gabarita-container .gp-disc-card::before { display: none; }
+    .gabarita-container .gp-disc-card:hover {
+      box-shadow: var(--gp-sombra-hover);
+      border-color: var(--gp-borda-forte);
+    }
+    .gabarita-container .gp-disc-card:focus-visible {
+      outline: 2px solid var(--gp-roxo);
+      outline-offset: 2px;
+    }
+    .gabarita-container .gp-disc-nome {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -.2px;
+      color: var(--gp-texto);
+    }
+    .gabarita-container .gp-disc-desc {
+      font-size: 12.5px;
+      color: var(--gp-texto-3);
+      line-height: 1.55;
+      margin-top: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gabarita-container .gp-disc-numero {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      color: var(--gp-roxo);
+      line-height: 1;
+      margin-top: 14px;
+    }
+    .gabarita-container .gp-disc-numero small {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--gp-texto-3);
+      letter-spacing: 0;
+      margin-left: 6px;
+    }
+    .gabarita-container .gp-disc-rodape {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gp-roxo);
+      border-top: 1px solid var(--gp-borda);
+    }
+    .gabarita-container .gp-disc-rodape svg {
+      width: 14px; height: 14px;
+      transition: transform .18s ease;
+    }
+    .gabarita-container .gp-disc-card:hover .gp-disc-rodape svg { transform: translateX(3px); }
+
+    .gabarita-container .gp-mentoria-hero {
+      background: var(--gp-branco);
+      border: 1px solid var(--gp-borda);
+      border-radius: var(--gp-raio-lg);
+      padding: 24px 26px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gabarita-container .gp-mentoria-hero::before { display: none; }
+    .gabarita-container .gp-mentoria-hero .gp-pagina-titulo {
+      color: var(--gp-texto);
+      position: relative;
+    }
+    .gabarita-container .gp-mentoria-hero .gp-pagina-sub {
+      color: var(--gp-texto-3);
+      position: relative;
+    }
+
+    .gabarita-container .gp-leitor {
+      position: fixed;
+      inset: 0;
+      z-index: 10002;
+      background: var(--gp-branco);
+      display: flex;
+      flex-direction: column;
+      animation: gp-abrirLeitor .22s cubic-bezier(.22,.61,.36,1);
+    }
+    .gabarita-container .gp-leitor[hidden] { display: none; }
+
+    @keyframes gp-abrirLeitor {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .gabarita-container .gp-leitor-progresso {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(5,150,105,.06);
+      z-index: 3;
+    }
+    .gabarita-container .gp-leitor-progresso span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--gp-roxo);
+      transition: width .1s linear, background .3s ease;
+    }
+    .gabarita-container .gp-leitor-progresso.gp-completo span { background: var(--gp-verde); }
+
+    .gabarita-container .gp-leitor-topo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 22px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gp-borda);
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+    .gabarita-container .gp-leitor-acoes {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .gabarita-container .gp-btn-icone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      padding: 0 11px;
+      border-radius: 9px;
+      border: 1px solid var(--gp-borda);
+      background: var(--gp-branco);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gp-texto-2);
+      transition: border-color .15s ease, color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .gabarita-container .gp-btn-icone:hover {
+      border-color: var(--gp-borda-forte);
+      color: var(--gp-texto);
+      background: #FCFCFD;
+      box-shadow: var(--gp-sombra-xs);
+    }
+    .gabarita-container .gp-btn-icone[aria-pressed="true"] {
+      background: var(--gp-roxo-050);
+      border-color: var(--gp-roxo-200);
+      color: var(--gp-roxo-700);
+    }
+    .gabarita-container .gp-btn-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--gp-borda);
+      background: var(--gp-branco);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gp-texto-2);
+      transition: border-color .15s ease, color .15s ease, box-shadow .15s ease;
+    }
+    .gabarita-container .gp-btn-voltar:hover {
+      border-color: var(--gp-borda-forte);
+      color: var(--gp-texto);
+      box-shadow: var(--gp-sombra-xs);
+    }
+    .gabarita-container .gp-btn-voltar svg {
+      width: 16px; height: 16px;
+      stroke-width: 2.2;
+    }
+
+    .gabarita-container .gp-leitor-scroll {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 44px 24px 140px;
+    }
+
+    .gabarita-container .gp-leitor-artigo {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--gp-texto);
+    }
+
+    .gabarita-container .gp-leitor-cabecalho {
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--gp-borda);
+    }
+    .gabarita-container .gp-leitor-disciplina { margin-bottom: 14px; }
+    .gabarita-container .gp-leitor-titulo {
+      font-size: 1.9em;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.7px;
+      color: var(--gp-texto);
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+    .gabarita-container .gp-leitor-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+      color: var(--gp-texto-3);
+      font-weight: 500;
+    }
+    .gabarita-container .gp-leitor-meta .gp-ponto { color: var(--gp-texto-4); }
+    .gabarita-container .gp-leitor-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gabarita-container .gp-leitor-meta-item svg {
+      width: 13px; height: 13px;
+      stroke-width: 2;
+      opacity: .65;
+    }
+
+    /* ============ CONTEÚDO DO LEITOR — PARÁGRAFOS COLORIDOS DISCRETOS ============ */
+    .gabarita-container .gp-conteudo {
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    /* Bloco base (parágrafo comum) — fundo branco com borda suave */
+    .gabarita-container .gp-conteudo .gp-bloco {
+      margin: 0 0 12px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid #eef2f6;
+      line-height: 1.78;
+      color: var(--gp-texto-2);
+      font-size: 1em;
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    /* Variações de tinta — verde, menta e lima em tons bem suaves */
+    .gabarita-container .gp-conteudo .gp-bloco-t1 {
+      background: #f1fbf5;
+      border-color: #dff3e6;
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-t2 {
+      background: #eefaf7;
+      border-color: #d5efe6;
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-t3 {
+      background: #fafbf0;
+      border-color: #eef2d8;
+    }
+
+    .gabarita-container .gp-conteudo .gp-bloco:last-child { margin-bottom: 0; }
+
+    /* Blocos especiais (Atenção, Definição, Exemplo, Observação) */
+    .gabarita-container .gp-conteudo .gp-bloco-especial {
+      margin: 0 0 18px;
+      padding: 14px 18px 14px 20px;
+      border-radius: 0 10px 10px 0;
+      border-left: 3px solid var(--gp-roxo-600);
+      background: var(--gp-roxo-050);
+      position: relative;
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-especial p {
+      margin: 0;
+      line-height: 1.75;
+      color: var(--gp-texto-2);
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-especial p + p { margin-top: 10px; }
+    .gabarita-container .gp-conteudo .gp-bloco-especial::before {
+      content: attr(data-rotulo);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--gp-roxo-700);
+      margin-bottom: 8px;
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-atencao {
+      border-left-color: var(--gp-ambar-600);
+      background: var(--gp-ambar-050);
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-atencao::before { color: var(--gp-ambar-600); }
+    .gabarita-container .gp-conteudo .gp-bloco-definicao {
+      border-left-color: var(--gp-azul-600);
+      background: var(--gp-azul-050);
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-definicao::before { color: var(--gp-azul-600); }
+    .gabarita-container .gp-conteudo .gp-bloco-exemplo {
+      border-left-color: var(--gp-verde-600);
+      background: var(--gp-verde-050);
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-exemplo::before { color: var(--gp-verde-600); }
+    .gabarita-container .gp-conteudo .gp-bloco-observacao {
+      border-left-color: var(--gp-rosa-600);
+      background: var(--gp-rosa-050);
+    }
+    .gabarita-container .gp-conteudo .gp-bloco-observacao::before { color: var(--gp-rosa-600); }
+
+    .gabarita-container .gp-conteudo-titulo {
+      position: relative;
+      font-weight: 800;
+      color: var(--gp-texto);
+      line-height: 1.35;
+      margin: 34px 0 14px;
+      letter-spacing: -.3px;
+    }
+    .gabarita-container .gp-conteudo-titulo:first-child { margin-top: 0; }
+    .gabarita-container h2.gp-conteudo-titulo {
+      font-size: 1.5em;
+      letter-spacing: -.5px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gp-borda);
+    }
+    .gabarita-container h2.gp-conteudo-titulo::before {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -1px;
+      width: 48px; height: 2px;
+      background: var(--gp-roxo);
+      border-radius: 2px;
+    }
+    .gabarita-container h3.gp-conteudo-titulo {
+      font-size: 1.22em;
+      color: var(--gp-roxo-700);
+      padding-left: 14px;
+    }
+    .gabarita-container h3.gp-conteudo-titulo::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .14em; bottom: .14em;
+      width: 3px;
+      border-radius: 3px;
+      background: var(--gp-roxo-600);
+    }
+    .gabarita-container h4.gp-conteudo-titulo {
+      font-size: 1.08em;
+      color: var(--gp-texto);
+      padding-left: 12px;
+    }
+    .gabarita-container h4.gp-conteudo-titulo::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .18em; bottom: .18em;
+      width: 3px;
+      border-radius: 3px;
+      background: var(--gp-verde);
+    }
+    .gabarita-container h5.gp-conteudo-titulo,
+    .gabarita-container h6.gp-conteudo-titulo {
+      font-size: .9em;
+      color: var(--gp-texto-2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .gabarita-container h5.gp-conteudo-titulo::before,
+    .gabarita-container h6.gp-conteudo-titulo::before { display: none; }
+
+    .gabarita-container .gp-conteudo-lista {
+      margin: 0 0 18px;
+      padding-left: 1.5em;
+    }
+    .gabarita-container .gp-conteudo-lista li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+      line-height: 1.75;
+      color: var(--gp-texto-2);
+    }
+    .gabarita-container .gp-conteudo-lista li::marker {
+      color: var(--gp-roxo);
+      font-weight: 700;
+    }
+    .gabarita-container .gp-conteudo-lista li:last-child { margin-bottom: 0; }
+    .gabarita-container ol.gp-conteudo-lista li::marker {
+      color: var(--gp-roxo);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .gabarita-container .gp-conteudo-citacao {
+      margin: 0 0 18px;
+      padding: 14px 20px;
+      border-left: 3px solid var(--gp-roxo-600);
+      background: var(--gp-roxo-050);
+      border-radius: 0 10px 10px 0;
+      color: var(--gp-texto-2);
+      font-style: italic;
+      line-height: 1.75;
+      position: relative;
+    }
+    .gabarita-container .gp-conteudo-citacao::before {
+      content: "“";
+      position: absolute;
+      top: 4px; left: 10px;
+      font-size: 2.2em;
+      color: var(--gp-roxo-200);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .gabarita-container .gp-conteudo-hr {
+      border: none;
+      border-top: 1px solid var(--gp-borda);
+      margin: 32px 0;
+      position: relative;
+    }
+    .gabarita-container .gp-conteudo-hr::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: -3px;
+      transform: translateX(-50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gp-roxo-200);
+    }
+
+    .gabarita-container .gp-conteudo code {
+      font-family: var(--gp-mono);
+      font-size: .88em;
+      background: var(--gp-fundo-2);
+      color: var(--gp-texto);
+      padding: 2px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--gp-borda);
+    }
+    .gabarita-container .gp-conteudo a {
+      color: var(--gp-roxo);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
+    .gabarita-container .gp-conteudo a:hover { color: var(--gp-roxo-700); }
+    .gabarita-container .gp-conteudo strong { font-weight: 800; color: var(--gp-texto); }
+    .gabarita-container .gp-conteudo em { font-style: italic; color: var(--gp-texto-2); }
+    .gabarita-container .gp-conteudo mark {
+      background: var(--gp-ambar-100);
+      color: var(--gp-texto);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    /* ============ MODO DE LEITURA — mantém as cores sutis, mas mais clean ============ */
+    .gabarita-container .gp-leitor.gp-modo-leitura { background: var(--gp-branco); }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-leitor-artigo {
+      max-width: 640px;
+      line-height: 2;
+    }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-leitor-topo { background: rgba(255,255,255,.94); }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco {
+      border-color: transparent;
+      padding: 12px 4px;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t1 {
+      background: rgba(5, 150, 105, 0.045);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t2 {
+      background: rgba(16, 185, 129, 0.045);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+    .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t3 {
+      background: rgba(132, 204, 22, 0.05);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+
+    /* ============ SKELETON GABARITA ============ */
+    .gabarita-container .gp-sk {
+      background: linear-gradient(90deg, #EEF0F3 25%, #F7F8FA 37%, #EEF0F3 63%);
+      background-size: 400% 100%;
+      animation: gp-sk 1.4s ease infinite;
+      border-radius: 7px;
+      display: block;
+    }
+    @keyframes gp-sk {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0 50%; }
+    }
+    .gabarita-container .gp-card-sk {
+      pointer-events: none;
+    }
+    .gabarita-container .gp-card-sk:hover {
+      box-shadow: var(--gp-sombra);
+      border-color: var(--gp-borda);
+    }
+    .gabarita-container .gp-sk-tag { width: 80px; height: 18px; border-radius: 999px; }
+    .gabarita-container .gp-sk-titulo { width: 78%; height: 17px; }
+    .gabarita-container .gp-sk-linha { width: 100%; height: 12px; }
+    .gabarita-container .gp-sk-linha-2 { width: 60%; height: 12px; }
+    .gabarita-container .gp-sk-rodape { width: 110px; height: 13px; }
+
+    /* ============ ESTADOS GABARITA ============ */
+    .gabarita-container .gp-estado {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+      padding: 52px 24px;
+      background: var(--gp-branco);
+      border: 1px dashed var(--gp-borda-forte);
+      border-radius: var(--gp-raio);
+      color: var(--gp-texto-3);
+    }
+    .gabarita-container .gp-estado-icone {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gp-roxo-050);
+      color: var(--gp-roxo);
+      margin-bottom: 2px;
+    }
+    .gabarita-container .gp-estado-icone svg {
+      width: 22px; height: 22px;
+      stroke-width: 1.9;
+    }
+    .gabarita-container .gp-estado-titulo {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gp-texto);
+    }
+    .gabarita-container .gp-estado-texto {
+      font-size: 13.5px;
+      color: var(--gp-texto-3);
+      max-width: 44ch;
+      line-height: 1.6;
+    }
+    .gabarita-container .gp-estado.gp-erro .gp-estado-icone {
+      background: #FEF3F2;
+      color: #B42318;
+    }
+    .gabarita-container .gp-estado .gp-btn { margin-top: 6px; }
+
+    /* ============ TOAST GABARITA ============ */
+    .gabarita-container .gp-toast-area {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      z-index: 10003;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      pointer-events: none;
+      width: max-content;
+      max-width: calc(100vw - 32px);
+    }
+    .gabarita-container .gp-toast {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: #0F172A;
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(15,23,42,.24);
+      animation: gp-toastIn .22s cubic-bezier(.22,.61,.36,1);
+    }
+    .gabarita-container .gp-toast svg {
+      width: 16px; height: 16px;
+      stroke-width: 2.4;
+    }
+    .gabarita-container .gp-toast.gp-sucesso svg { stroke: #34D399; }
+    .gabarita-container .gp-toast.gp-erro svg { stroke: #FCA5A5; }
+    @keyframes gp-toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .gabarita-container .gp-toast.gp-saindo {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    /* ============ RESPONSIVO GABARITA ============ */
+    @media (max-width: 900px) {
+      .gabarita-container .gp-area { padding: 22px 18px 48px; }
+      .gabarita-container .gp-grid-conteudos,
+      .gabarita-container .gp-grid-disciplinas {
+        grid-template-columns: 1fr;
+      }
+      .gabarita-container .gp-dash-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .gabarita-container .gp-dash-hero-titulo { font-size: 25px; }
+      .gabarita-container .gp-dash-hero { margin-bottom: 22px; }
+      .gabarita-container .gp-stat { padding: 16px 18px; }
+      .gabarita-container .gp-stat-valor { font-size: 26px; }
+      .gabarita-container .gp-stat-principal .gp-stat-valor { font-size: 30px; }
+      .gabarita-container .gp-pagina-titulo { font-size: 22px; }
+      .gabarita-container .gp-pagina-sub { font-size: 13.5px; }
+      .gabarita-container .gp-pagina-cabecalho { margin-bottom: 20px; padding-bottom: 16px; }
+      .gabarita-container .gp-leitor-scroll { padding: 28px 16px 120px; }
+      .gabarita-container .gp-leitor-artigo { font-size: 16.5px; line-height: 1.75; }
+      .gabarita-container .gp-leitor-titulo { font-size: 1.55em; }
+      .gabarita-container .gp-leitor-topo { padding: 10px 14px; gap: 8px; }
+      .gabarita-container .gp-btn-voltar { padding: 8px 12px; font-size: 12.5px; }
+      .gabarita-container .gp-btn-icone { min-width: 36px; height: 36px; font-size: 12.5px; padding: 0 10px; }
+      .gabarita-container .gp-mentoria-hero { padding: 20px 18px; }
+      .gabarita-container .gp-topbar {
+        padding: 10px 14px;
+        gap: 10px;
+      }
+      .gabarita-container .gp-nav {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: flex-start;
+      }
+      .gabarita-container .gp-topbar-dir { margin-left: auto; }
+      .gabarita-container .gp-conteudo .gp-bloco { padding: 12px 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .gabarita-container .gp-filtros { flex-direction: column; }
+      .gabarita-container .gp-filtros select { width: 100%; }
+      .gabarita-container .gp-card { padding: 16px 16px 16px; }
+      .gabarita-container .gp-disc-card { padding: 18px 16px; }
+      .gabarita-container .gp-leitor-titulo { font-size: 1.4em; }
+      .gabarita-container .gp-dash-hero-titulo { font-size: 22px; }
+      .gabarita-container .gp-area { padding: 18px 14px 40px; }
+      .gabarita-container .gp-nav-item { padding: 6px 10px; font-size: 12px; }
+      .gabarita-container .gp-nav-item svg { width: 14px; height: 14px; }
+      .gabarita-container .gp-conteudo .gp-bloco { padding: 11px 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gabarita-container *,
+      .gabarita-container *::before,
+      .gabarita-container *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .gabarita-container .gp-leitor-scroll::-webkit-scrollbar { width: 10px; }
+      .gabarita-container .gp-leitor-scroll::-webkit-scrollbar-thumb {
+        background: #DDE0E5;
+        border-radius: 8px;
+        border: 3px solid #FFFFFF;
+      }
+      .gabarita-container .gp-leitor-scroll::-webkit-scrollbar-thumb:hover { background: #C8CCD3; }
+    }
+
+    .page-gabarita { padding: 0; }
+    .page-gabarita .gabarita-container {
+      min-height: calc(100vh - var(--navbar-height));
+      background: var(--bg);
+    }
+
+    /* Modo escuro para o container do Gabarita+ */
+    .dark .gabarita-container {
+      --gp-roxo:#34d399;
+      --gp-roxo-600:#10b981;
+      --gp-roxo-700:#6ee7b7;
+      --gp-roxo-050:#0f2a1f;
+      --gp-roxo-100:#1a3d2e;
+      --gp-roxo-200:#2a5a44;
+      --gp-verde:#34d399; --gp-verde-600:#10b981; --gp-verde-050:#0f2a1f; --gp-verde-100:#1a3d2e;
+      --gp-ambar-600:#fbbf24; --gp-ambar-050:#2a1f0f; --gp-ambar-100:#3d2e15;
+      --gp-azul-600:#60a5fa; --gp-azul-050:#0f1a2e; --gp-azul-100:#1a2a40;
+      --gp-rosa-600:#f472b6; --gp-rosa-050:#2a0f1a; --gp-rosa-100:#3d1a2e;
+      --gp-texto:#e8edf2;
+      --gp-texto-2:#b0c4d9;
+      --gp-texto-3:#7a8fa3;
+      --gp-texto-4:#5a6f82;
+      --gp-fundo:#0b121f;
+      --gp-fundo-2:#1f2c38;
+      --gp-branco:#17212b;
+      --gp-borda:#2a3a4a;
+      --gp-borda-forte:#3a4a5a;
+    }
+
+    .dark .gabarita-container .gp-leitor { background: #17212b; }
+    .dark .gabarita-container .gp-leitor-topo {
+      background: rgba(23,33,43,.94);
+      border-bottom-color: #2a3a4a;
+    }
+    .dark .gabarita-container .gp-leitor-cabecalho { border-bottom-color: #2a3a4a; }
+
+    /* Blocos coloridos no modo escuro — tons sutis de verde/menta/lima */
+    .dark .gabarita-container .gp-conteudo .gp-bloco {
+      background: #1a2430;
+      border-color: #2a3a4a;
+    }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-t1 {
+      background: #142a20;
+      border-color: #1e3d2e;
+    }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-t2 {
+      background: #122a26;
+      border-color: #1c3d38;
+    }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-t3 {
+      background: #23291a;
+      border-color: #333b25;
+    }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-especial { background: #1e1a2e; }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-atencao { background: #2a1f0f; }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-definicao { background: #0f1a2e; }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-exemplo { background: #0f2a1f; }
+    .dark .gabarita-container .gp-conteudo .gp-bloco-observacao { background: #2a0f1a; }
+
+    .dark .gabarita-container .gp-leitor.gp-modo-leitura { background: #17212b; }
+    .dark .gabarita-container .gp-leitor.gp-modo-leitura .gp-leitor-topo {
+      background: rgba(23,33,43,.94);
+    }
+    .dark .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t1 {
+      background: rgba(52, 211, 153, 0.08);
+    }
+    .dark .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t2 {
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .dark .gabarita-container .gp-leitor.gp-modo-leitura .gp-conteudo .gp-bloco-t3 {
+      background: rgba(163, 230, 53, 0.07);
+    }
+    .dark .gabarita-container .gp-sk {
+      background: linear-gradient(90deg, #23303c 25%, #1c2833 37%, #23303c 63%);
+      background-size: 400% 100%;
+    }
   </style>
 </head>
 <body>
 
-  <!-- ===== PAGE TRANSITION OVERLAY ===== -->
   <div class="page-transition-overlay" id="pageTransitionOverlay">
     <div class="spinner"></div>
   </div>
 
-  <!-- ===== LOGIN ===== -->
   <div id="loginPage" class="login-page" style="display:none;">
     <div class="login-card">
       <div class="app-logo">
@@ -2537,7 +3971,6 @@
     </div>
   </div>
 
-  <!-- ===== WELCOME ===== -->
   <div id="welcomeOverlay" class="welcome-overlay" style="display:none;">
     <div class="welcome-modal">
       <img src="https://res.cloudinary.com/dqmuoc3o0/image/upload/v1790257238/ChatGPT_Image_24_de_set._de_2026_07_13_44_dro2ao.png" alt="VULP+" class="welcome-logo" />
@@ -2561,7 +3994,6 @@
     </div>
   </div>
 
-  <!-- ===== APP ===== -->
   <div id="appContainer" style="display:none;">
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="Sidebar.close()"></div>
@@ -2600,8 +4032,6 @@
       </div>
 
       <nav class="sidebar-nav" id="sidebarNav">
-
-        <!-- ===== VULPQUEST — BOTÃO DE DESTAQUE (COMPACTO) ===== -->
         <div class="sidebar-item vulpquest-item" onclick="window.open('https://vulpquest-app-questoes.vercel.app/', '_blank', 'noopener,noreferrer')" title="Abrir VulpQuest — Sistema de Questões">
           <span class="sidebar-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2619,6 +4049,24 @@
           </svg>
         </div>
 
+        <div class="sidebar-item gabarita-item" onclick="Sidebar.navigateTo('gabarita')" title="Abrir Gabarita+ — Leitura e Estudo">
+          <span class="sidebar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v14H6.5A2.5 2.5 0 0 0 4 19.5z"/>
+              <path d="M6.5 17H19v4H6.5A2.5 2.5 0 0 1 4 18.5"/>
+              <path d="M8.5 7h6"/>
+              <path d="M8.5 10.5h4"/>
+            </svg>
+          </span>
+          <div class="gabarita-content">
+            <span class="gabarita-title">Gabarita+ <span class="g-badge">Novo</span></span>
+          </div>
+          <svg class="gabarita-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+
         <div class="sidebar-section-title">Principal</div>
         <div class="sidebar-item active" data-page="home" onclick="Sidebar.navigateTo('home')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -2626,11 +4074,6 @@
         </div>
 
         <div class="sidebar-section-title">Aprendizado</div>
-
-        <div class="sidebar-item" data-page="aprenda-aqui" onclick="Sidebar.navigateTo('aprenda-aqui')">
-          <img src="https://res.cloudinary.com/dqmuoc3o0/image/upload/v1785333893/utensilios-de-escritorio-dentro-de-uma-xicara_jd7rnu.png" alt="Aprenda Aqui" class="sidebar-icon-img" />
-          Aprenda Aqui
-        </div>
 
         <div class="sidebar-item" data-page="studymap" onclick="Sidebar.navigateTo('studymap')">
           <img src="https://res.cloudinary.com/dqmuoc3o0/image/upload/v1785337686/analise-de-dados_wxhjza.png" alt="Meu Mapa de Estudos" class="sidebar-icon-img" />
@@ -2641,7 +4084,6 @@
         <div id="sidebarDisciplines"></div>
 
         <div class="sidebar-section-title">Progresso</div>
-
       </nav>
 
       <div class="sidebar-footer">
@@ -2775,36 +4217,9 @@
         <div id="disciplineMaterials"></div>
       </div>
 
-      <div class="page" id="pageAprendaAqui">
-        <button class="back-btn" onclick="Navigation.navigateTo('home')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          Voltar para Disciplinas
-        </button>
-        <div class="breadcrumb">
-          <a href="#" onclick="Navigation.navigateTo('home'); return false;">Início</a>
-          <span class="sep">›</span>
-          <span>Aprenda Aqui</span>
+      <div class="page page-gabarita" id="pageGabarita">
+        <div class="gabarita-container" id="gabaritaContainer">
         </div>
-        <div class="section-header">
-          <h1>
-            <span class="discipline-header-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            </span>
-            Aprenda Aqui
-          </h1>
-          <p id="aprendaSubtitle">Materiais exclusivos para você aprender com qualidade.</p>
-        </div>
-        <div class="tabs" id="aprendaTabs">
-          <button class="tab-btn active" onclick="Render.switchAprendaTab('pdfs')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            PDFs
-          </button>
-          <button class="tab-btn" onclick="Render.switchAprendaTab('videos')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            Vídeos
-          </button>
-        </div>
-        <div id="aprendaMaterials"></div>
       </div>
 
       <div class="page" id="pageStudyMap">
@@ -2897,8 +4312,9 @@
 
   <script>
     // ============================================================
-    //  CONFIG
+    //  VULP+ PRO — CÓDIGO PRINCIPAL (PRESERVADO INTEGRALMENTE)
     // ============================================================
+
     const Config = {
       API_URL: 'https://script.google.com/macros/s/AKfycbxTDBiQ_PyZNZChCVNjgAN9mnXBmsZhd4uOpjUanJ6A9Rmd-qzS_r_XqNb13QOMOsmb/exec',
       CACHE_KEY: 'estude_plus_cache',
@@ -2945,9 +4361,6 @@
       PROFILE_KEY: 'estude_plus_profile',
     };
 
-    // ============================================================
-    //  STORAGE
-    // ============================================================
     const Storage = {
       get(key, def) { try { const r = localStorage.getItem(key); return r === null ? def : JSON.parse(r); } catch { return def; } },
       set(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch {} },
@@ -2973,9 +4386,6 @@
       setProfile(p) { this.set(Config.PROFILE_KEY, p); },
     };
 
-    // ============================================================
-    //  TOAST
-    // ============================================================
     const Toast = {
       show(msg, type) {
         const c = document.getElementById('toastContainer');
@@ -2997,9 +4407,6 @@
       download(m) { this.show(m, 'download'); },
     };
 
-    // ============================================================
-    //  API
-    // ============================================================
     const API = {
       async fetchMaterials() {
         try {
@@ -3014,9 +4421,6 @@
       },
     };
 
-    // ============================================================
-    //  UTILS
-    // ============================================================
     const Utils = {
       extractYouTubeID(url) {
         if (!url) return null;
@@ -3096,9 +4500,6 @@
       },
     };
 
-    // ============================================================
-    //  INDEXEDDB MANAGER
-    // ============================================================
     const IDBManager = {
       _db: null,
       DB_NAME: 'VULP_Plus_DB',
@@ -3143,9 +4544,6 @@
       async clearLogs() { const db = await this.openDB(); return new Promise((res, rej) => { const tx = db.transaction('logs', 'readwrite'); const s = tx.objectStore('logs'); s.clear(); tx.oncomplete = res; tx.onerror = () => rej(tx.error); }); },
     };
 
-    // ============================================================
-    //  LOG MANAGER
-    // ============================================================
     const LogManager = {
       async logAcesso(mat) { if (!mat) return; await IDBManager.addLog({ tipo: 'acesso', materialId: String(mat.ID), disciplina: mat.Disciplina || '', titulo: mat['Título'] || mat.Titulo || '', tipoMaterial: Utils.isVideoType(mat.Tipo) ? 'video' : 'pdf', timestamp: Date.now() }); },
       async logConclusao(mat) { if (!mat) return; await IDBManager.addLog({ tipo: 'conclusao', materialId: String(mat.ID), disciplina: mat.Disciplina || '', titulo: mat['Título'] || mat.Titulo || '', tipoMaterial: Utils.isVideoType(mat.Tipo) ? 'video' : 'pdf', timestamp: Date.now() }); },
@@ -3155,9 +4553,6 @@
       async getLogs(filters) { return IDBManager.getLogs(filters); },
     };
 
-    // ============================================================
-    //  PDF VIEWER LEGADO
-    // ============================================================
     const PDFViewer = {
       open(url, title) { Toast.info('Este visualizador foi substituído pelo Leitor PDF profissional.'); },
       close() {
@@ -3170,9 +4565,6 @@
       },
     };
 
-    // ============================================================
-    //  LEITOR DE PDF (PDF.js)
-    // ============================================================
     const PDFReader = {
       pdfDoc: null, scale: 1.0, rotation: 0, currentPage: 1, totalPages: 0,
       container: null, overlay: null, title: '', url: '', materialId: '', disciplina: '',
@@ -3428,9 +4820,6 @@
       },
     };
 
-    // ============================================================
-    //  SIDEBAR
-    // ============================================================
     const Sidebar = {
       toggle() {
         const sidebar = document.getElementById('sidebar');
@@ -3445,8 +4834,14 @@
       },
       navigateTo(page, disciplineName, tab) {
         if (window.innerWidth <= 768) this.close();
-        const map = { home: 'home', 'aprenda-aqui': 'aprenda-aqui', 'studymap': 'studymap' };
-        if (map[page]) { Navigation.navigateTo(page); this.setActiveItem(page); }
+        const map = { home: 'home', 'studymap': 'studymap', 'gabarita': 'gabarita' };
+        if (map[page]) {
+          Navigation.navigateTo(page);
+          this.setActiveItem(page);
+          if (page === 'gabarita') {
+            GabaritaPlus.init();
+          }
+        }
         else if (page === 'discipline' && disciplineName) {
           Navigation.openDiscipline(disciplineName);
           if (tab) setTimeout(() => Render.switchDisciplineTab(tab), 100);
@@ -3457,11 +4852,12 @@
         document.querySelectorAll('.sidebar-item[data-page]').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.sidebar-discipline-item').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.sidebar-subitem').forEach(el => el.classList.remove('active'));
-        const map = { home: 'home', 'aprenda-aqui': 'aprenda-aqui', 'studymap': 'studymap' };
+        const map = { home: 'home', 'studymap': 'studymap', 'gabarita': 'gabarita' };
         if (map[page]) { const el = document.querySelector('.sidebar-item[data-page="' + page + '"]'); if (el) el.classList.add('active'); }
         else if (page === 'discipline' && disciplineName) {
           const el = document.querySelector('.sidebar-discipline-item[data-discipline="' + CSS.escape(disciplineName) + '"]'); if (el) el.classList.add('active');
         }
+        document.querySelectorAll('.vulpquest-item, .gabarita-item').forEach(el => el.classList.remove('active'));
       },
       render(disciplines) {
         const container = document.getElementById('sidebarDisciplines');
@@ -3498,9 +4894,6 @@
       },
     };
 
-    // ============================================================
-    //  PERFIL
-    // ============================================================
     const Profile = {
       init() {
         this.loadProfile();
@@ -3612,9 +5005,6 @@
       },
     };
 
-    // ============================================================
-    //  RENDER
-    // ============================================================
     const Render = {
       currentDiscipline: null,
       currentDisciplineTab: 'pdfs',
@@ -3730,34 +5120,6 @@
         container.innerHTML = materials.map(mat => this.createMaterialCard(mat)).join('');
       },
 
-      renderAprendaAqui() {
-        const all = App.allMaterials || [];
-        const filtrados = all.filter(m => (m.Disciplina || '').toLowerCase().includes('aprenda aqui'));
-        const pdfs = filtrados.filter(m => !Utils.isVideoType(m.Tipo));
-        const videos = filtrados.filter(m => Utils.isVideoType(m.Tipo));
-        const container = document.getElementById('aprendaMaterials');
-        const subtitle = document.getElementById('aprendaSubtitle');
-        if (filtrados.length === 0) {
-          container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Nenhum material encontrado para "Aprenda Aqui"</h3><p>Verifique se há conteúdos com essa disciplina na planilha.</p></div>';
-          if (subtitle) subtitle.textContent = 'Nenhum material disponível no momento.';
-          return;
-        }
-        if (subtitle) subtitle.textContent = pdfs.length + ' PDFs · ' + videos.length + ' Vídeos · ' + filtrados.length + ' materiais no total';
-        const materials = this.aprendaTab === 'pdfs' ? pdfs : videos;
-        if (materials.length === 0) {
-          container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Nenhum ' + (this.aprendaTab === 'pdfs' ? 'PDF' : 'vídeo') + ' em "Aprenda Aqui"</h3></div>';
-          return;
-        }
-        container.innerHTML = materials.map(mat => this.createMaterialCard(mat)).join('');
-        document.querySelectorAll('#aprendaTabs .tab-btn').forEach(btn => { btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(this.aprendaTab)); });
-      },
-
-      switchAprendaTab(tab) {
-        this.aprendaTab = tab;
-        this.renderAprendaAqui();
-        document.querySelectorAll('.sidebar-item[data-page="aprenda-aqui"]').forEach(el => el.classList.add('active'));
-      },
-
       createMaterialCard(mat) {
         const isVideo = Utils.isVideoType(mat.Tipo);
         if (isVideo) return this.createVideoCardPremium(mat);
@@ -3857,9 +5219,6 @@
       },
     };
 
-    // ============================================================
-    //  NAVIGATION
-    // ============================================================
     const Navigation = {
       currentPage: 'home',
       _transitionTimeout: null,
@@ -3878,7 +5237,7 @@
       _doNavigate(page) {
         this.currentPage = page;
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        const map = { home: 'pageHome', discipline: 'pageDiscipline', 'aprenda-aqui': 'pageAprendaAqui', 'studymap': 'pageStudyMap' };
+        const map = { home: 'pageHome', discipline: 'pageDiscipline', 'gabarita': 'pageGabarita', 'studymap': 'pageStudyMap' };
         const id = map[page]; if (id) document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
         const navMap = { home: 'navHome', studymap: 'navStudyMap' };
@@ -3886,17 +5245,17 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.refreshCurrentPage();
         const searchInput = document.getElementById('searchInput');
-        if (searchInput && page !== 'home' && page !== 'aprenda-aqui') searchInput.value = '';
+        if (searchInput && page !== 'home') searchInput.value = '';
         if (page === 'home' && searchInput && searchInput.value === '' && App.allMaterials && App.allMaterials.length > 0) {
           const disciplines = Utils.groupByDiscipline(App.allMaterials);
           Render.renderHome(disciplines);
         }
-        if (page === 'aprenda-aqui') Render.renderAprendaAqui();
         if (page === 'studymap') StudyMap.renderSummary();
+        if (page === 'gabarita') GabaritaPlus.init();
         Sidebar.setActiveItem(page);
         const bc = document.querySelector('.breadcrumb span:last-child');
         if (bc) {
-          const titles = { home: 'Início', 'aprenda-aqui': 'Aprenda Aqui', 'studymap': 'Meu Mapa de Estudos' };
+          const titles = { home: 'Início', 'gabarita': 'Gabarita+', 'studymap': 'Meu Mapa de Estudos' };
           bc.textContent = titles[page] || page;
         }
       },
@@ -3918,16 +5277,13 @@
           case 'home': Render.renderHome(disciplines); break;
           case 'discipline':
             if (Render.currentDiscipline) { Render.renderDisciplineProgress(); Render.renderDisciplineMaterials(); } break;
-          case 'aprenda-aqui': Render.renderAprendaAqui(); break;
           case 'studymap': StudyMap.renderSummary(); break;
+          case 'gabarita': break;
         }
         Sidebar.render(disciplines);
       },
     };
 
-    // ============================================================
-    //  SEARCH
-    // ============================================================
     const Search = {
       search(term, allMaterials) {
         if (!term || term.trim() === '') return Utils.groupByDiscipline(allMaterials);
@@ -3956,9 +5312,6 @@
       },
     };
 
-    // ============================================================
-    //  DOWNLOAD MANAGER
-    // ============================================================
     const DownloadManager = {
       async downloadPDF(btn) {
         const link = btn.dataset.link;
@@ -3998,9 +5351,6 @@
       },
     };
 
-    // ============================================================
-    //  NOTIFICATION MANAGER
-    // ============================================================
     const NotificationManager = {
       async addNotificationIfNew(mat, oldMaterials) {
         const oldIds = oldMaterials.map(m => String(m.ID));
@@ -4086,9 +5436,6 @@
       openMaterial(link, materialId) { this.close(); if (link && link.trim() !== '') App.openMaterial(link, materialId); else Toast.error('Link não disponível.'); },
     };
 
-    // ============================================================
-    //  AUTO UPDATER
-    // ============================================================
     const AutoUpdater = {
       intervalId: null,
       start() { this.stop(); this.intervalId = setInterval(() => this.checkForUpdates(), Config.POLL_INTERVAL_MS); console.log('[AutoUpdater] Ativo.'); },
@@ -4114,9 +5461,6 @@
       },
     };
 
-    // ============================================================
-    //  MEU MAPA DE ESTUDOS
-    // ============================================================
     const StudyMap = {
       renderSummary() {
         const container = document.getElementById('studyMapSummary');
@@ -4511,8 +5855,1112 @@
     };
 
     // ============================================================
-    //  APP PRINCIPAL
+    //  GABARITA+ — MÓDULO INTEGRADO DO VULP+ ESTUDOS
     // ============================================================
+    const GabaritaPlus = (function() {
+      "use strict";
+
+      const API_BASE = "https://script.google.com/macros/s/AKfycbwYdwM0iBxVbExPfWDLZENL4fvGVYLd70Pa2-_8nXxXHKaoh2PSdKh2DxTSum1v985LjQ/exec";
+      const ACOES = ["resumos", "mentoria", "disciplinas"];
+      const CACHE_PREFIX = "gabarita_v4_";
+      const CACHE_TTL = 2 * 60 * 1000;
+      const PREF_FONTE = "gabarita_fonte_v4";
+      const PREF_MODO  = "gabarita_modo_v4";
+      const FONTE_MIN = 14, FONTE_MAX = 26, FONTE_PADRAO = 17;
+
+      let rota = { view: "inicio", id: "", params: new URLSearchParams() };
+      let inicializado = false;
+
+      const state = {
+        resumos: [], mentoria: [], disciplinas: [],
+        status: { resumos: "idle", mentoria: "idle", disciplinas: "idle" },
+        erros:  { resumos: "",     mentoria: "",     disciplinas: "" },
+        ultimaAtualizacao: 0,
+        usouCache: false,
+        bruto: { resumos: null, mentoria: null, disciplinas: null },
+        busca: "", filtroDisciplina: "", filtroAssunto: "", ordem: "padrao"
+      };
+
+      let tamanhoFonte = Number(localStorage.getItem(PREF_FONTE)) || FONTE_PADRAO;
+      if (!Number.isFinite(tamanhoFonte)) tamanhoFonte = FONTE_PADRAO;
+      tamanhoFonte = Math.min(FONTE_MAX, Math.max(FONTE_MIN, tamanhoFonte));
+      let modoLeitura = localStorage.getItem(PREF_MODO) === "1";
+
+      function el(tag, cls, txt) {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (txt !== undefined && txt !== null) n.textContent = String(txt);
+        return n;
+      }
+
+      function svgIcon(str) {
+        const w = document.createElement("span");
+        w.innerHTML = str;
+        return w.firstElementChild;
+      }
+
+      function chave(v) {
+        return String(v == null ? "" : v).toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+      }
+
+      function normalizarTexto(v) {
+        return String(v == null ? "" : v).toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+
+      function paraNumero(v) {
+        if (v === null || v === undefined || v === "") return 0;
+        const n = Number(String(v).replace(",", "."));
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function timestamp(v) {
+        if (!v) return 0;
+        const s = String(v).trim();
+        if (!s) return 0;
+        let m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/.exec(s);
+        if (m) { let a = Number(m[3]); if (a < 100) a += 2000; return new Date(a, Number(m[2]) - 1, Number(m[1])).getTime(); }
+        const d = new Date(s);
+        return isNaN(d.getTime()) ? 0 : d.getTime();
+      }
+
+      function formatarData(v) {
+        const t = timestamp(v);
+        if (!t) return "";
+        return new Date(t).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+      }
+
+      function formatarDataHora(ts) {
+        if (!ts) return "—";
+        const d = new Date(ts);
+        return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }) +
+          " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+      }
+
+      function limparMarkdown(t) {
+        return String(t == null ? "" : t)
+          .replace(/<br\s*\/?>/gi, " ")
+          .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+          .replace(/[*_`#>]+/g, "")
+          .replace(/\s+/g, " ").trim();
+      }
+
+      function extrairTrecho(item, max) {
+        max = max || 165;
+        let base = item.resumoCurto && String(item.resumoCurto).trim()
+          ? String(item.resumoCurto) : limparMarkdown(item.conteudo);
+        base = limparMarkdown(base);
+        if (!base) return "";
+        if (base.length <= max) return base;
+        return base.slice(0, max).replace(/\s+\S*$/, "") + "…";
+      }
+
+      function ordenarPorOrdem(lista) {
+        const v = (x) => { const n = Number(x); return Number.isFinite(n) && n !== 0 ? n : Infinity; };
+        return lista.map((item, i) => ({ item, i }))
+          .sort((a, b) => {
+            const oa = v(a.item.ordem), ob = v(b.item.ordem);
+            if (oa !== ob) return oa - ob;
+            return a.i - b.i;
+          }).map((x) => x.item);
+      }
+
+      function plural(n, s, p) { return n === 1 ? s : p; }
+      function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+      function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+      function lerCache(acao, ignorarTTL) {
+        const bruto = lsGet(CACHE_PREFIX + acao);
+        if (!bruto) return null;
+        try {
+          const p = JSON.parse(bruto);
+          if (!p || !Array.isArray(p.dados)) return null;
+          if (!ignorarTTL && Date.now() - Number(p.ts || 0) > CACHE_TTL) return null;
+          return p;
+        } catch (e) { return null; }
+      }
+
+      function gravarCache(acao, dados) {
+        lsSet(CACHE_PREFIX + acao, JSON.stringify({ ts: Date.now(), dados }));
+      }
+
+      function limparCache() {
+        try {
+          Object.keys(localStorage).filter((k) => k.indexOf("gabarita_") === 0).forEach((k) => {
+            try { localStorage.removeItem(k); } catch (e) {}
+          });
+        } catch (e) {}
+      }
+
+      function extrairLista(json) {
+        if (Array.isArray(json)) {
+          if (json.length === 0) return [];
+          if (typeof json[0] === "object" && json[0] !== null) return json;
+          return [];
+        }
+        if (!json || typeof json !== "object") return [];
+        const visitados = new Set();
+        function buscar(obj, nivel) {
+          if (nivel > 5 || !obj || typeof obj !== "object" || visitados.has(obj)) return null;
+          visitados.add(obj);
+          for (const k of Object.keys(obj)) {
+            const v = obj[k];
+            if (Array.isArray(v) && v.length > 0 && typeof v[0] === "object" && v[0] !== null) return v;
+          }
+          for (const k of Object.keys(obj)) {
+            const v = obj[k];
+            if (v && typeof v === "object" && !Array.isArray(v)) {
+              const dentro = buscar(v, nivel + 1);
+              if (dentro) return dentro;
+            }
+          }
+          return null;
+        }
+        const achou = buscar(json, 0);
+        if (achou) return achou;
+        const chaves = Object.keys(json);
+        const pareceRegistro = chaves.some((k) =>
+          ["titulo", "title", "nome", "conteudo", "disciplina", "assunto", "id"].indexOf(chave(k)) !== -1);
+        return pareceRegistro ? [json] : [];
+      }
+
+      async function buscarAPI(acao) {
+        const url = API_BASE + "?acao=" + encodeURIComponent(acao);
+        const resp = await fetch(url, { method: "GET", cache: "no-store", redirect: "follow" });
+        if (!resp.ok) throw new Error("HTTP " + resp.status + " " + resp.statusText);
+        const texto = await resp.text();
+        let json;
+        try { json = JSON.parse(texto.replace(/^\uFEFF/, "")); }
+        catch (e) { throw new Error("A API não devolveu JSON válido."); }
+        const lista = extrairLista(json);
+        return { dados: lista, ts: Date.now(), bruto: json };
+      }
+
+      function mapaItem(item) {
+        const m = new Map();
+        if (!item || typeof item !== "object") return m;
+        for (const k of Object.keys(item)) m.set(chave(k), item[k]);
+        return m;
+      }
+
+      function campo(m, nomes) {
+        for (const n of nomes) {
+          const v = m.get(chave(n));
+          if (v !== undefined && v !== null && String(v).trim() !== "") return v;
+        }
+        return "";
+      }
+
+      function normResumo(item, i) {
+        if (typeof item === "string")
+          return { id: "r-" + i, ordem: 0, disciplina: "", titulo: item.trim(), assunto: "", conteudo: "", status: "", atualizadoEm: "", resumoCurto: "" };
+        const m = mapaItem(item);
+        const id = campo(m, ["id", "codigo", "cod", "identificador", "slug"]);
+        return {
+          id: String(id || ("r-" + i)),
+          ordem: paraNumero(campo(m, ["ordem", "order", "posicao", "sequencia"])),
+          disciplina: String(campo(m, ["disciplina", "materia", "subject", "area"]) || "").trim(),
+          titulo: String(campo(m, ["titulo", "title", "nome", "topico_titulo"]) || "").trim(),
+          assunto: String(campo(m, ["assunto", "topico", "tema", "subassunto", "subtema"]) || "").trim(),
+          conteudo: String(campo(m, ["conteudo", "content", "texto", "material", "markdown", "resumo_completo"]) || ""),
+          status: String(campo(m, ["status", "situacao", "publicado"]) || "").trim(),
+          atualizadoEm: campo(m, ["atualizado_em", "atualizadoem", "atualizado", "data_atualizacao", "data", "updated_at", "updated", "ultima_atualizacao", "modificado_em"]),
+          resumoCurto: String(campo(m, ["resumo", "descricao_curta", "resumo_curto", "descricao", "sinopse", "breve"]) || "")
+        };
+      }
+
+      function normMentoria(item, i) {
+        if (typeof item === "string")
+          return { id: "m-" + i, ordem: 0, disciplina: "Mentoria", titulo: item.trim(), assunto: "", conteudo: "", status: "", atualizadoEm: "", resumoCurto: "" };
+        const m = mapaItem(item);
+        const id = campo(m, ["id", "codigo", "cod", "identificador", "slug"]);
+        return {
+          id: String(id || ("m-" + i)),
+          ordem: paraNumero(campo(m, ["ordem", "order", "posicao", "sequencia"])),
+          disciplina: "Mentoria",
+          titulo: String(campo(m, ["titulo", "title", "nome"]) || "").trim(),
+          assunto: String(campo(m, ["assunto", "topico", "tema", "categoria", "categoria_titulo"]) || "").trim(),
+          conteudo: String(campo(m, ["conteudo", "content", "texto", "material", "markdown", "orientacao", "descricao"]) || ""),
+          status: String(campo(m, ["status", "situacao", "publicado"]) || "").trim(),
+          atualizadoEm: campo(m, ["atualizado_em", "atualizadoem", "atualizado", "data_atualizacao", "data", "updated_at", "updated", "ultima_atualizacao"]),
+          resumoCurto: String(campo(m, ["resumo", "descricao_curta", "resumo_curto", "descricao", "sinopse"]) || "")
+        };
+      }
+
+      function normDisciplina(item, i) {
+        if (typeof item === "string")
+          return { id: "d-" + i, ordem: 0, nome: item.trim(), descricao: "", total: 0 };
+        const m = mapaItem(item);
+        return {
+          id: String(campo(m, ["id", "codigo", "cod", "slug"]) || ("d-" + i)),
+          ordem: paraNumero(campo(m, ["ordem", "order", "posicao", "sequencia"])),
+          nome: String(campo(m, ["disciplina", "nome", "titulo", "materia", "name", "area"]) || "").trim(),
+          descricao: String(campo(m, ["descricao", "resumo", "detalhe", "observacao", "sobre"]) || "").trim(),
+          total: paraNumero(campo(m, ["quantidade", "total", "qtd", "resumos", "count"]))
+        };
+      }
+
+      const NORMALIZADORES = { resumos: normResumo, mentoria: normMentoria, disciplinas: normDisciplina };
+
+      async function carregarSecao(acao, forcar) {
+        state.status[acao] = "carregando";
+        state.erros[acao] = "";
+
+        if (!forcar) {
+          const c = lerCache(acao, false);
+          if (c) {
+            state[acao] = ordenarPorOrdem(c.dados.map((x, i) => NORMALIZADORES[acao](x, i))
+              .filter((x) => acao === "disciplinas" ? !!x.nome : !!(x.titulo || x.conteudo)));
+            state.status[acao] = "ok";
+            state.usouCache = true;
+            state.ultimaAtualizacao = c.ts;
+            return;
+          }
+        }
+
+        try {
+          const r = await buscarAPI(acao);
+          const lista = r.dados
+            .map((x, i) => NORMALIZADORES[acao](x, i))
+            .filter((x) => acao === "disciplinas" ? !!x.nome : !!(x.titulo || x.conteudo));
+
+          state[acao] = ordenarPorOrdem(lista);
+          state.status[acao] = "ok";
+          state.usouCache = false;
+          state.ultimaAtualizacao = r.ts;
+          state.bruto[acao] = r.bruto;
+          gravarCache(acao, lista);
+        } catch (erro) {
+          const c = lerCache(acao, true);
+          if (c) {
+            state[acao] = ordenarPorOrdem(c.dados.map((x, i) => NORMALIZADORES[acao](x, i))
+              .filter((x) => acao === "disciplinas" ? !!x.nome : !!(x.titulo || x.conteudo)));
+            state.status[acao] = "ok";
+            state.usouCache = true;
+            state.ultimaAtualizacao = c.ts;
+            state.erros[acao] = "Usando cache (API offline): " + erro.message;
+          } else {
+            state.status[acao] = "erro";
+            state.erros[acao] = erro.message || "Erro desconhecido.";
+          }
+        }
+      }
+
+      async function carregarTudo(forcar) {
+        ACOES.forEach((a) => { if (forcar || state.status[a] !== "ok") state.status[a] = "carregando"; });
+        renderApp();
+        await Promise.all(ACOES.map((a) => carregarSecao(a, forcar)));
+        renderApp();
+      }
+
+      const INLINE_RE = /(\*\*[^*]+\*\*)|(__[^_]+__)|(\*[^*\n]+\*)|(_[^_\n]+_)|(`[^`\n]+`)|(\[[^\]\n]+\]\([^)\s]+\))/g;
+
+      function inline(alvo, texto) {
+        const s = String(texto == null ? "" : texto);
+        let ultimo = 0, m;
+        INLINE_RE.lastIndex = 0;
+        while ((m = INLINE_RE.exec(s)) !== null) {
+          if (m.index > ultimo) alvo.appendChild(document.createTextNode(s.slice(ultimo, m.index)));
+          const t = m[0];
+          if (t.startsWith("**") || t.startsWith("__")) {
+            const b = document.createElement("strong"); b.textContent = t.slice(2, -2); alvo.appendChild(b);
+          } else if (t.startsWith("`")) {
+            const c = document.createElement("code"); c.textContent = t.slice(1, -1); alvo.appendChild(c);
+          } else if (t.startsWith("[")) {
+            const p = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(t);
+            const a = document.createElement("a");
+            if (p) {
+              a.textContent = p[1];
+              if (/^https?:\/\//i.test(p[2]) || /^mailto:/i.test(p[2])) {
+                a.href = p[2]; a.target = "_blank"; a.rel = "noopener noreferrer";
+              } else a.href = "#";
+            } else { a.textContent = t; a.href = "#"; }
+            alvo.appendChild(a);
+          } else {
+            const e = document.createElement("em"); e.textContent = t.slice(1, -1); alvo.appendChild(e);
+          }
+          ultimo = INLINE_RE.lastIndex;
+          if (m.index === INLINE_RE.lastIndex) INLINE_RE.lastIndex++;
+        }
+        if (ultimo < s.length) alvo.appendChild(document.createTextNode(s.slice(ultimo)));
+      }
+
+      function prepararConteudo(t) {
+        let s = String(t == null ? "" : t);
+        s = s.replace(/<\s*br\s*\/?\s*>/gi, "\n");
+        s = s.replace(/<\s*\/\s*p\s*>/gi, "\n\n");
+        s = s.replace(/<\s*p\s*[^>]*>/gi, "");
+        s = s.replace(/&nbsp;/gi, " ");
+        s = s.replace(/\r\n?/g, "\n");
+        s = s.replace(/\n{3,}/g, "\n\n");
+        return s;
+      }
+
+      const ROTULOS_BLOCO = [
+        { tipo: "atencao",    rotulo: "Atenção",    re: /^\s*(aten[cç][aã]o|importante|obs\.?|observa[cç][aã]o|aviso)\s*[:\-–]\s*/i },
+        { tipo: "definicao",  rotulo: "Definição",  re: /^\s*(defini[cç][aã]o|conceito|significa que|entende-se por)\s*[:\-–]\s*/i },
+        { tipo: "exemplo",    rotulo: "Exemplo",    re: /^\s*(exemplo|ex\.?|por exemplo|ilustra[cç][aã]o)\s*[:\-–]\s*/i },
+        { tipo: "observacao", rotulo: "Observação", re: /^\s*(observa[cç][aã]o|nota|lembrete|dica)\s*[:\-–]\s*/i }
+      ];
+
+      function detectarBloco(linha) {
+        for (const r of ROTULOS_BLOCO) {
+          const m = r.re.exec(linha);
+          if (m) return { tipo: r.tipo, rotulo: r.rotulo, restante: linha.slice(m[0].length) };
+        }
+        return null;
+      }
+
+      function montarConteudo(texto) {
+        const wrap = el("div", "gp-conteudo");
+        const linhas = prepararConteudo(texto).split("\n");
+        let lista = null, cp = 0;
+        const fechar = () => { lista = null; };
+
+        for (let i = 0; i < linhas.length; i++) {
+          const linha = linhas[i].trim();
+          if (!linha) { fechar(); continue; }
+          if (/^(\*{3,}|-{3,}|_{3,})$/.test(linha)) { fechar(); wrap.appendChild(el("hr", "gp-conteudo-hr")); continue; }
+
+          let m = /^(#{1,6})\s+(.*)$/.exec(linha);
+          if (m) {
+            fechar();
+            const nv = Math.min(m[1].length + 1, 6);
+            const h = document.createElement("h" + nv);
+            h.className = "gp-conteudo-titulo"; inline(h, m[2]); wrap.appendChild(h); continue;
+          }
+
+          m = /^>\s?(.*)$/.exec(linha);
+          if (m) { fechar(); const bq = el("blockquote", "gp-conteudo-citacao"); inline(bq, m[1]); wrap.appendChild(bq); continue; }
+
+          m = /^[-*+]\s+(.*)$/.exec(linha);
+          if (m) {
+            if (!lista || lista.tagName !== "UL") { fechar(); lista = el("ul", "gp-conteudo-lista"); wrap.appendChild(lista); }
+            const li = document.createElement("li"); inline(li, m[1]); lista.appendChild(li); continue;
+          }
+
+          m = /^\d+[.)]\s+(.*)$/.exec(linha);
+          if (m) {
+            if (!lista || lista.tagName !== "OL") { fechar(); lista = el("ol", "gp-conteudo-lista"); wrap.appendChild(lista); }
+            const li = document.createElement("li"); inline(li, m[1]); lista.appendChild(li); continue;
+          }
+
+          fechar();
+
+          const esp = detectarBloco(linha);
+          if (esp) {
+            const box = el("div", "gp-bloco-especial gp-bloco-" + esp.tipo);
+            box.setAttribute("data-rotulo", esp.rotulo);
+            const p = document.createElement("p");
+            inline(p, esp.restante); box.appendChild(p);
+            let j = i + 1;
+            while (j < linhas.length) {
+              const prox = linhas[j].trim();
+              if (!prox) break;
+              if (/^(#{1,6}\s|>|[-*+]\s|\d+[.)]\s)/.test(prox)) break;
+              const p2 = document.createElement("p"); inline(p2, prox); box.appendChild(p2);
+              j++;
+            }
+            i = j - 1;
+            wrap.appendChild(box);
+            continue;
+          }
+
+          const tinta = cp % 4; cp++;
+          const p = el("p", "gp-bloco" + (tinta > 0 ? " gp-bloco-t" + tinta : ""));
+          inline(p, linha); wrap.appendChild(p);
+        }
+        return wrap;
+      }
+
+      const IC = {
+        inicio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg>',
+        resumos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v14H6.5A2.5 2.5 0 0 0 4 19.5z"/><path d="M6.5 17H19v4H6.5A2.5 2.5 0 0 1 4 18.5"/><path d="M8.5 7h6"/><path d="M8.5 10.5h4"/></svg>',
+        disciplinas: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>',
+        mentoria: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg>',
+        busca: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>',
+        vazio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>',
+        erro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v5"/><circle cx="12" cy="16.5" r=".8" fill="currentColor"/><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+        seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+        livro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v16H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v4H6.5A2.5 2.5 0 0 1 4 20.5z"/></svg>',
+        predio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/></svg>',
+        bussola: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg>',
+        calendario: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>'
+      };
+
+      const NAV = [
+        { id: "inicio", rot: "Início", ic: IC.inicio },
+        { id: "resumos", rot: "Resumos", ic: IC.resumos },
+        { id: "disciplinas", rot: "Disciplinas", ic: IC.disciplinas },
+        { id: "mentoria", rot: "Mentoria", ic: IC.mentoria }
+      ];
+
+      function montarNav() {
+        const container = document.getElementById("gabaritaNav");
+        if (!container) return;
+        container.textContent = "";
+        NAV.forEach((it) => {
+          const a = document.createElement("a");
+          a.className = "gp-nav-item"; a.href = "#gabarita/" + it.id; a.setAttribute("data-nav", it.id);
+          a.appendChild(svgIcon(it.ic)); a.appendChild(el("span", null, it.rot));
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            irPara("#gabarita/" + it.id);
+          });
+          container.appendChild(a);
+        });
+      }
+
+      function atualizarNav() {
+        document.querySelectorAll(".gabarita-container .gp-nav-item").forEach((a) => {
+          const on = a.getAttribute("data-nav") === rota.view;
+          a.classList.toggle("gp-ativo", on);
+          if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+        });
+      }
+
+      const TIT = { inicio: "Início", resumos: "Resumos", disciplinas: "Disciplinas", mentoria: "Mentoria" };
+
+      function skCards(n) {
+        const f = document.createDocumentFragment();
+        for (let i = 0; i < (n || 3); i++) {
+          const c = el("article", "gp-card gp-card-sk");
+          c.appendChild(el("div", "gp-sk gp-sk-tag"));
+          c.appendChild(el("div", "gp-sk gp-sk-titulo"));
+          c.appendChild(el("div", "gp-sk gp-sk-linha"));
+          c.appendChild(el("div", "gp-sk gp-sk-linha-2"));
+          const r = el("div", "gp-card-rodape"); r.appendChild(el("div", "gp-sk gp-sk-rodape"));
+          c.appendChild(r); f.appendChild(c);
+        }
+        return f;
+      }
+
+      function blocoEstado(tipo, titulo, texto, rot, fn) {
+        const b = el("div", "gp-estado" + (tipo === "erro" ? " gp-erro" : ""));
+        const ic = el("div", "gp-estado-icone");
+        ic.appendChild(svgIcon(tipo === "erro" ? IC.erro : IC.vazio));
+        b.appendChild(ic); b.appendChild(el("p", "gp-estado-titulo", titulo));
+        if (texto) b.appendChild(el("p", "gp-estado-texto", texto));
+        if (rot && fn) {
+          const bt = el("button", "gp-btn gp-btn-primario gp-btn-sm", rot); bt.type = "button";
+          bt.addEventListener("click", fn); b.appendChild(bt);
+        }
+        return b;
+      }
+
+      function loadingTexto(msg) {
+        const b = el("div", "gp-estado");
+        b.appendChild(el("p", "gp-estado-titulo", msg || "Carregando conteúdos..."));
+        return b;
+      }
+
+      function toast(msg, tipo) {
+        const a = document.getElementById("gabaritaToastArea");
+        if (!a) return;
+        const t = el("div", "gp-toast" + (tipo ? " gp-" + tipo : ""));
+        if (tipo === "sucesso" || tipo === "erro") t.appendChild(svgIcon(IC.check));
+        t.appendChild(el("span", null, msg)); a.appendChild(t);
+        setTimeout(() => { t.classList.add("gp-saindo"); setTimeout(() => t.remove(), 220); }, 2600);
+      }
+
+      function cardResumo(item, tipo) {
+        const c = el("article", "gp-card" + (tipo === "mentoria" ? " gp-card-mentoria" : ""));
+        if (item.disciplina) {
+          const tag = el("span", "gp-tag" + (tipo === "mentoria" ? " gp-tag-verde" : ""), item.disciplina);
+          c.appendChild(tag);
+        }
+        c.appendChild(el("h3", "gp-card-titulo", item.titulo || "Sem título"));
+        if (item.assunto) c.appendChild(el("p", "gp-card-assunto", item.assunto));
+        const t = extrairTrecho(item);
+        if (t) c.appendChild(el("p", "gp-card-trecho", t));
+        const r = el("div", "gp-card-rodape");
+        const d = formatarData(item.atualizadoEm);
+        r.appendChild(el("span", "gp-card-data", d ? "Atualizado em " + d : "Conteúdo disponível"));
+        const link = el("a", "gp-btn gp-btn-primario gp-btn-sm", tipo === "mentoria" ? "Abrir" : "Estudar");
+        link.href = "#gabarita/" + (tipo === "mentoria" ? "mentoria/" : "resumos/") + encodeURIComponent(item.id);
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          irPara("#gabarita/" + (tipo === "mentoria" ? "mentoria/" : "resumos/") + encodeURIComponent(item.id));
+        });
+        r.appendChild(link); c.appendChild(r);
+        return c;
+      }
+
+      function resumosRecentes(n) {
+        return state.resumos.map((item, i) => ({ item, i }))
+          .sort((a, b) => {
+            const ta = timestamp(a.item.atualizadoEm), tb = timestamp(b.item.atualizadoEm);
+            if (ta !== tb) return tb - ta;
+            return a.i - b.i;
+          }).slice(0, n).map((x) => x.item);
+      }
+
+      function obterDisciplinas() {
+        const m = new Map();
+        state.disciplinas.forEach((d) => {
+          if (!d.nome) return;
+          const k = chave(d.nome);
+          if (!m.has(k)) m.set(k, { nome: d.nome, descricao: d.descricao, ordem: d.ordem, total: 0 });
+          else if (d.descricao && !m.get(k).descricao) m.get(k).descricao = d.descricao;
+        });
+        state.resumos.forEach((r) => {
+          const n = r.disciplina || "Sem disciplina", k = chave(n);
+          if (!m.has(k)) m.set(k, { nome: n, descricao: "", ordem: 0, total: 0 });
+          m.get(k).total += 1;
+        });
+        return Array.from(m.values()).sort((a, b) => {
+          const oa = Number(a.ordem) || Infinity, ob = Number(b.ordem) || Infinity;
+          if (oa !== ob) return oa - ob;
+          return a.nome.localeCompare(b.nome, "pt-BR");
+        });
+      }
+
+      function viewInicio() {
+        const p = el("div", "gp-pagina");
+        const hero = el("header", "gp-dash-hero");
+        hero.appendChild(el("div", "gp-dash-hero-saudacao", "Gabarita+"));
+        hero.appendChild(el("h1", "gp-dash-hero-titulo", "Olá, vamos estudar?"));
+        hero.appendChild(el("p", "gp-dash-hero-sub", "Organize seus materiais, acompanhe as disciplinas e avance com foco rumo à aprovação."));
+        p.appendChild(hero);
+
+        const g = el("div", "gp-dash-grid");
+
+        const s1 = document.createElement("a"); s1.className = "gp-stat gp-stat-principal"; s1.href = "#gabarita/resumos";
+        s1.addEventListener("click", (e) => { e.preventDefault(); irPara("#gabarita/resumos"); });
+        const r1 = el("span", "gp-stat-rotulo"); r1.appendChild(svgIcon(IC.livro)); r1.appendChild(el("span", null, "Resumos disponíveis"));
+        s1.appendChild(r1);
+        if (state.status.resumos === "carregando") s1.appendChild(el("span", "gp-sk gp-stat-sk"));
+        else if (state.status.resumos === "erro") {
+          const l = el("div", "gp-stat-linha"); l.appendChild(el("span", "gp-stat-valor", "—")); s1.appendChild(l);
+          s1.appendChild(el("span", "gp-stat-erro", "Falha ao carregar"));
+        } else {
+          const l = el("div", "gp-stat-linha");
+          l.appendChild(el("span", "gp-stat-valor", String(state.resumos.length)));
+          l.appendChild(el("span", "gp-stat-sufixo", plural(state.resumos.length, "resumo", "resumos")));
+          s1.appendChild(l);
+          s1.appendChild(el("span", "gp-stat-cta", "Ver todos os resumos →"));
+        }
+        g.appendChild(s1);
+
+        const s2 = document.createElement("a"); s2.className = "gp-stat"; s2.href = "#gabarita/disciplinas";
+        s2.addEventListener("click", (e) => { e.preventDefault(); irPara("#gabarita/disciplinas"); });
+        const r2 = el("span", "gp-stat-rotulo"); r2.appendChild(svgIcon(IC.predio)); r2.appendChild(el("span", null, "Disciplinas"));
+        s2.appendChild(r2);
+        if (state.status.disciplinas === "carregando") s2.appendChild(el("span", "gp-sk gp-stat-sk"));
+        else {
+          const n = obterDisciplinas().length;
+          const l = el("div", "gp-stat-linha");
+          l.appendChild(el("span", "gp-stat-valor", String(n)));
+          l.appendChild(el("span", "gp-stat-sufixo", plural(n, "disciplina", "disciplinas")));
+          s2.appendChild(l); s2.appendChild(el("span", "gp-stat-cta", "Explorar →"));
+        }
+        g.appendChild(s2);
+
+        const s3 = document.createElement("a"); s3.className = "gp-stat"; s3.href = "#gabarita/mentoria";
+        s3.addEventListener("click", (e) => { e.preventDefault(); irPara("#gabarita/mentoria"); });
+        const r3 = el("span", "gp-stat-rotulo"); r3.appendChild(svgIcon(IC.bussola)); r3.appendChild(el("span", null, "Mentoria"));
+        s3.appendChild(r3);
+        if (state.status.mentoria === "carregando") s3.appendChild(el("span", "gp-sk gp-stat-sk"));
+        else if (state.status.mentoria === "erro") {
+          const l = el("div", "gp-stat-linha"); l.appendChild(el("span", "gp-stat-valor", "—")); s3.appendChild(l);
+          s3.appendChild(el("span", "gp-stat-erro", "Falha ao carregar"));
+        } else {
+          const n = state.mentoria.length;
+          const l = el("div", "gp-stat-linha");
+          l.appendChild(el("span", "gp-stat-valor", String(n)));
+          l.appendChild(el("span", "gp-stat-sufixo", plural(n, "orientação", "orientações")));
+          s3.appendChild(l); s3.appendChild(el("span", "gp-stat-cta", "Ver mentoria →"));
+        }
+        g.appendChild(s3);
+        p.appendChild(g);
+
+        const sec = el("section", "gp-secao");
+        const cab = el("div", "gp-secao-cabecalho");
+        cab.appendChild(el("h2", "gp-secao-titulo", "Continue estudando"));
+        const vt = el("a", "gp-secao-link", "Ver todos os resumos →"); vt.href = "#gabarita/resumos";
+        vt.addEventListener("click", (e) => { e.preventDefault(); irPara("#gabarita/resumos"); });
+        cab.appendChild(vt); sec.appendChild(cab);
+
+        const gc = el("div", "gp-grid-conteudos");
+        if (state.status.resumos === "carregando") { gc.appendChild(skCards(3)); sec.appendChild(gc); }
+        else if (state.status.resumos === "erro") {
+          sec.appendChild(blocoEstado("erro", "Não foi possível carregar os conteúdos.",
+            state.erros.resumos, "Tentar novamente", () => carregarTudo(true)));
+        }
+        else if (state.resumos.length === 0) {
+          sec.appendChild(blocoEstado("vazio", "Nenhum conteúdo encontrado.",
+            "Assim que novos resumos forem publicados, eles aparecerão aqui."));
+        }
+        else { resumosRecentes(4).forEach((r) => gc.appendChild(cardResumo(r))); sec.appendChild(gc); }
+        p.appendChild(sec);
+        return p;
+      }
+
+      function viewResumos() {
+        const p = el("div", "gp-pagina");
+        const h = el("header", "gp-pagina-cabecalho");
+        h.appendChild(el("h1", "gp-pagina-titulo", "Resumos"));
+        h.appendChild(el("p", "gp-pagina-sub", "Encontre rapidamente o conteúdo que você precisa para estudar."));
+        p.appendChild(h);
+
+        if (state.status.resumos === "carregando") {
+          p.appendChild(loadingTexto("Carregando conteúdos..."));
+          const g = el("div", "gp-grid-conteudos"); g.appendChild(skCards(6)); p.appendChild(g);
+          return p;
+        }
+        if (state.status.resumos === "erro") {
+          p.appendChild(blocoEstado("erro", "Não foi possível carregar os conteúdos.",
+            state.erros.resumos || "Verifique sua conexão e tente novamente.",
+            "Tentar novamente", () => carregarTudo(true)));
+          return p;
+        }
+        if (state.resumos.length === 0) {
+          p.appendChild(blocoEstado("vazio", "Nenhum conteúdo encontrado.",
+            "Ainda não há resumos publicados na planilha."));
+          return p;
+        }
+
+        const bw = el("div", "gp-busca"); bw.appendChild(svgIcon(IC.busca));
+        const input = document.createElement("input");
+        input.type = "search"; input.id = "gabaritaCampoBusca";
+        input.placeholder = "Pesquisar resumo...";
+        input.setAttribute("aria-label", "Pesquisar resumo");
+        input.value = state.busca; input.autocomplete = "off";
+        bw.appendChild(input); p.appendChild(bw);
+
+        const fil = el("div", "gp-filtros");
+        const sd = document.createElement("select"); sd.setAttribute("aria-label", "Disciplina");
+        const sa = document.createElement("select"); sa.setAttribute("aria-label", "Assunto");
+        const so = document.createElement("select"); so.setAttribute("aria-label", "Ordenar");
+
+        const opTodas = document.createElement("option"); opTodas.value = ""; opTodas.textContent = "Todas as disciplinas";
+        sd.appendChild(opTodas);
+        obterDisciplinas().forEach((d) => {
+          const o = document.createElement("option");
+          o.value = chave(d.nome);
+          o.textContent = d.nome + (d.total ? " (" + d.total + ")" : "");
+          sd.appendChild(o);
+        });
+        sd.value = state.filtroDisciplina || "";
+
+        [["padrao", "Ordem do conteúdo"], ["recentes", "Recentes"], ["antigos", "Mais antigos"], ["az", "Título (A–Z)"], ["za", "Título (Z–A)"]]
+          .forEach(([v, t]) => { const o = document.createElement("option"); o.value = v; o.textContent = t; so.appendChild(o); });
+        so.value = state.ordem;
+
+        fil.appendChild(sd); fil.appendChild(sa); fil.appendChild(so); p.appendChild(fil);
+
+        const cont = el("p", "gp-contagem"); cont.setAttribute("aria-live", "polite"); p.appendChild(cont);
+        const lista = el("div", "gp-grid-conteudos"); p.appendChild(lista);
+
+        function assuntos() {
+          const m = new Map();
+          state.resumos.forEach((r) => {
+            if (state.filtroDisciplina && chave(r.disciplina) !== state.filtroDisciplina) return;
+            if (!r.assunto) return;
+            const k = chave(r.assunto);
+            if (!m.has(k)) m.set(k, r.assunto);
+          });
+          return Array.from(m.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
+        }
+
+        function reconstruirAssuntos() {
+          const at = state.filtroAssunto;
+          sa.textContent = "";
+          const ot = document.createElement("option"); ot.value = ""; ot.textContent = "Todos os assuntos"; sa.appendChild(ot);
+          const arr = assuntos();
+          arr.forEach((a) => { const o = document.createElement("option"); o.value = chave(a); o.textContent = a; sa.appendChild(o); });
+          sa.disabled = arr.length === 0;
+          if (at && arr.some((a) => chave(a) === at)) sa.value = at;
+          else { state.filtroAssunto = ""; sa.value = ""; }
+        }
+
+        function filtrar() {
+          const termo = normalizarTexto(state.busca).trim();
+          let res = state.resumos.filter((r) => {
+            if (state.filtroDisciplina && chave(r.disciplina) !== state.filtroDisciplina) return false;
+            if (state.filtroAssunto && chave(r.assunto) !== state.filtroAssunto) return false;
+            if (!termo) return true;
+            return normalizarTexto([r.titulo, r.disciplina, r.assunto, r.conteudo].join(" \n ")).indexOf(termo) !== -1;
+          });
+          switch (state.ordem) {
+            case "recentes": res = res.map((x, i) => ({ x, i })).sort((a, b) => {
+              const ta = timestamp(a.x.atualizadoEm), tb = timestamp(b.x.atualizadoEm);
+              return ta !== tb ? tb - ta : a.i - b.i;
+            }).map((o) => o.x); break;
+            case "antigos": res = res.map((x, i) => ({ x, i })).sort((a, b) => {
+              const ta = timestamp(a.x.atualizadoEm) || Infinity, tb = timestamp(b.x.atualizadoEm) || Infinity;
+              return ta !== tb ? ta - tb : a.i - b.i;
+            }).map((o) => o.x); break;
+            case "az": res = res.slice().sort((a, b) => (a.titulo || "").localeCompare(b.titulo || "", "pt-BR")); break;
+            case "za": res = res.slice().sort((a, b) => (b.titulo || "").localeCompare(a.titulo || "", "pt-BR")); break;
+            default: res = ordenarPorOrdem(res);
+          }
+          return res;
+        }
+
+        function atualizarLista() {
+          const enc = filtrar(); lista.textContent = "";
+          if (enc.length === 0) {
+            const temFil = !!(state.busca.trim() || state.filtroDisciplina || state.filtroAssunto);
+            cont.textContent = "";
+            lista.appendChild(blocoEstado("vazio",
+              temFil ? "Nenhum resumo encontrado para sua pesquisa." : "Nenhum conteúdo encontrado.",
+              temFil ? "Tente outro termo ou remova os filtros aplicados." : "",
+              temFil ? "Limpar filtros" : null,
+              temFil ? () => { state.busca = ""; state.filtroDisciplina = ""; state.filtroAssunto = ""; state.ordem = "padrao"; renderApp(); } : null));
+            return;
+          }
+          cont.textContent = "";
+          cont.appendChild(el("strong", null, String(enc.length)));
+          cont.appendChild(document.createTextNode(" " + plural(enc.length, "conteúdo encontrado", "conteúdos encontrados")));
+          const f = document.createDocumentFragment();
+          enc.forEach((r) => f.appendChild(cardResumo(r)));
+          lista.appendChild(f);
+        }
+
+        let q = null;
+        input.addEventListener("input", () => {
+          state.busca = input.value;
+          if (q) cancelAnimationFrame(q);
+          q = requestAnimationFrame(() => { q = null; atualizarLista(); });
+        });
+        sd.addEventListener("change", () => { state.filtroDisciplina = sd.value; reconstruirAssuntos(); atualizarLista(); });
+        sa.addEventListener("change", () => { state.filtroAssunto = sa.value; atualizarLista(); });
+        so.addEventListener("change", () => { state.ordem = so.value; atualizarLista(); });
+
+        reconstruirAssuntos(); atualizarLista();
+        return p;
+      }
+
+      function viewDisciplinas() {
+        const p = el("div", "gp-pagina");
+        const h = el("header", "gp-pagina-cabecalho");
+        h.appendChild(el("h1", "gp-pagina-titulo", "Disciplinas"));
+        h.appendChild(el("p", "gp-pagina-sub", "Navegue pelos conteúdos organizados por disciplina."));
+        p.appendChild(h);
+
+        if (state.status.disciplinas === "carregando" && state.status.resumos === "carregando") {
+          p.appendChild(loadingTexto("Carregando conteúdos..."));
+          const g = el("div", "gp-grid-disciplinas"); g.appendChild(skCards(4)); p.appendChild(g);
+          return p;
+        }
+        if (state.status.disciplinas === "erro" && state.status.resumos === "erro") {
+          p.appendChild(blocoEstado("erro", "Não foi possível carregar os conteúdos.",
+            "Verifique sua conexão e tente novamente.", "Tentar novamente", () => carregarTudo(true)));
+          return p;
+        }
+
+        const ds = obterDisciplinas();
+        if (ds.length === 0) {
+          p.appendChild(blocoEstado("vazio", "Nenhum conteúdo encontrado.", "Ainda não há disciplinas disponíveis."));
+          return p;
+        }
+        const g = el("div", "gp-grid-disciplinas");
+        ds.forEach((d) => {
+          const b = el("button", "gp-disc-card"); b.type = "button";
+          b.setAttribute("aria-label", "Ver resumos de " + d.nome);
+          b.appendChild(el("h2", "gp-disc-nome", d.nome));
+          if (d.descricao) b.appendChild(el("p", "gp-disc-desc", d.descricao));
+          const num = el("div", "gp-disc-numero");
+          num.appendChild(document.createTextNode(String(d.total)));
+          const sm = document.createElement("small");
+          sm.textContent = plural(d.total, "resumo", "resumos");
+          num.appendChild(sm);
+          b.appendChild(num);
+          const r = el("div", "gp-disc-rodape");
+          r.appendChild(el("span", null, "Ver conteúdos"));
+          r.appendChild(svgIcon(IC.seta));
+          b.appendChild(r);
+          b.addEventListener("click", () => {
+            state.filtroDisciplina = chave(d.nome);
+            state.filtroAssunto = ""; state.busca = ""; state.ordem = "padrao";
+            irPara("#gabarita/resumos");
+          });
+          g.appendChild(b);
+        });
+        p.appendChild(g);
+        return p;
+      }
+
+      function viewMentoria() {
+        const p = el("div", "gp-pagina");
+        const hero = el("header", "gp-mentoria-hero");
+        hero.appendChild(el("h1", "gp-pagina-titulo", "Mentoria VULP+"));
+        hero.appendChild(el("p", "gp-pagina-sub", "Orientações, estratégias e dicas para melhorar seus estudos."));
+        p.appendChild(hero);
+
+        if (state.status.mentoria === "carregando") {
+          p.appendChild(loadingTexto("Carregando conteúdos..."));
+          const g = el("div", "gp-grid-conteudos"); g.appendChild(skCards(3)); p.appendChild(g);
+          return p;
+        }
+        if (state.status.mentoria === "erro") {
+          p.appendChild(blocoEstado("erro", "Não foi possível carregar os conteúdos.",
+            state.erros.mentoria || "Verifique sua conexão e tente novamente.",
+            "Tentar novamente", () => carregarTudo(true)));
+          return p;
+        }
+        if (state.mentoria.length === 0) {
+          p.appendChild(blocoEstado("vazio", "Nenhum conteúdo encontrado.", "Ainda não há orientações de mentoria publicadas."));
+          return p;
+        }
+        const g = el("div", "gp-grid-conteudos");
+        state.mentoria.forEach((m) => g.appendChild(cardResumo(m, "mentoria")));
+        p.appendChild(g);
+        return p;
+      }
+
+      let leitorEl, leitorArt, leitorScroll, leitorBarra, leitorProg;
+
+      function aplicarPrefs() {
+        if (!leitorArt) return;
+        leitorArt.style.fontSize = tamanhoFonte + "px";
+        if (leitorEl) leitorEl.classList.toggle("gp-modo-leitura", modoLeitura);
+        const btnModo = document.getElementById("gabaritaBtnModoLeitura");
+        if (btnModo) btnModo.setAttribute("aria-pressed", modoLeitura ? "true" : "false");
+      }
+
+      function atualizarProgresso() {
+        if (!leitorScroll) return;
+        const tot = leitorScroll.scrollHeight - leitorScroll.clientHeight;
+        const at = leitorScroll.scrollTop;
+        const pct = tot <= 0 ? 100 : Math.min(100, Math.max(0, (at / tot) * 100));
+        if (leitorBarra) leitorBarra.style.width = pct + "%";
+        if (leitorProg) leitorProg.classList.toggle("gp-completo", pct >= 99.5);
+      }
+
+      function abrirLeitor(view, id) {
+        const lista = view === "mentoria" ? state.mentoria : state.resumos;
+        const item = lista.find((x) => String(x.id) === String(id));
+        if (!leitorArt) return;
+        leitorArt.textContent = "";
+        if (!item) {
+          leitorArt.appendChild(blocoEstado("erro", "Conteúdo não encontrado.",
+            "O conteúdo pode ter sido removido ou atualizado."));
+        } else {
+          const cab = el("header", "gp-leitor-cabecalho");
+          if (item.disciplina) {
+            const tw = el("div", "gp-leitor-disciplina");
+            tw.appendChild(el("span", "gp-tag" + (view === "mentoria" ? " gp-tag-verde" : ""), item.disciplina));
+            cab.appendChild(tw);
+          }
+          cab.appendChild(el("h1", "gp-leitor-titulo", item.titulo || "Sem título"));
+          const meta = el("div", "gp-leitor-meta");
+          if (item.assunto) {
+            const mi = el("span", "gp-leitor-meta-item");
+            mi.appendChild(el("span", null, item.assunto));
+            meta.appendChild(mi);
+            meta.appendChild(el("span", "gp-ponto", "•"));
+          }
+          const d = formatarData(item.atualizadoEm);
+          const mdata = el("span", "gp-leitor-meta-item");
+          mdata.appendChild(svgIcon(IC.calendario));
+          mdata.appendChild(el("span", null, d ? "Atualizado em " + d : "Conteúdo disponível"));
+          meta.appendChild(mdata);
+          cab.appendChild(meta); leitorArt.appendChild(cab);
+          if (item.conteudo && String(item.conteudo).trim()) {
+            leitorArt.appendChild(montarConteudo(item.conteudo));
+          } else {
+            leitorArt.appendChild(el("p", "gp-estado-texto", "Este conteúdo ainda não possui texto cadastrado."));
+          }
+        }
+        if (leitorEl) {
+          leitorEl.hidden = false;
+          document.body.classList.add("leitor-aberto");
+        }
+        aplicarPrefs(); if (leitorScroll) leitorScroll.scrollTop = 0; atualizarProgresso();
+        const btnVoltar = document.getElementById("gabaritaBtnVoltarLeitor");
+        if (btnVoltar) btnVoltar.focus();
+      }
+
+      function fecharLeitor() {
+        if (leitorEl && !leitorEl.hidden) { leitorEl.hidden = true; if (leitorArt) leitorArt.textContent = ""; }
+        document.body.classList.remove("leitor-aberto");
+      }
+
+      function parseHash() {
+        const hash = location.hash || "";
+        const b = hash.replace(/^#gabarita\/?/, "");
+        const partes = b.split("?");
+        const seg = partes[0].split("/").filter(Boolean);
+        const view = seg[0] || "inicio";
+        const id = seg[1] ? decodeURIComponent(seg[1]) : "";
+        return { view: TIT[view] ? view : "inicio", id, params: new URLSearchParams(partes[1] || "") };
+      }
+
+      function irPara(h) {
+        if (location.hash === h) tratarRota();
+        else location.hash = h;
+      }
+
+      function tratarRota() {
+        if (!inicializado) return;
+        rota = parseHash();
+        renderApp();
+      }
+
+      function renderApp() {
+        const area = document.getElementById("gabaritaArea");
+        if (!area) return;
+        const tinhaFoco = document.activeElement && document.activeElement.id === "gabaritaCampoBusca";
+        area.textContent = "";
+        let node;
+        switch (rota.view) {
+          case "resumos": node = viewResumos(); break;
+          case "disciplinas": node = viewDisciplinas(); break;
+          case "mentoria": node = viewMentoria(); break;
+          default: node = viewInicio();
+        }
+        area.appendChild(node);
+        atualizarNav();
+        if (tinhaFoco) {
+          const c = document.getElementById("gabaritaCampoBusca");
+          if (c) { c.focus(); try { c.setSelectionRange(c.value.length, c.value.length); } catch (e) {} }
+        }
+        if (rota.id && (rota.view === "resumos" || rota.view === "mentoria")) abrirLeitor(rota.view, rota.id);
+        else fecharLeitor();
+        atualizarInfoGabarita();
+      }
+
+      function atualizarInfoGabarita() {
+        const a = document.getElementById("gabaritaInfoAtualizacao");
+        if (!a) return;
+        if (!state.ultimaAtualizacao) { a.textContent = ""; return; }
+        a.textContent = (state.usouCache ? "Cache · " : "") + formatarDataHora(state.ultimaAtualizacao);
+      }
+
+      function init() {
+        if (inicializado) {
+          renderApp();
+          return;
+        }
+        inicializado = true;
+
+        const container = document.getElementById("gabaritaContainer");
+        if (!container) return;
+
+        container.innerHTML = `
+          <div class="gp-app">
+            <header class="gp-topbar">
+              <div class="gp-topbar-esq">
+                <span class="gp-brand-mark">G+</span>
+                <div class="gp-topbar-titulo">Gabarita+</div>
+              </div>
+              <nav class="gp-nav" id="gabaritaNav" aria-label="Navegação Gabarita+"></nav>
+              <div class="gp-topbar-dir">
+                <span class="gp-info-atualizacao" id="gabaritaInfoAtualizacao" style="font-size:11.5px; color:var(--gp-texto-4); white-space:nowrap;"></span>
+                <button type="button" class="gp-btn gp-btn-secundario gp-btn-sm" id="gabaritaBtnAtualizarTopo">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/>
+                  </svg>
+                  <span>Atualizar</span>
+                </button>
+              </div>
+            </header>
+            <main class="gp-area" id="gabaritaArea" role="main"></main>
+          </div>
+
+          <section class="gp-leitor" id="gabaritaLeitor" hidden aria-label="Leitor de conteúdo">
+            <div class="gp-leitor-progresso" id="gabaritaLeitorProgresso"><span id="gabaritaLeitorBarra"></span></div>
+            <header class="gp-leitor-topo">
+              <button type="button" class="gp-btn-voltar" id="gabaritaBtnVoltarLeitor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+                </svg>
+                <span>Voltar</span>
+              </button>
+              <div class="gp-leitor-acoes">
+                <button type="button" class="gp-btn-icone" id="gabaritaBtnFonteMenos" aria-label="Diminuir fonte">A−</button>
+                <button type="button" class="gp-btn-icone" id="gabaritaBtnFonteMais" aria-label="Aumentar fonte">A+</button>
+                <button type="button" class="gp-btn-icone" id="gabaritaBtnModoLeitura" aria-pressed="false">Modo de leitura</button>
+              </div>
+            </header>
+            <div class="gp-leitor-scroll" id="gabaritaLeitorScroll">
+              <article class="gp-leitor-artigo" id="gabaritaLeitorArtigo"></article>
+            </div>
+          </section>
+
+          <div class="gp-toast-area" id="gabaritaToastArea" aria-live="polite"></div>
+        `;
+
+        leitorEl = document.getElementById("gabaritaLeitor");
+        leitorArt = document.getElementById("gabaritaLeitorArtigo");
+        leitorScroll = document.getElementById("gabaritaLeitorScroll");
+        leitorBarra = document.getElementById("gabaritaLeitorBarra");
+        leitorProg = document.getElementById("gabaritaLeitorProgresso");
+
+        montarNav();
+
+        const btnAtualizarTopo = document.getElementById("gabaritaBtnAtualizarTopo");
+
+        async function atualizarGabarita() {
+          if (btnAtualizarTopo) btnAtualizarTopo.disabled = true;
+          try {
+            limparCache();
+            await carregarTudo(true);
+            toast("Conteúdos atualizados.", "sucesso");
+          } catch (e) { toast("Não foi possível atualizar agora.", "erro"); }
+          finally {
+            if (btnAtualizarTopo) btnAtualizarTopo.disabled = false;
+          }
+        }
+
+        if (btnAtualizarTopo) btnAtualizarTopo.addEventListener("click", atualizarGabarita);
+
+        const btnVoltar = document.getElementById("gabaritaBtnVoltarLeitor");
+        if (btnVoltar) btnVoltar.addEventListener("click", () => { history.back(); });
+
+        const btnFonteMais = document.getElementById("gabaritaBtnFonteMais");
+        if (btnFonteMais) btnFonteMais.addEventListener("click", () => {
+          tamanhoFonte = Math.min(FONTE_MAX, tamanhoFonte + 1);
+          lsSet(PREF_FONTE, String(tamanhoFonte)); aplicarPrefs();
+        });
+
+        const btnFonteMenos = document.getElementById("gabaritaBtnFonteMenos");
+        if (btnFonteMenos) btnFonteMenos.addEventListener("click", () => {
+          tamanhoFonte = Math.max(FONTE_MIN, tamanhoFonte - 1);
+          lsSet(PREF_FONTE, String(tamanhoFonte)); aplicarPrefs();
+        });
+
+        const btnModoLeitura = document.getElementById("gabaritaBtnModoLeitura");
+        if (btnModoLeitura) btnModoLeitura.addEventListener("click", () => {
+          modoLeitura = !modoLeitura;
+          lsSet(PREF_MODO, modoLeitura ? "1" : "0"); aplicarPrefs();
+        });
+
+        if (leitorScroll) leitorScroll.addEventListener("scroll", atualizarProgresso, { passive: true });
+        window.addEventListener("resize", atualizarProgresso);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && leitorEl && !leitorEl.hidden) history.back();
+        });
+
+        window.addEventListener("hashchange", tratarRota);
+
+        aplicarPrefs();
+        rota = parseHash();
+
+        ACOES.forEach((a) => { state.status[a] = "carregando"; });
+        renderApp();
+
+        Promise.all(ACOES.map((a) => carregarSecao(a, true))).then(() => {
+          renderApp();
+          const falhas = ACOES.filter((a) => state.status[a] === "erro");
+          if (falhas.length === ACOES.length) toast("Não foi possível carregar os conteúdos.", "erro");
+        });
+      }
+
+      return {
+        init: init,
+        state: state,
+        carregarTudo: carregarTudo,
+        irPara: irPara,
+        renderApp: renderApp
+      };
+    })();
+
     const App = {
       allMaterials: [],
       isLoading: false,
@@ -4680,7 +7128,6 @@
         if (icon) icon.style.animation = 'spin 0.8s linear infinite';
         try {
           await this.fetchAndCache(false);
-          if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
           Toast.success('Plataforma recarregada com sucesso!');
         } catch (e) { Toast.error('Erro ao recarregar.'); throw e; }
         finally { if (icon) icon.style.animation = ''; }
@@ -4699,7 +7146,6 @@
           Render.renderDisciplineProgress();
           Render.renderDisciplineMaterials();
         }
-        if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
         Sidebar.render(Utils.groupByDiscipline(this.allMaterials));
       },
 
@@ -4711,7 +7157,6 @@
         Storage.markMaterialViewed(id);
         Render.updateMaterialCardButtons(mat ? mat._uid : id);
         if (Navigation.currentPage === 'home') Render.renderHome(Utils.groupByDiscipline(this.allMaterials));
-        if (Navigation.currentPage === 'aprenda-aqui') Render.renderAprendaAqui();
         if (mat) LogManager.logAcesso(mat).catch(() => {});
         setTimeout(() => {
           const win = window.open(finalLink, '_blank', 'noopener,noreferrer');
@@ -4745,9 +7190,6 @@
       },
     };
 
-    // ============================================================
-    //  WELCOME
-    // ============================================================
     const Welcome = {
       show() {
         if (Storage.wasWelcomeShown()) return;
@@ -4805,12 +7247,8 @@
       },
     };
 
-    // ============================================================
-    //  INICIALIZAÇÃO
-    // ============================================================
     document.addEventListener('DOMContentLoaded', () => App.init());
-    console.log('%c🚀 VULP+ PRO %cSidebar 10/10 aplicada!', 'font-size:1.3em;font-weight:bold;color:#2563eb;', 'color:#334155;');
-    console.log('%c🎨 Design premium • Contadores em pill • Perfil refinado', 'color:#10b981;font-weight:bold;');
+    console.log('%c🚀 VULP+ PRO %cGabarita+ integrado com sucesso!', 'font-size:1.3em;font-weight:bold;color:#2563eb;', 'color:#059669;');
   </script>
 </body>
 </html>
